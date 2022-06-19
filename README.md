@@ -1,9 +1,9 @@
 # Invictus
  _A spaceship based game built on Javascript, HTML, and Canvas_
 
-[//]: <> (Logo here if have time lol)
+[//]: # (Logo here if have time lol)
 
-##How To Play
+## How To Play
 
 Under Construction...
 - __Arrow Keys or WASD:__ Move spaceship
@@ -22,7 +22,7 @@ Under Construction...
 | C | Open command-line to enter cheats |
 
 
-Features
+## Features
 
 lol I barely have anything don't play it yet...
 
@@ -50,25 +50,32 @@ Under Construction...
 ## Production Timeline
 
 Week 9
-Thursday: Project Setup, Create canvas, stars, spaceship movement, shooting projectiles
-Friday: Finish shooting projectiles, offset, basic enemies, collisions (bouncing?), damage, healthbars
-Saturday: Finish First Level. Add power-ups, more enemies, maybe boss? 
-Sunday: Create shop, be able to level-up and add powerups. 
+- Thursday: Project Setup, Create canvas, stars, spaceship movement, shooting projectiles
+- Friday: Finish shooting projectiles, offset, basic enemies, collisions (bouncing?), damage, healthbars
+- Saturday: Finish First Level. Add power-ups, more enemies, maybe boss? 
+- Sunday: Create shop, be able to level-up and add powerups. 
 
 Week 10
-Monday: Catchup...Finish non-completed
-Tuesday: Add more levels
-Wendesday: UI (Start-game, end-game, saving/loading, options like turning off volumes, pause)
-Thursday: More graphics improvements/cleanup, additional difficult bosses and AI, background upgrade (Scrollable?), achievemnts, and other bonuses
-Friday: Continue working
-Saturday: Continue Working
-Sunday: Finish-up!
+- Monday: Catchup...Finish non-completed
+- Tuesday: Add more levels
+- Wendesday: UI (Start-game, end-game, saving/loading, options like turning off volumes, pause)
+- Thursday: More graphics improvements/cleanup, additional difficult bosses and AI, background upgrade (Scrollable?), achievments, complex/multi-faceted hitboxes, and other bonuses
+- Friday: Continue working
+- Saturday: Continue Working
+- Sunday: Finish-up!
 
 
 ## To-Do
 
 Under Construction...
 Make cheats
+Dynamic Hitboxes (instead of large, inaccurate boxes)
+
+## Known Bugs
+
+- Sometimes on page refresh, mousemove event not working as intended (maybe DOMload?)
+- Slightly off-the-mark lasers
+- Brightness of stars
 
 
 ### Special Thanks

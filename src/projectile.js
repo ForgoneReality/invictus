@@ -1,8 +1,9 @@
 //projectile.js
 //just pass context around into draw and animate specifically
 
+
 export default class Projectile {
-    constructor(position, velocity, size, collidable, owner, color)//color optional
+    constructor(position, velocity, size, collidable, owner, type)//color optional
     {
         this.posX = position[0];
         this.posY = position[1];
@@ -10,7 +11,7 @@ export default class Projectile {
         this.velY = velocity[1];
         this.size = size;
         this.collidable = collidable;
-        this.color = color;
+        this.type = type;
         this.owner = owner; //1 ally, 2 enemy, 3 neutral
     }
 

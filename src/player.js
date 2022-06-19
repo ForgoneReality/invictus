@@ -4,7 +4,7 @@ import CircleDamageProjectile from "./circleDamageProjectile";
 import LaserDamageProjectile from "./laserDamageProjectile";
 
 export default class Player {
-    constructor(position, context) //more later, type?
+    constructor(position) //more later, type?
     {
         this.posX = position[0];
         this.posY = position[1];
@@ -13,15 +13,18 @@ export default class Player {
 
         this.canvasX = this.posX * 2;
         this.canvasY = this.posY + 50;
+        this.ship_level = 1;
 
         const image = new Image();
         image.src  = '../images/playership1.png';
         image.onload = () => {
             this.image = image;
-            // const SCALE = 1;
-            this.width = image.width;
-            this.height = image.height;
+            const SCALE = 0.02;
+            this.width = image.width * SCALE;
+            this.height = image.height * SCALE;
         }
+
+        this.health = 200; 
 
         this.movedX = 0;
         this.movedY = 0;
@@ -31,6 +34,7 @@ export default class Player {
         // this.color = "red";
         this.normalVector = [0,-1];
         this.shootTimer = 0;
+        this.levelup(2);
     }
 
     draw(context, mouse_x, mouse_y)
@@ -62,7 +66,7 @@ export default class Player {
         //It creates a lag between whether it determines a key is being tapped or held (~1 second)
         //which makes movement very, very slow and clunky
         //so have to do it this way instead. Neither keymaster.js's bind nor built-in events work
-        console.log(this.posX, this.posY);
+        // console.log(this.posX, this.posY);
         if(key.isPressed("up") || key.isPressed("w"))
         {
             this.power("up");
@@ -108,6 +112,25 @@ export default class Player {
         {
             this.posY = this.canvasY - 50;
         }
+    }
+
+    levelup(level)
+    {
+        this.ship_level = level;
+        if (level === 2)
+        {
+            const image = new Image();
+            image.src  = '../images/playership2.png';
+            image.onload = () => {
+                this.image = image;
+                const SCALE = 0.02;
+                this.width = image.width * SCALE;
+                this.height = image.height * SCALE;
+            }
+
+            //this.health = 
+            //this.projectileType   
+        }   
     }
 
     // bindKeys()
@@ -270,13 +293,17 @@ export default class Player {
         this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
         switch(type)
         {
+            case -1:
+                this.shootTimer -= 1;
+                return undefined;
+                break;
             case 0: //red ball center
                 let speed = 10;
                 let cooldown = 15;
-                if(this.shootTimer === 0)
+                if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
-                    let proj = new CircleDamageProjectile([this.realX(), this.realY()], [speed * this.normalVector[0], speed*this.normalVector[1]], 2, 1, "red", 25, 4);
+                    let proj = new CircleDamageProjectile([this.realX(), this.realY()], [speed * this.normalVector[0], speed*this.normalVector[1]], 2, 1, 1, 25, 4);
                     return [proj];
                 }
                 else
@@ -288,10 +315,10 @@ export default class Player {
             case 1: //primitive lasers center
                 let speed1 = 12;
                 let cooldown1 = 12;
-                if(this.shootTimer === 0)
+                if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown1;
-                    let proj = new LaserDamageProjectile([this.realX(), this.realY()], [speed1 * this.normalVector[0], speed1*this.normalVector[1]], 20, 1, "red", 25, 4);
+                    let proj = new LaserDamageProjectile([this.realX(), this.realY()], [speed1 * this.normalVector[0], speed1*this.normalVector[1]], 20, 1, 0, 12.5, 4);
                     return [proj];
                 }
                 else
@@ -301,10 +328,37 @@ export default class Player {
                 }
                 break;
             case 2: //basic lasers double
+               
+                let speed2 = 12;
+                let cooldown2 = 12;
+                if(this.shootTimer <= 0)
+                {
+                    let projs = [];
+                    this.shootTimer = cooldown2;
+                    let offset_x = 17;
+                    let offset_y = -30;// defaults for level === 1
+                    if (this.ship_level === 2)
+                    {
+                        offset_x = 17;
+                        offset_y = -40;
+                    }
+                
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, 0, 12.5, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, 0, 12.5, 4));
+                    return projs;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                    return undefined;
+                }
                 //remember to return an array!
                 break;
             default:
-                console.error("unknown projectile type");
+                // console.error("unknown projectile type");
         }
     }
 
@@ -349,11 +403,53 @@ export default class Player {
         this.normalVector = [distX / length, distY / length];
     }
 
-    realX(){ //INCOMPLETE - NEEDS TO FACTOR IN ANGLE!!
-        return this.posX + this.width / 2;
+    realX(){ //INCOMPLETE - NEEDS TO FACTOR IN ANGLE!! ... or does it? center doesn't change when angle changes
+        return this.posX + this.width / 2 + 1;
     }
 
-    realY(){ //INCOMPLETE - NEEDS TO FACTOR IN ANGLE!!
+    realY(){ 
         return this.posY + this.height / 2;
+    }
+
+    //#offset returns the new (x,y) relative to center after rotating to this.degrees
+    offset(x, y) //x,y relative to center, which should be realX() and real(Y), prior to rotation
+    {
+        if(this.degrees === undefined) //shouldn't need this but jic
+        {
+            this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
+        }
+        
+        //apply matrix transformation of form 
+        //R = |cos θ  - sin θ |
+        //    | sin θ   cos θ |
+        //to apply rotational transformation by changing basis vectors 
+
+        let degrees = this.degrees; //setup
+        //usually -90 but because y is going positive going down, don't have to
+
+        let c = Math.cos(degrees * Math.PI / 180.0);
+        let s = Math.sin(degrees * Math.PI / 180.0);
+
+        return [x * c - y * s, x * s + y * c];
+    }
+
+    leftX()
+    {
+        return this.posX;
+    }
+
+    rightX()
+    {
+        return this.posX + this.width;
+    }
+
+    upY()
+    {
+        return this.posY;
+    }
+
+    downY()
+    {
+        return this.posY + this.height;
     }
 }
