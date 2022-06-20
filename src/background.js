@@ -3,6 +3,7 @@
 import Star from "./star"
 import Ship from "./ship"
 import Player from "./player"
+import Drop from "./drop";
 
 export default class Background{
     constructor(width, height, level_id, context)
@@ -15,8 +16,13 @@ export default class Background{
         this.projectiles = [];
         this.enemyprojectiles = [];
         this.enemyships = [];
+        this.drops = [];
         this.createLevel(1);
         this.initializeStars(context);
+
+        //stats
+        this.enemiesdefeated = 0;
+        this.gold = 0;
     };
 
     createLevel(level)
@@ -34,10 +40,16 @@ export default class Background{
 
         if (level === 1)
         {
-            // this.enemyships.push(new Ship([.25*this.width, -300], 0, this)); //type 1
-            // this.enemyships.push(new Ship([.54 * this.width, -500], 0, this)); //type 1
-            this.enemyships.push(new Ship([.75*this.width, -250], 1, this)); //type 2
-            this.enemyships.push(new Ship([.34 * this.width, -88], 1, this)); //type 2
+            this.enemyships.push(new Ship([.25*this.width, -100], 0, this)); //type 1
+            this.enemyships.push(new Ship([.54 * this.width, -480], 0, this)); //type 1
+            this.enemyships.push(new Ship([.65*this.width, -133], 1, this)); //type 2
+            this.enemyships.push(new Ship([.34 * this.width, -700], 1, this)); //type 2
+            this.enemyships.push(new Ship([.6 * this.width, -600], 2, this)); //type 3
+            this.enemyships.push(new Ship([.42 * this.width, -210], 3, this)); //type 4
+            this.enemyships.push(new Ship([.7*this.width, -780], 3, this)); //type 1
+            this.enemyships.push(new Ship([.45 * this.width, -840], 2, this)); //type 3
+            this.enemyships.push(new Ship([.34 * this.width, -985], 0, this)); //type 2
+            this.enemyships.push(new Ship([.18 * this.width, -1050], 1, this)); //type 2
         }
     }
 
@@ -73,9 +85,15 @@ export default class Background{
         context.fillStyle = "black";
         context.fillRect(0, 0, this.width, this.height);
         this.createStars(context);
+
+        if(this.enemiesdefeated === 1)
+        {
+            this.player.levelup(1);
+        }
+
     
 
-        if(key.isPressed(" "))
+        if(key.isPressed(" ") )
         {
             let proj = this.player.shootProjectile(this.mouse_x, this.mouse_y, 2);
             if (proj)
@@ -91,6 +109,8 @@ export default class Background{
         this.updateAll(context);
         this.player.animate(this.context, this.mouse_x, this.mouse_y);
         this.checkCollisions(context);
+
+        this.updateUI(context);
 
         requestAnimationFrame(this.animate.bind(this));
        
@@ -129,9 +149,6 @@ export default class Background{
 
     updateAll(context)
     {
-        // console.log("projectiles: ", this.projectiles);
-        // console.log("enemies", this.enemyships);
-        
         this.updateSomething(context, this.stars);
         this.updateSomething(context, this.enemyships);
 
@@ -143,8 +160,12 @@ export default class Background{
         {
             if(this.projectiles[i].outofBounds(this.width, this.height))
             {
-                this.projectiles.splice(i, 1);
-                i--;
+                setTimeout(()=> 
+                {
+                    this.projectiles.splice(i, 1);
+                    i--;
+                }, 0);
+                
             }
         }
 
@@ -156,10 +177,31 @@ export default class Background{
         {
             if(this.enemyprojectiles[i].outofBounds(this.width, this.height))
             {
-                this.enemyprojectiles.splice(i, 1);
-                i--;
+                setTimeout(()=> 
+                {
+                    this.enemyprojectiles.splice(i, 1);
+                    i--;
+                }, 0);
             }
         }
+
+        this.drops.forEach((drop) => {
+            drop.animate(this.context)
+        });
+
+        for(let i = 0; i < this.drops.length; i++)
+        {
+            if(this.drops[i].outofBounds(this.width, this.height))
+            {
+                setTimeout(()=> 
+                {
+                    this.drops.splice(i, 1);
+                    i--;
+                }, 0);
+            }
+        }
+
+ 
     }
 
     updateSomething(context, something){
@@ -188,13 +230,23 @@ export default class Background{
                 if(this.collidesWith(this.enemyships[i], this.projectiles[j]))
                 {
                     this.enemyships[i].health -= this.projectiles[j].damage;
-                    this.projectiles.splice(j, 1);
-                    j--;
+                    setTimeout(()=> 
+                    {
+                        this.projectiles.splice(j, 1);
+                        j--;
+                    }, 0);
+           
                     
                     if(this.enemyships[i].health <= 0)
                     {
-                        this.enemyships.splice(i, 1);
-                        i--;
+                        this.handleEnemyDefeat(this.enemyships[i]);
+
+                        setTimeout(()=> 
+                        {
+                            this.enemyships.splice(i, 1);
+                            i--;
+                        }, 0);
+
                         break;
                     }
 
@@ -207,17 +259,72 @@ export default class Background{
         {
             if(this.collidesWith(this.player, this.enemyprojectiles[j]))
             {
-                this.player.health -= this.enemyprojectiles[j].damage;
-                this.enemyprojectiles.splice(j, 1);
-                j--;
-                
-                if(this.player.health <= 0)
-                {
-                    alert("YOU LOSE!");
-                    exit;
-                }
+                this.player.dealDamage(this.enemyprojectiles[j].damage);
 
+                setTimeout(()=> 
+                    {
+                        this.enemyprojectiles.splice(j, 1);
+                        j--;
+                    }, 0);
         
+            }
+        }
+
+        for(let i = 0; i <this.enemyships.length; i++)
+        {
+            if(this.collidesWith(this.player, this.enemyships[i]))
+            {
+                this.player.dealDamage(Math.max(this.enemyships[i].damage, 50, ));
+                this.enemyships[i].health -= 25;
+                
+                let n = this.normalizedVector(this.player, this.enemyships[i]);
+                this.player.collided = 20;
+                this.player.velX = n[0] * 13;
+                this.player.velY = n[1] * 13;
+
+                this.enemyships[i].collided = 13;
+                this.enemyships[i].velX = n[0] * -13;
+                this.enemyships[i].velY = n[1] * -13;   
+
+                if(this.enemyships[i].health <= 0)
+                {
+                    this.handleEnemyDefeat(this.enemyships[i]);
+
+                    setTimeout(()=> 
+                        {
+                            this.enemyships.splice(i, 1);
+                            i--;
+                        }, 0);
+                }
+        
+            }
+        }
+
+        for(let i = 0; i <this.drops.length; i++)
+        {
+            if(this.collidesWith(this.player, this.drops[i]))
+            {
+                switch(this.drops[i].type)
+                {
+                    case 0: //health pack
+                        this.player.health = Math.min(this.player.health + 500, this.player.basehealth, this.player.health + this.player.basehealth / 2);
+                        break;
+                    case 1: //double fire
+                        this.player.projectileType = 2;
+                        this.player.shotsLeft = 50;
+                        break;
+                    case 2: //money
+                        break;
+                    case 3: //gamma ray
+                        this.player.projectileType = 3;
+                        this.player.shotsLeft = 55;
+                        break;
+                }
+                setTimeout(()=> 
+                    {
+                        this.drops.splice(i, 1);
+                        i--;
+                    }, 0);
             }
         }
     }
@@ -240,4 +347,80 @@ export default class Background{
         }
         return false;
     }
+
+    normalizedVector(a, b)
+    {
+        let target_x = a.realX();
+        let target_y = a.realY();
+        let distX = target_x - b.realX();
+        let distY = target_y - b.realY();
+
+        length = Math.sqrt(distX * distX + distY * distY);
+        // this.normalVector = [Math.abs(distX) / length, Math.abs(distY) / length];
+        return [distX / length, distY / length];
+    }
+
+    updateUI(ctx)
+    {
+        ctx.fillStyle = '#ff4040';
+        ctx.strokeStyle = "black"
+        ctx.textBaseline = 'top';
+        ctx.font = '10pt Verdana';
+        let healthtext = `Health: ${Math.floor(this.player.health)} / ${Math.floor(this.player.basehealth)}`;
+        ctx.textAlign = 'left';
+        // const t_width = ctx.measureText(text).width;
+        // const t_height = ctx.measureText(text).height;
+        ctx.fillText(healthtext, 20, this.height - 50);
+
+        let goldtext = `Gold: ${Math.floor(this.gold)}`;
+        ctx.textAlign = 'right';
+        ctx.fillStyle = 'gold';
+        ctx.fillText(goldtext, this.width-20, this.height - 50);
+        ctx.textAlign = 'start';
+        
+    }
+
+    //need to make sound & explosion
+    handleEnemyDefeat(e_ship)
+    {
+        this.enemiesdefeated++;
+        this.gold += e_ship.gold;
+        let v = e_ship.value;
+
+        let num = Math.floor(Math.random()*100 * v);
+        //these numbers will change
+
+        // if(num > 140)//ultimate drop
+        // {
+
+        // }
+        // else if(num > 120)//super rare drop
+        // {
+
+        // }
+        // else if(num > 110) //very rare drop
+        // {
+
+        // }
+        if (num > 95)// rare drop: missiles,
+        {
+            this.drops.push(new Drop([e_ship.posX, e_ship.posY], 3));
+        }
+        else if (num > 65) //uncommon drop: gold, shield, health, missiles
+        {
+            let m = Math.random() * 10;
+            if (m < 3)
+                this.drops.push(new Drop([e_ship.posX, e_ship.posY], 1));
+            else
+                this.drops.push(new Drop([e_ship.posX, e_ship.posY], 0));
+        }
+        else{
+            //no drop
+        }
+
+    }
+
+
+    
 }
+

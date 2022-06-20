@@ -4,7 +4,15 @@ export default class Star extends Projectile{
     constructor(positionX, velocityY, size, color="white")
     {
         super([positionX, 20], [0, velocityY], size, false, 0, color);
-        this.brightness = Math.random()*50 + 70;
+        let brightest = Math.random()*4;
+        if (brightest < 1)
+        {
+            this.brightness = 255;
+        }
+        else
+        {
+            this.brightness = Math.random()*145 + 110;
+        }
     }
     
 
@@ -20,7 +28,7 @@ export default class Star extends Projectile{
           }
     
         context.beginPath();
-        context.fillStyle = "white";
+        context.fillStyle = `rgb(${this.brightness}, ${this.brightness}, ${this.brightness})`;
         setShadow(context, "white", 0, 0, this.size*2);
         context.arc(this.posX, this.posY, this.size, 0, 2 * Math.PI, false);
         context.fill();

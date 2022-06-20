@@ -14,7 +14,6 @@ export default class Game
  
         // this.levelup();
         this.start();//initially new game every time... loading functionality later
- 
     }
 
 

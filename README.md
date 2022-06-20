@@ -68,14 +68,24 @@ Week 10
 ## To-Do
 
 Under Construction...
-Make cheats
-Dynamic Hitboxes (instead of large, inaccurate boxes)
+
+SOON:
+- Gamma drop needs wider cropping
+
+LATER: 
+- Upgrade background: planets, nebulas, etc.
+- Consistent graphics -> change drop images, UI, etc.
+
+MAYBE:
+- Make cheats
+- Dynamic Hitboxes (instead of large, inaccurate boxes)
 
 ## Known Bugs
 
 - Sometimes on page refresh, mousemove event not working as intended (maybe DOMload?)
-- Slightly off-the-mark lasers
-- Brightness of stars
+- Random shadow blurring unintended
+- Make drops intervally shadow blur
+- LAG: WHEN UPGRADING SHIP, CREATING DROP (load image?)
 
 
 ### Special Thanks

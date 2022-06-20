@@ -6,8 +6,9 @@ import LaserDamageProjectile from "./laserDamageProjectile";
 const TYPES = [
     { 
         //Basic Enemy Ship
-        velocity: [0, 1.55],
-        health: 125,
+        velocity: [0, 1.65 * (0.4 + Math.random() * 0.8)],
+        endvelocity: [0, 1.65],
+        health: 135,
         damage: 50,
         img: '../images/enemyship1.png',
         color: "red",
@@ -15,14 +16,16 @@ const TYPES = [
         rotatable: false,
         scale: .022, 
         shootTimerInit: 50, 
-        gold: 1000,
-        value: 1
+        gold: 1500,
+        value: 1,
+        shotsLeft: 40
     },
     { 
         //Purple Corner Shooting Enemy Ship
-        velocity: [0, 1.55],
+        velocity: [0, 1    * (0.4 + Math.random() * 0.8)],
+        endvelocity: [0, 1],
         health: 175,
-        damage: 50,
+        damage: 60,
         img: '../images/enemyship2.png',
         color: "pink",
         blur: 0,
@@ -30,8 +33,43 @@ const TYPES = [
         scale: .022, 
         shootTimerInit: 50, 
         gold: 2000,
-        value: 2
+        value: 1.03,
+        shotsLeft: 40
+    },
+    {
+         //yellow dude who zooms in but shoot slows and has pauses
+         velocity: [0, 5],
+         endvelocity: [0, 1.4],
+         health: 175,
+         damage: 40,
+         img: '../images/enemyship3.png',
+         color: "yellow",
+         blur: 0,
+         rotatable: false,
+         scale: .022, 
+         shootTimerInit: 50, 
+         gold: 2000,
+         value: 1.04,
+         shotsLeft: 8
+    },
+    {
+        //Blue dude who rapidly zooms in 
+        velocity: [0, 10.2],
+        endvelocity: [0, 1.8],
+        health: 150,
+        damage: 33,
+        img: '../images/enemyship4.png',
+        color: "cyan",
+        blur: 0,
+        rotatable: true,
+        scale: .022, 
+        shootTimerInit: 32, 
+        gold: 2200,
+        value: 1.06,
+        shotsLeft: 8
     }
+
+
 ];
 
 export default class Ship {
@@ -42,6 +80,8 @@ export default class Ship {
 
         this.canvasX = this.posX;
         this.canvasY = this.posY;
+
+        this.collided = 0;
 
         this.background = background;
         this.type = type;
@@ -66,7 +106,7 @@ export default class Ship {
         this.health = TYPES[type].health; 
         this.damage = TYPES[type].damage;
 
-        this.degrees = 180;
+        this.degrees = 0;
 
         this.color = TYPES[type].color;
         this.blur = TYPES[type].blur;
@@ -75,25 +115,23 @@ export default class Ship {
 
         this.shootTimer = TYPES[type].shootTimerInit;
         this.gold = TYPES[type].gold;
+        this.value = TYPES[type].value;
+        this.shotsLeft = TYPES[type].shotsLeft;
     }
 
-    draw(context, target_x = this.posX, target_y = this.canvasbottom)
+    draw(context)
     {
         if (this.image)
         {
-            if (this.rotatable) this.updateAngleAndNormalizedVector(target_x, target_y);
+            if (this.rotatable) this.updateAngleAndNormalizedVector();
             context.save();
             context.shadowColor = this.color;
             context.shadowBlur = this.blur;
-            // context.translate(this.posX+this.width/2, this.posY+this.height/2);
-            // context.rotate(this.degrees*Math.PI/180.0);
-            // context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
+            context.translate(this.posX+this.width/2, this.posY+this.height/2);
+            context.rotate(this.degrees*Math.PI/180.0);
+            context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
             context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
             context.restore();
-        }
-        else
-        {
-            // console.error("Enemy Ship not loaded");
         }
     }
 
@@ -104,7 +142,7 @@ export default class Ship {
         if(this.posY+this.height / 2 + 1 >= 0)
         {
             this.move();
-            this.fire();
+            this.shootProjectile();
             this.draw(context);
         }
         else
@@ -115,23 +153,100 @@ export default class Ship {
 
     move()
     {
+        if (this.collided > 1)
+        {
+            this.posX += this.velX;
+            this.posY += this.velY;
+            this.velX = this.velX * 0.9;
+            this.velY = this.velY * 0.9;
+            this.collided -= 1;
+            return;
+        }
+        else if(this.collided === 1)
+        {
+            this.posX += this.velX;
+            this.posY += this.velY;
+            this.velX = TYPES[this.type].endvelocity[0];
+            this.velY = TYPES[this.type].endvelocity[1];
+            this.collided -= 1;
+            return;
+        }
         //to be implemented
-        this.posX += this.velX;
-        this.posY += this.velY;
+        if (this.type === 0)
+        {   
+            if(this.posY + 100 < this.background.player.posY)
+            {
+                if(this.posX > this.background.player.posX)
+                {
+                    this.velX = -0.4;
+                }
+                else
+                    this.velX = 0.4;
+
+                this.posX += this.velX;
+
+            }
+            this.posY += this.velY;
+            
+        }
+        else if (this.type === 1)
+        {
+            this.posX += this.velX;
+            this.posY += this.velY;
+        }
+
+        else if (this.type === 2)
+        {
+            this.posY += this.velY;
+            if(this.velY > 1.4)
+            {
+                this.velY -= 0.4;
+            }
+
+            if(this.posY + 100 < this.background.player.posY)
+            {
+                if(this.posX > this.background.player.posX)
+                {
+                    this.velX = -0.3;
+                }
+                else
+                    this.velX = 0.3;
+
+                this.posX += this.velX;
+            }
+        }
+        else if (this.type === 3)
+        {
+            this.posY += this.velY;
+            if(this.velY > 1.8)
+            {
+                this.velY -= 0.4;
+            }
+ 
+        }
+
+
     }
 
-    fire()
-    {
-        switch(this.type)
-        {
-            case 0:
-                this.shootProjectile();
-                break;
-            case 1:
-                this.shootProjectile();
-                break;
-        }
-    }
+    // fire()
+    // {
+    //     this.shootProjectile();
+    //     // switch(this.type)
+    //     // {
+    //     //     case 0:
+    //     //         this.shootProjectile();
+    //     //         break;
+    //     //     case 1:
+    //     //         this.shootProjectile();
+    //     //         break;
+    //     //     case 2:
+    //     //         this.shootProjectile();
+    //     //         break;
+    //     //     case 3:
+    //     //         this.shootProjectile();
+    //     //         break;
+    //     // }
+    // }
 
 
     // shootProjectile(target_x = this.realX(), target_y = this.canvasBottom)
@@ -148,11 +263,13 @@ export default class Ship {
             case 0: //red ball center
                 speed = 3.3;
                 cooldown = 100;
+                
                 if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
                     let proj = new CircleDamageProjectile([this.realX(), this.realY()+30], [speed * this.normalVector[0], speed*this.normalVector[1]], 4.5, 2, 0, this.damage, 20);
                     this.background.enemyprojectiles.push(proj);
+                    this.shotsLeft -= 1;
                 }
                 else
                 {
@@ -162,75 +279,88 @@ export default class Ship {
                 break;
 
             case 1:
-                speed = 3.5;
+                speed = 5.5;
                 cooldown = 150;
                 if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
-                    let proj = new CircleDamageProjectile([this.realX()+40, this.realY()+30], [speed * Math.sqrt(2) / 2, speed * Math.sqrt(2) / 2], 4.5, 2, 1, this.damage, 20, -1 * Math.PI / 4, 3 * Math.PI / 4);
+                    let proj = new CircleDamageProjectile([this.realX()+40, this.realY()+30], [speed * Math.sqrt(2) / 2, speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, -1 * Math.PI / 4, 3 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj);
 
-                    let proj2 = new CircleDamageProjectile([this.realX()-40, this.realY()+30], [speed * -1 * Math.sqrt(2) / 2,  speed * Math.sqrt(2) / 2], 4.5, 2, 1, this.damage, 20, Math.PI / 4, 5 * Math.PI / 4);
+                    let proj2 = new CircleDamageProjectile([this.realX()-40, this.realY()+30], [speed * -1 * Math.sqrt(2) / 2,  speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, Math.PI / 4, 5 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj2);
 
-                    let proj3 = new CircleDamageProjectile([this.realX()+40, this.realY()-30], [speed * Math.sqrt(2) / 2, -1 * speed * Math.sqrt(2) / 2], 4.5, 2, 1, this.damage, 20, 5 * Math.PI / 4, 9 * Math.PI / 4);
+                    let proj3 = new CircleDamageProjectile([this.realX()+40, this.realY()-30], [speed * Math.sqrt(2) / 2, -1 * speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, 5 * Math.PI / 4, 9 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj3);
 
-                    let proj4 = new CircleDamageProjectile([this.realX()-40, this.realY()-30], [speed * -1 * Math.sqrt(2) / 2,  -1 * speed * Math.sqrt(2) / 2], 4.5, 2, 1, this.damage, 20, 3 * Math.PI / 4, 7 * Math.PI / 4);
+                    let proj4 = new CircleDamageProjectile([this.realX()-40, this.realY()-30], [speed * -1 * Math.sqrt(2) / 2,  -1 * speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, 3 * Math.PI / 4, 7 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj4);
+                    this.shotsLeft -= 1;
 
                 }
+
                 else
                 {
                     this.shootTimer -= 1;
                     return undefined;
                 }
                 break;
-            // case 1: //primitive lasers center
-            //     let speed1 = 12;
-            //     let cooldown1 = 12;
-            //     if(this.shootTimer === 0)
-            //     {
-            //         this.shootTimer = cooldown1;
-            //         let proj = new LaserDamageProjectile([this.realX(), this.realY()], [speed1 * this.normalVector[0], speed1*this.normalVector[1]], 20, 1, "red", 25, 4);
-            //         return [proj];
-            //     }
-            //     else
-            //     {
-            //         this.shootTimer -= 1;
-            //         return undefined;
-            //     }
-            //     break;
-            // case 2: //basic lasers double
-               
-            //     let speed2 = 12;
-            //     let cooldown2 = 12;
-            //     if(this.shootTimer === 0)
-            //     {
-            //         let projs = [];
-            //         this.shootTimer = cooldown2;
-            //         let offset_x = 17;
-            //         let offset_y = -30;// defaults for level === 1
-            //         if (this.ship_level === 2)
-            //         {
-            //             offset_x = 17;
-            //             offset_y = -40;
-            //         }
-                
-            //         let rotate_scaler = this.offset(offset_x, offset_y);
-            //         let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+            case 2: 
+                speed = 3.5;
+                cooldown = 18;
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 150;
+                    this.shotsLeft = 8;
+                    return undefined;
+                }
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+                    let offset;
+                    if(this.shotsLeft % 2 === 0)
+                    {
+                        offset = 26.5;
+                    }
+                    else
+                    {
+                        offset = -26.5;
+                    }
+                    let proj = new LaserDamageProjectile([this.realX() + offset, this.realY()+30], [0, speed], 0, 15, 2, 2, this.damage, 25);
+                    this.background.enemyprojectiles.push(proj);
+                    this.shotsLeft -= 1;
+                    //position, velocity, angle, length, owner, type, damage, blur=0, width=2)
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
+                    break;
+            case 3: 
+                speed = 4;
+                cooldown = 5.5;
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 250;
+                    this.shotsLeft = 8;
+                    return undefined;
+                }
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+                    let scatter_x = this.normalVector[0] * (Math.random(0.4) + 0.8);
+                    let scatter_y = this.normalVector[1] * (Math.random(0.4) + 0.8);
+                    let proj = new CircleDamageProjectile([this.realX(), this.realY()+30], [speed * scatter_x, speed*scatter_y], 4.5, 2, 3, this.damage, 20);
+                    this.background.enemyprojectiles.push(proj);
+                    this.shotsLeft -= 1;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
 
-            //         projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, "red", 25, 4));
-            //         projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, "red", 25, 4));
-            //         return projs;
-            //     }
-            //     else
-            //     {
-            //         this.shootTimer -= 1;
-            //         return undefined;
-            //     }
-            //     //remember to return an array!
-            //     break;
+                break;
+
             default:
                 console.error("unknown projectile type");
         }
@@ -238,13 +368,15 @@ export default class Ship {
 
 
     //NOT SURE IF THIS WORKS
-    updateAngleAndNormalizedVector(target_x, target_y)
+    updateAngleAndNormalizedVector()
     {
+        let target_x = this.background.player.realX();
+        let target_y = this.background.player.realY()   ;
         let distX = target_x - this.realX();
         let distY = target_y - this.realY();
         if(distX === 0)
         {
-            if(this.realY() > target_y)
+            if(target_y > this.realY())
             {
                 this.degrees = 180;
             }
@@ -253,7 +385,7 @@ export default class Ship {
         }
         else if (distY === 0)
         {
-            if(distX > 0)
+            if(distX < 0)
             {
                 this.degrees = 90;
             }
@@ -264,7 +396,7 @@ export default class Ship {
         }
         else
         {//beware y is on top not bototm
-            if(distX > 0)
+            if(distX < 0)
             {
                 this.degrees = 90 + ((Math.atan(distY / distX)) * 180.0 / Math.PI);
             }
@@ -284,6 +416,11 @@ export default class Ship {
     }
 
     realY(){ 
+        if(this.type === 1)
+        {
+            return this.posY + this.height *.4;
+        }
+        else
         return this.posY + this.height / 2;
     }
 
@@ -292,7 +429,7 @@ export default class Ship {
     {
         if(this.degrees === undefined && this.rotatable) //shouldn't need this but jic
         {
-            this.updateAngleAndNormalizedVector(target_x, target_y);
+            this.updateAngleAndNormalizedVector();
         }
         
         //apply matrix transformation of form 

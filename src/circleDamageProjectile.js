@@ -1,7 +1,7 @@
 import Projectile from './projectile'
 
 export default class CircleDamageProjectile extends Projectile{
-    constructor(position, velocity, radius, owner, type, damage, blur=0, arc_start, arc_end)
+    constructor(position, velocity, radius, owner, type, damage, blur=0, arc_start, arc_end) //owner might be dead code
     {
         super(position, velocity, radius, true, owner, type);
         this.blur = blur;
@@ -42,8 +42,14 @@ export default class CircleDamageProjectile extends Projectile{
         else if (this.type === 1)
         {
             color = "pink";
-            gradient_a = "#FF4da6";
-            gradient_b = "#CC0099";
+            gradient_b = "#FF4da6";
+            gradient_a = "#CC0099";
+        }
+        else if (this.type === 3)
+        {
+            color = "cyan";
+            gradient_a = "  #b3ffff";
+            gradient_b = "#00FFFF";
         }
 
    

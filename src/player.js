@@ -3,6 +3,25 @@ let SAFEFRAMES = 5;
 import CircleDamageProjectile from "./circleDamageProjectile";
 import LaserDamageProjectile from "./laserDamageProjectile";
 
+
+const TYPES2 = [
+    { 
+        //Basic Enemy Ship
+        basehealth: 250,
+        basedamage: 20,
+        img: '../images/enemyship1.png',
+        scale: .022, 
+        defaultprojType: 0
+    },
+    {
+            //Basic Enemy Ship
+            basehealth: 500,
+            basedamage: 25,
+            img: '../images/enemyship2.png',
+            scale: .022, 
+            defaultprojType: 1
+    }
+]
 export default class Player {
     constructor(position) //more later, type?
     {
@@ -13,7 +32,7 @@ export default class Player {
 
         this.canvasX = this.posX * 2;
         this.canvasY = this.posY + 50;
-        this.ship_level = 1;
+        this.ship_level = 0;
 
         const image = new Image();
         image.src  = '../images/playership1.png';
@@ -23,8 +42,10 @@ export default class Player {
             this.width = image.width * SCALE;
             this.height = image.height * SCALE;
         }
-
-        this.health = 200; 
+        this.basehealth = TYPES2[this.ship_level].basehealth;
+        this.health = this.basehealth; 
+        this.basedamage = TYPES2[this.ship_level].basedamage;
+        this.regen = 0.05;
 
         this.movedX = 0;
         this.movedY = 0;
@@ -33,31 +54,34 @@ export default class Player {
 
         // this.color = "red";
         this.normalVector = [0,-1];
+        this.projectileType = 0;
+        this.shotsLeft = 0;
         this.shootTimer = 0;
-        this.levelup(2);
+
+        this.collided = 0;
+        this.interval = 1; //multi-purpose for variying shots
     }
 
     draw(context, mouse_x, mouse_y)
     {
         if (this.image)
         {
-            this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
-            // console.log(this.degrees);
-            // console.log(this.normalVector);
+        this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
+        // console.log(this.degrees);
+        // console.log(this.normalVector);
 
-            context.save();
-            context.shadowColor = "red";
-            context.shadowBlur = 9;
-            context.translate(this.posX+this.width/2, this.posY+this.height/2);
-            context.rotate(this.degrees*Math.PI/180.0);
-            context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
-            context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
-            context.restore();
+        context.save();
+        context.shadowColor = "red";
+        context.shadowBlur = 9;
+        context.translate(this.posX+this.width/2, this.posY+this.height/2);
+        context.rotate(this.degrees*Math.PI/180.0);
+        context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
+        context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+        context.restore();
+        context.shadowBlur = 0;
         }
-        else
-        {
-            console.error("Ship not loaded");
-        }
+
+
     }
 
     animate(context, mouse_x, mouse_y)
@@ -67,21 +91,34 @@ export default class Player {
         //which makes movement very, very slow and clunky
         //so have to do it this way instead. Neither keymaster.js's bind nor built-in events work
         // console.log(this.posX, this.posY);
-        if(key.isPressed("up") || key.isPressed("w"))
+        if(this.health < this.basehealth)
         {
-            this.power("up");
+            this.health += this.regen;
         }
-        if(key.isPressed("right") || key.isPressed("d"))
+
+        if(this.collided <= 0)
         {
-            this.power("right");
+            if(key.isPressed("up") || key.isPressed("w"))
+            {
+
+                this.power("up");
+            }
+            if(key.isPressed("right") || key.isPressed("d"))
+            {
+                this.power("right");
+            }
+            if(key.isPressed("down")|| key.isPressed("s"))
+            {
+                this.power("down");
+            }
+            if(key.isPressed("left")|| key.isPressed("a"))
+            {
+                this.power("left");
+            }
         }
-        if(key.isPressed("down")|| key.isPressed("s"))
+        else
         {
-            this.power("down");
-        }
-        if(key.isPressed("left")|| key.isPressed("a"))
-        {
-            this.power("left");
+            this.collided -= 1;
         }
         
         this.move();
@@ -116,8 +153,14 @@ export default class Player {
 
     levelup(level)
     {
+        if (this.ship_level >= level)
+        {
+            return;
+        }
         this.ship_level = level;
-        if (level === 2)
+        this.projectileType = TYPES2[level].defaultprojType;
+        
+        if (level === 1)
         {
             const image = new Image();
             image.src  = '../images/playership2.png';
@@ -127,24 +170,10 @@ export default class Player {
                 this.width = image.width * SCALE;
                 this.height = image.height * SCALE;
             }
-
-            //this.health = 
-            //this.projectileType   
-        }   
+        } 
+        this.basehealth = TYPES2[level].basehealth;
+        this.basedamage = TYPES2[level].basedamage;
     }
-
-    // bindKeys()
-    // {
-    //     let player = this;
-    //     key('up', function(){ player.power("up")});
-    //     key('left', function(){ player.power("left")});
-    //     key('down', function(){ player.power("down") });
-    //     key('right', function(){ player.power("right")});
-
-
-    //     // key('space', function(){ ship.fireBullet() });
-
-    // }
 
     power(direction)
     {
@@ -276,8 +305,9 @@ export default class Player {
         }
     }
 
-    shootProjectile(mouse_x, mouse_y, type = 0)
+    shootProjectile(mouse_x, mouse_y)
     {
+        let type = this.projectileType;
         let mx;
         let my;
         if(mouse_x === -1 && mouse_y === -1)
@@ -291,6 +321,8 @@ export default class Player {
             my = mouse_y;
         }
         this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
+        let speed;
+        let cooldown;
         switch(type)
         {
             case -1:
@@ -298,56 +330,50 @@ export default class Player {
                 return undefined;
                 break;
             case 0: //red ball center
-                let speed = 10;
-                let cooldown = 15;
-                if(this.shootTimer <= 0)
-                {
-                    this.shootTimer = cooldown;
-                    let proj = new CircleDamageProjectile([this.realX(), this.realY()], [speed * this.normalVector[0], speed*this.normalVector[1]], 2, 1, 1, 25, 4);
-                    return [proj];
-                }
-                else
-                {
-                    this.shootTimer -= 1;
-                    return undefined;
-                }
-                break;
-            case 1: //primitive lasers center
-                let speed1 = 12;
-                let cooldown1 = 12;
-                if(this.shootTimer <= 0)
-                {
-                    this.shootTimer = cooldown1;
-                    let proj = new LaserDamageProjectile([this.realX(), this.realY()], [speed1 * this.normalVector[0], speed1*this.normalVector[1]], 20, 1, 0, 12.5, 4);
-                    return [proj];
-                }
-                else
-                {
-                    this.shootTimer -= 1;
-                    return undefined;
-                }
-                break;
-            case 2: //basic lasers double
-               
-                let speed2 = 12;
-                let cooldown2 = 12;
+                speed = 12;
+                cooldown = 8;
                 if(this.shootTimer <= 0)
                 {
                     let projs = [];
-                    this.shootTimer = cooldown2;
+                    this.shootTimer = cooldown;
                     let offset_x = 17;
                     let offset_y = -30;// defaults for level === 1
-                    if (this.ship_level === 2)
+                    if (this.interval === 1)
                     {
-                        offset_x = 17;
-                        offset_y = -40;
+                        let rotate_scaler = this.offset(offset_x, offset_y);
+                        projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                        this.interval = 0;
                     }
-                
+                    else if (this.interval === 0)
+                    {
+                        let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+                        projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                        this.interval = 1;
+                    }
+                    return projs;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                    return undefined;
+                }
+            case 1: //basic lasers double
+               
+                speed = 12;
+                cooldown = 12;
+                if(this.shootTimer <= 0)
+                {
+                    let projs = [];
+                    this.shootTimer = cooldown;
+                    let offset_x = 17;
+                    let offset_y = -40;// defaults for level === 1
+
                     let rotate_scaler = this.offset(offset_x, offset_y);
                     let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+                    
 
-                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, 0, 12.5, 4));
-                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed2 * this.normalVector[0], speed2*this.normalVector[1]], this.degrees, 20, 1, 0, 12.5, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     return projs;
                 }
                 else
@@ -357,8 +383,93 @@ export default class Player {
                 }
                 //remember to return an array!
                 break;
+            case 2: //double shot
+                speed = 12;
+                cooldown = 12;
+                if(this.shootTimer <= 0)
+                {
+                    this.shotsLeft--;
+                    let projs = [];
+                    this.shootTimer = cooldown;
+                    let offset_x = 17;
+                    let offset_y = -40;// defaults for level === 1
+                    if (this.ship_level === 0)
+                    {
+                        offset_y = -30;
+                    }
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+                    
+
+                    let x = this.normalVector[0];
+                    let y = this.normalVector[1];
+
+                    let d = (this.degrees * Math.PI / 180);
+                    let x_modifier2 = x * Math.cos(Math.PI / 6) - y * Math.sin(Math.PI / 6);
+                    let y_modifier2 = x * Math.sin(Math.PI / 6) + y * Math.cos(Math.PI / 6);
+                    let x_modifier = x * Math.cos(- Math.PI / 6) - y * Math.sin(- Math.PI / 6);
+                    let y_modifier = x * Math.sin(- Math.PI / 6) + y * Math.cos(- Math.PI / 6);
+                    console.log([x_modifier,y_modifier]);
+
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * x_modifier2, speed * y_modifier2], this.degrees + 30, 20, 1, 0, this.basedamage, 4));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* x_modifier, speed * y_modifier], this.degrees - 30, 20, 1, 0, this.basedamage, 4));
+                   
+                    if (this.shotsLeft <= 0)
+                    {
+                        this.projectileType = TYPES2[this.ship_level].defaultprojType;
+                    }
+                    return projs;
+                    
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                    return undefined;
+                }
+            case 3:
+                speed = 17 ;
+                cooldown = 6;
+                if(this.shootTimer <= 0)
+                {
+                    this.shotsLeft--;
+                    let projs = [];
+                    this.shootTimer = cooldown;
+                    let offset_x = 0;
+                    let offset_y = -40;// defaults for level === 1
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 3, this.basedamage * 2.5, 4, 2, "../images/gamma.png"));
+                    if (this.shotsLeft <= 0)
+                    {
+                        this.projectileType = TYPES2[this.ship_level].defaultprojType;
+                    }
+                    
+                    return projs;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                    return undefined;
+                }
+                //remember to return an array!
+                break;
+
             default:
                 // console.error("unknown projectile type");
+        }
+    }
+
+    dealDamage(dmg)
+    {
+        this.health -= dmg;
+        if(this.health <= 0)
+        {
+            // alert("YOU LOSE!");
+            exit;
         }
     }
 
@@ -408,23 +519,18 @@ export default class Player {
     }
 
     realY(){ 
-        return this.posY + this.height / 2;
+        return this.posY + this.height * .3;
     }
 
     //#offset returns the new (x,y) relative to center after rotating to this.degrees
-    offset(x, y) //x,y relative to center, which should be realX() and real(Y), prior to rotation
+    offset(x, y, deg = 0) //x,y relative to center, which should be realX() and real(Y), prior to rotation
     {
-        if(this.degrees === undefined) //shouldn't need this but jic
-        {
-            this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
-        }
-        
         //apply matrix transformation of form 
         //R = |cos θ  - sin θ |
         //    | sin θ   cos θ |
         //to apply rotational transformation by changing basis vectors 
 
-        let degrees = this.degrees; //setup
+        let degrees = this.degrees + deg; //setup
         //usually -90 but because y is going positive going down, don't have to
 
         let c = Math.cos(degrees * Math.PI / 180.0);
