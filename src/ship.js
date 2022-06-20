@@ -580,7 +580,7 @@ export default class Ship {
                 if(this.shootTimer2 <= 0)
                 {
                     this.shootTimer2 = cooldown2;
-                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 5], this.canvasBottom, 40, 50, 0);
+                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 5], this.canvasBottom, 70, 50, 0);
                     this.background.lasers.push(proj3);
                     //constructor(position, velocity, length, width, damage, type, angle)
                 }
