@@ -20,7 +20,8 @@ export default class StarField
         this.mouse = {};
         this.starX_dir = 0;
         this.starY_dir = 0;
-        
+        this.continue = true;
+
 
         canvas.width = this.innerWidth;
         canvas.height = this.innerHeight;
@@ -60,15 +61,21 @@ export default class StarField
 
     // Function for animate canvas objects
     animate(){
-        let c = this.context;
-        requestAnimationFrame(this.animate.bind(this));
-        c.fillStyle = "black";
-        c.fillRect(0,0,this.innerWidth,this.innerHeight);
-    
-        for(let i = 1; i < 500; i++){
-            this.stars[i].update(c);
-            console.log("bruh");
+        if(this.continue){
+            let c = this.context;
+            requestAnimationFrame(this.animate.bind(this));
+            c.fillStyle = "black";
+            c.fillRect(0,0,this.innerWidth,this.innerHeight);
+        
+            for(let i = 1; i < 500; i++){
+                this.stars[i].update(c);
+            }
         }
+        else
+        {
+            this.stars = null;
+        }
+
 
         
     }
