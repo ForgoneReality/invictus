@@ -1,5 +1,6 @@
 // //game.js
 import Background from "./background"
+import StarField from "./starfield"
 
 export default class Game
 {
@@ -10,14 +11,16 @@ export default class Game
         this.canvas.height = innerHeight;
         this.state = "new-game";
         this.level = 1;
+        this.loading_screen();
 
-
-        this.start();//initially new game every time... loading functionality later
+        // this.start();//initially new game every time... loading functionality later
     }
-    // loading_screen()
-    // {
-    //     this.
-    // }
+
+    loading_screen()
+    {
+        const loadingscreen = document.queryselector('#loading');
+        this.starField = new StarField(this.canvas);
+    }
 
     start()
     {
