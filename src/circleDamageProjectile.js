@@ -32,6 +32,8 @@ export default class CircleDamageProjectile extends Projectile{
 
         let gradient_a;
         let gradient_b;
+        let gradient_c;
+        let mid;
         let color;
         if(this.type === 0)
         {
@@ -51,14 +53,36 @@ export default class CircleDamageProjectile extends Projectile{
             gradient_a = "  #b3ffff";
             gradient_b = "#00FFFF";
         }
+        else if (this.type === 4)
+        {
+            color = "purple";
+            gradient_a = "#DEA5FF";
+            gradient_b = "#6A00A7";
+        }
+        else if (this.type === 5)
+        {
+            color = "darkgreen";
+            gradient_b = "#00A31A";
+            gradient_a = "#78FF54";
+        }
 
    
         // context.save();
         context.beginPath();
         setShadow(context, color, 0, 0, this.blur);
         let grd = context.createRadialGradient(this.posX, this.posY, 0, this.posX, this.posY, this.size / 2);
-        grd.addColorStop(0, gradient_a);
-        grd.addColorStop(1, gradient_b);
+        if(gradient_c === undefined)
+        {
+            grd.addColorStop(0, gradient_a);
+            grd.addColorStop(1, gradient_b);
+        }
+        else
+        {
+            grd.addColorStop(0, gradient_a);
+            grd.addColorStop(mid, gradient_b);
+            grd.addColorStop(1, gradient_c);
+        }
+        
         context.fillStyle = grd;
 
         context.arc(this.posX, this.posY, this.size, this.arc_start, this.arc_end, false);
@@ -89,7 +113,7 @@ export default class CircleDamageProjectile extends Projectile{
 
     rightX()
     {
-        return this.posX;
+        return this.posX + 2 * this.size;
     }
 
     upY()
@@ -99,7 +123,7 @@ export default class CircleDamageProjectile extends Projectile{
 
     downY()
     {
-        return this.posY;
+        return this.posY + 2 * this.size;
     }
     
 }

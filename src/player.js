@@ -6,16 +6,16 @@ import LaserDamageProjectile from "./laserDamageProjectile";
 
 const TYPES2 = [
     { 
-        //Basic Enemy Ship
-        basehealth: 250,
+        //Basic Player Ship
+        basehealth: 500,
         basedamage: 20,
         img: '../images/enemyship1.png',
         scale: .022, 
         defaultprojType: 0
     },
     {
-            //Basic Enemy Ship
-            basehealth: 500,
+            //Level 2 Ship
+            basehealth: 1000,
             basedamage: 25,
             img: '../images/enemyship2.png',
             scale: .022, 
@@ -172,6 +172,7 @@ export default class Player {
             }
         } 
         this.basehealth = TYPES2[level].basehealth;
+        this.health = this.basehealth;
         this.basedamage = TYPES2[level].basedamage;
     }
 

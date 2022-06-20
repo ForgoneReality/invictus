@@ -18,7 +18,13 @@ const TYPES3 = [
             scale: .04, 
             rarity: "common"
     },
-    {},
+    {
+        img: '../images/gold.png',
+        color: "gold",
+        blur: 0,
+        scale: .1, 
+        rarity: "common"
+    },
     { 
         //gamma rays
         img: '../images/gamma.png',
@@ -34,7 +40,7 @@ export default class Drop extends Projectile {
     {
         //position, velocity, size, collidable, owner, type)
 
-        super(position, [0, 1.2], 0.25, true, 3, type);
+        super(position, [0, 1.6], 0.25, true, 3, type);
         const image = new Image();
         image.src = TYPES3[type].img;
         image.onload = () => {

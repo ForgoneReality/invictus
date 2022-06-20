@@ -37,10 +37,10 @@ const TYPES = [
         shotsLeft: 40
     },
     {
-         //yellow dude who zooms in but shoot slows and has pauses
+         //yellow dude who zooms in but shoot slows and has pauses, tanky hp
          velocity: [0, 5],
          endvelocity: [0, 1.4],
-         health: 175,
+         health: 250,
          damage: 40,
          img: '../images/enemyship3.png',
          color: "yellow",
@@ -67,6 +67,37 @@ const TYPES = [
         gold: 2200,
         value: 1.06,
         shotsLeft: 8
+    },
+    {
+        //Purple dude who actively shoots (slowly) at player 
+        velocity: [0, 1.6],
+        endvelocity: [0, 1.6],
+        health: 165,
+        damage: 45,
+        img: '../images/enemyship5.png',
+        color: "purple",
+        blur: 0,
+        rotatable: true,
+        scale: .1, 
+        shootTimerInit: 20, 
+        gold: 2100,
+        value: 1.05,
+        shotsLeft: 3
+    },
+    {
+        velocity: [0, 0.6],
+        endvelocity: [0, 0.6],
+        health: 222,
+        damage: 60,
+        img: '../images/enemyship6.png',
+        color: "green",
+        blur: 0,
+        rotatable: false,
+        scale: .085, 
+        shootTimerInit: 40, 
+        gold: 3000,
+        value: 1.09,
+        shotsLeft: 2
     }
 
 
@@ -189,7 +220,7 @@ export default class Ship {
             this.posY += this.velY;
             
         }
-        else if (this.type === 1)
+        else if (this.type === 1 || this.type === 4)
         {
             this.posX += this.velX;
             this.posY += this.velY;
@@ -223,6 +254,23 @@ export default class Ship {
                 this.velY -= 0.4;
             }
  
+        }
+        else if (this.type === 5)
+        {   
+            if(this.posY + 100 < this.background.player.posY)
+            {
+                if(this.posX > this.background.player.posX)
+                {
+                    this.velX = -1;
+                }
+                else
+                    this.velX = 1;
+
+                this.posX += this.velX;
+
+            }
+            this.posY += this.velY;
+            
         }
 
 
@@ -296,9 +344,7 @@ export default class Ship {
                     let proj4 = new CircleDamageProjectile([this.realX()-40, this.realY()-30], [speed * -1 * Math.sqrt(2) / 2,  -1 * speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, 3 * Math.PI / 4, 7 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj4);
                     this.shotsLeft -= 1;
-
                 }
-
                 else
                 {
                     this.shootTimer -= 1;
@@ -359,6 +405,66 @@ export default class Ship {
                     this.shootTimer -= 1;
                 }
 
+                break;
+            case 4: 
+                speed = 3.8;
+                cooldown = 22;
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 132;
+                    this.shotsLeft = 3;
+                    return undefined;
+                }
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+
+                    let offset_x = 27;
+                    let offset_y = 0;// defaults for level === 1
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+
+                    
+                    let proj = new CircleDamageProjectile([this.realX() + rotate_scaler[0], this.realY()+rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 4, this.damage, 5);
+                    let proj2 = new CircleDamageProjectile([this.realX() + rotate_scaler2[0], this.realY()+rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 4, this.damage, 5);
+                    
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft -= 1;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
+
+                break;
+            case 5:
+                
+                speed = 3.3;
+                cooldown = 30;
+                
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 125;
+                    this.shotsLeft = 2;
+                    return undefined;
+                }
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+                    let proj = new CircleDamageProjectile([this.realX()-40, this.realY()+30], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 5, this.damage, 20);
+                    this.background.enemyprojectiles.push(proj);
+
+                    let proj2 = new CircleDamageProjectile([this.realX()+40, this.realY()+30], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 5, this.damage, 20);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft -= 1;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                    return undefined;
+                }
                 break;
 
             default:

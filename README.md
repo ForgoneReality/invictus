@@ -70,9 +70,10 @@ Week 10
 Under Construction...
 
 SOON:
-- Gamma drop needs wider cropping
+- Fix Yellow Ship... Looks out-of-place. Darken and edit
 
 LATER: 
+
 - Upgrade background: planets, nebulas, etc.
 - Consistent graphics -> change drop images, UI, etc.
 
