@@ -8,7 +8,7 @@ const TYPES2 = [
     { 
         //Basic Player Ship
         basehealth: 500,
-        basedamage: 20,
+        basedamage: 25,
         img: '../images/enemyship1.png',
         scale: .022, 
         defaultprojType: 0
@@ -16,7 +16,7 @@ const TYPES2 = [
     {
             //Level 2 Ship
             basehealth: 1000,
-            basedamage: 25,
+            basedamage: 35,
             img: '../images/enemyship2.png',
             scale: .022, 
             defaultprojType: 1

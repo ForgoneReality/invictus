@@ -40,7 +40,7 @@ export default class Drop extends Projectile {
     {
         //position, velocity, size, collidable, owner, type)
 
-        super(position, [0, 1.6], 0.25, true, 3, type);
+        super(position, [0, 1.75], 0.25, true, 3, type);
         const image = new Image();
         image.src = TYPES3[type].img;
         image.onload = () => {
@@ -81,6 +81,11 @@ export default class Drop extends Projectile {
     downY() //scuffed
     {
         return this.posY + (this.size + this.width) / 2;
+    }
+
+    outofBounds(width, height)
+    {
+        return (this.posX >= width || this.posY >= height)
     }
 
 }

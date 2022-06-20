@@ -71,11 +71,16 @@ Under Construction...
 
 SOON:
 - Fix Yellow Ship... Looks out-of-place. Darken and edit
+- Recolor some ships
+- RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
 
 LATER: 
-
+- Instructions
+- Loading...
 - Upgrade background: planets, nebulas, etc.
+- Drawing off-screen ships (slightly off atm)
 - Consistent graphics -> change drop images, UI, etc.
+- Sound!!!
 
 MAYBE:
 - Make cheats
@@ -87,6 +92,10 @@ MAYBE:
 - Random shadow blurring unintended
 - Make drops intervally shadow blur
 - LAG: WHEN UPGRADING SHIP, CREATING DROP (load image?)
+- RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
+- Not centered: all ships and objects are initialized with their top left corner!
+- Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
+
 
 
 ### Special Thanks

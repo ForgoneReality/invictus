@@ -6,12 +6,14 @@ export default class Game
 {
     constructor(canvas){
         this.canvas = canvas;
-        this.context = canvas.getContext('2d');
         this.canvas.width = innerWidth;
         this.canvas.height = innerHeight;
+        this.context = this.canvas.getContext('2d');
         this.state = "new-game";
         this.level = 1;
         
+        this.width = this.canvas.width;
+        this.height = this.canvas.height;
         this.loading_screen();
 
         // this.start();//initially new game every time... loading functionality later
@@ -42,7 +44,7 @@ export default class Game
         // let canvas = document.getElementById('game-canvas');
         // let context = canvas.getContext('2d');
 
-        this.background = new Background(this.canvas.width, this.canvas.height, this.level, this.context);
+        this.background = new Background(this.width, this.height, this.level, this.context);
         this.state = "fighting";
         this.background.animate();
         // for now the game just instantly plays the "level" which is currently misnamed as background

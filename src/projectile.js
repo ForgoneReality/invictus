@@ -23,7 +23,8 @@ export default class Projectile {
     animate(context)
     {
         this.move();
-        this.draw(context);
+        if (this.posY >= 0)
+            this.draw(context);
     }
 
     move() //default move, no acceleration. projectiles, stars, some enemy ships, drops, etc.

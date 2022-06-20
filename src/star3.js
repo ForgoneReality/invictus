@@ -44,9 +44,6 @@ export default class Star3
     
     // Function for draw star
     draw(c){
-        console.log(this.starX, this.starY, this.starRadius)
-
-
         c.beginPath();
         c.shadowColor = "white";
         c.shadowBlur = this.starRadius * 2;

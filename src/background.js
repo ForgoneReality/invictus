@@ -17,6 +17,7 @@ export default class Background{
         this.enemyprojectiles = [];
         this.enemyships = [];
         this.drops = [];
+        this.lasers = [];
         this.createLevel(1);
         this.initializeStars(context);
 
@@ -27,7 +28,7 @@ export default class Background{
 
     createLevel(level)
     {
-        this.player = new Player([this.width / 2 + 1, this.height - 50]);
+        this.player = new Player([this.width / 2, this.height - 50]);
         this.mouse_x = this.width / 2;
         this.mouse_y = 0;
         let handleMousemove = (event) => {
@@ -40,40 +41,51 @@ export default class Background{
 
         if (level === 1)
         {
-            this.enemyships.push(new Ship([.25*this.width, -100], 0, this)); //type 1
-            this.enemyships.push(new Ship([.54 * this.width, -480], 0, this)); //type 1
-            this.enemyships.push(new Ship([.65*this.width, -133], 1, this)); //type 2
-            this.enemyships.push(new Ship([.34 * this.width, -700], 1, this)); //type 2
-            this.enemyships.push(new Ship([.6 * this.width, -600], 2, this)); //type 3
-            this.enemyships.push(new Ship([.42 * this.width, -510], 3, this)); //type 4
-            this.enemyships.push(new Ship([.7*this.width, -780], 3, this)); //type 1
-            this.enemyships.push(new Ship([.45 * this.width, -840], 2, this)); //type 3
-            this.enemyships.push(new Ship([.34 * this.width, -985], 0, this)); //type 2
-            this.enemyships.push(new Ship([.18 * this.width, -1050], 1, this)); //type 2
+
+            // this.drops.push(new Drop([.5*this.width, -460], 3));
+            // this.enemyships.push(new Ship([.15*this.width, -100], 0, this)); //type 1
+            // this.enemyships.push(new Ship([.44 * this.width, -480], 0, this)); //type 1
+            // this.enemyships.push(new Ship([.55*this.width, -133], 1, this)); //type 2
+            // this.enemyships.push(new Ship([.24 * this.width, -700], 1, this)); //type 2
+            // this.enemyships.push(new Ship([.5 * this.width, -600], 2, this)); //type 3
+            // this.enemyships.push(new Ship([.32 * this.width, -510], 3, this)); //type 4
+            // this.enemyships.push(new Ship([.6*this.width, -780], 3, this)); //type 1
+            // this.enemyships.push(new Ship([.35 * this.width, -840], 2, this)); //type 3
+            // this.enemyships.push(new Ship([.24 * this.width, -985], 0, this)); //type 2
+            // this.enemyships.push(new Ship([.1 * this.width, -1050], 1, this)); //type 2
             
-            this.enemyships.push(new Ship([.9*this.width, -1090], 4, this)); 
-            this.enemyships.push(new Ship([.75*this.width, -333], 4, this)); 
-            this.enemyships.push(new Ship([.68*this.width, -1150], 5, this)); 
-            this.enemyships.push(new Ship([.23*this.width, -1200], 1, this)); 
-            this.enemyships.push(new Ship([.37*this.width, -1300], 3, this)); 
-            this.enemyships.push(new Ship([.53*this.width, -1400], 5, this)); 
-            this.enemyships.push(new Ship([.4*this.width, -1500], 2, this)); 
-            this.enemyships.push(new Ship([.71*this.width, -1640], 0, this)); 
-            this.enemyships.push(new Ship([.44*this.width, -1523], 4, this)); 
+            // this.enemyships.push(new Ship([.8*this.width, -1090], 4, this)); 
+            // this.enemyships.push(new Ship([.75*this.width, -333], 4, this)); 
+            // this.enemyships.push(new Ship([.68*this.width, -1150], 5, this)); 
+            // this.enemyships.push(new Ship([.13*this.width, -1200], 1, this)); 
+            // this.enemyships.push(new Ship([.27*this.width, -1300], 3, this)); 
+            // this.enemyships.push(new Ship([.43*this.width, -1400], 5, this)); 
+            // this.enemyships.push(new Ship([.53*this.width, -1500], 2, this)); 
+            // this.enemyships.push(new Ship([.63*this.width, -1640], 0, this)); 
+            // this.enemyships.push(new Ship([.77*this.width, -1523], 4, this)); 
 
-            this.enemyships.push(new Ship([.33*this.width, -1776], 3, this)); 
-            this.enemyships.push(new Ship([.66*this.width, -1840], 3, this)); 
-            this.enemyships.push(new Ship([.5*this.width, -1890], 3, this)); 
-            this.enemyships.push(new Ship([.4*this.width, -1992], 4, this)); 
-            this.enemyships.push(new Ship([.2*this.width, -2040], 5, this)); 
-            this.enemyships.push(new Ship([.7*this.width, -2100], 0, this)); 
-            this.enemyships.push(new Ship([.35*this.width, -2150], 1, this)); 
-            this.enemyships.push(new Ship([.63*this.width, -2160], 1, this)); 
-            this.enemyships.push(new Ship([.27*this.width, -2245], 5, this)); 
-            this.enemyships.push(new Ship([.58*this.width, -2324], 2, this)); 
+            // this.enemyships.push(new Ship([.23*this.width, -1776], 3, this)); 
+            // this.enemyships.push(new Ship([.56*this.width, -1840], 3, this)); 
+            // this.enemyships.push(new Ship([.4*this.width, -1890], 3, this)); 
+            // this.enemyships.push(new Ship([.5*this.width, -1992], 4, this)); 
+            // this.enemyships.push(new Ship([.1*this.width, -2040], 5, this)); 
+            // this.enemyships.push(new Ship([.6*this.width, -2100], 4, this)); 
+            // this.enemyships.push(new Ship([.25*this.width, -2150], 1, this)); 
+            // this.enemyships.push(new Ship([.53*this.width, -2160], 1, this)); 
+            // this.enemyships.push(new Ship([.17*this.width, -2245], 5, this)); 
+            // this.enemyships.push(new Ship([.48*this.width, -2324], 2, this));
 
+            // this.enemyships.push(new Ship([.5*this.width, -2500], 0, this)); 
+            // this.enemyships.push(new Ship([.38*this.width, -2570], 0, this)); 
+            // this.enemyships.push(new Ship([.62*this.width, -2570], 0, this)); 
+            // this.enemyships.push(new Ship([.26*this.width, -2640], 0, this)); 
+            // this.enemyships.push(new Ship([.74*this.width, -2640], 0, this));
+            // this.enemyships.push(new Ship([.14*this.width, -2710], 0, this)); 
+            // this.enemyships.push(new Ship([.87*this.width, -2710], 0, this));  
+
+            // this.drops.push(new Drop([.3*this.width, -2320], 1));
+            this.enemyships.push(new Ship([.12*this.width, -100], 6, this, true));  
             
-
         }
     }
 
@@ -92,7 +104,6 @@ export default class Background{
             }
             else
                 size = Math.random()*2 + 1;
-
             
             let mystar = new Star(posx, Math.random()*1 + 0.2 + (size / (8)), size);
 
@@ -114,8 +125,6 @@ export default class Background{
         {
             this.player.levelup(1);
         }
-
-    
 
         if(key.isPressed(" ") )
         {
@@ -173,6 +182,23 @@ export default class Background{
 
     updateAll(context)
     {
+        this.lasers.forEach((laser) => {
+            laser.animate(this.context);
+        })
+
+        for(let i = this.lasers.length - 1; i >= 0; i--) // problematic! need to go backwards
+        {
+            if(this.lasers[i].deleted)
+            {
+                setTimeout(()=> 
+                {
+                    this.lasers.splice(i, 1);
+                }, 0);
+                
+            }
+        }
+
+
         this.updateSomething(context, this.stars);
         this.updateSomething(context, this.enemyships);
 
@@ -180,14 +206,13 @@ export default class Background{
             proj.animate(this.context)
         });
 
-        for(let i = 0; i < this.projectiles.length; i++)
+        for(let i = this.projectiles.length - 1; i >= 0; i--) // problematic! need to go backwards
         {
             if(this.projectiles[i].outofBounds(this.width, this.height))
             {
                 setTimeout(()=> 
                 {
                     this.projectiles.splice(i, 1);
-                    i--;
                 }, 0);
                 
             }
@@ -197,14 +222,14 @@ export default class Background{
             proj.animate(this.context)
         });
 
-        for(let i = 0; i < this.enemyprojectiles.length; i++)
+        for(let i = this.enemyprojectiles.length - 1; i >= 0; i--)
         {
             if(this.enemyprojectiles[i].outofBounds(this.width, this.height))
             {
+                // console.log("out of bounds!");
                 setTimeout(()=> 
                 {
                     this.enemyprojectiles.splice(i, 1);
-                    i--;
                 }, 0);
             }
         }
@@ -213,29 +238,25 @@ export default class Background{
             drop.animate(this.context)
         });
 
-        for(let i = 0; i < this.drops.length; i++)
+        for(let i = this.drops.length - 1; i >= 0; i--)
         {
             if(this.drops[i].outofBounds(this.width, this.height))
             {
                 setTimeout(()=> 
                 {
                     this.drops.splice(i, 1);
-                    i--;
                 }, 0);
             }
         }
-
- 
     }
 
     updateSomething(context, something){
       
-        for(let i = 0; i < something.length; i++)
+        for(let i = something.length - 1; i >= 0; i--)
         {
             if(something[i].posY > this.height + 50)
             {
                 something.splice(i, 1);
-                i--;
             }
         }
         
@@ -247,9 +268,9 @@ export default class Background{
     checkCollisions(context)
     {
         //change to for-loop
-        for(let i = 0; i <this.enemyships.length; i++)
+        for(let i = this.enemyships.length - 1; i >= 0; i--)
         {
-            for(let j = 0; j < this.projectiles.length; j++)
+            for(let j = this.projectiles.length - 1; j >= 0; j--)
             {
                 if(this.collidesWith(this.enemyships[i], this.projectiles[j]))
                 {
@@ -257,7 +278,6 @@ export default class Background{
                     setTimeout(()=> 
                     {
                         this.projectiles.splice(j, 1);
-                        j--;
                     }, 0);
            
                     
@@ -268,7 +288,6 @@ export default class Background{
                         setTimeout(()=> 
                         {
                             this.enemyships.splice(i, 1);
-                            i--;
                         }, 0);
 
                         break;
@@ -279,7 +298,7 @@ export default class Background{
             }
         }
 
-        for(let j = 0; j < this.enemyprojectiles.length; j++)
+        for(let j = this.enemyprojectiles.length - 1; j >= 0; j--)
         {
             if(this.collidesWith(this.player, this.enemyprojectiles[j]))
             {
@@ -288,27 +307,44 @@ export default class Background{
                 setTimeout(()=> 
                     {
                         this.enemyprojectiles.splice(j, 1);
-                        j--;
                     }, 0);
         
             }
         }
 
-        for(let i = 0; i <this.enemyships.length; i++)
+        for(let j = this.lasers.length - 1; j >= 0; j--)
+        {
+            if(this.collidesWith(this.player, this.lasers[j]))
+            {
+                this.player.dealDamage(this.lasers[j].damage);
+
+                setTimeout(()=> 
+                    {
+                        this.lasers.splice(j, 1);
+                    }, 0);
+        
+            }
+        }
+
+        for(let i = this.enemyships.length - 1; i >= 0; i--)
         {
             if(this.collidesWith(this.player, this.enemyships[i]))
             {
-                this.player.dealDamage(Math.max(this.enemyships[i].damage, 50, ));
-                this.enemyships[i].health -= 25;
+                this.player.dealDamage(Math.max(this.enemyships[i].damage, 50, )); //fix this
+                
                 
                 let n = this.normalizedVector(this.player, this.enemyships[i]);
                 this.player.collided = 20;
                 this.player.velX = n[0] * 13;
                 this.player.velY = n[1] * 13;
 
-                this.enemyships[i].collided = 13;
-                this.enemyships[i].velX = n[0] * -13;
-                this.enemyships[i].velY = n[1] * -13;   
+                if(!this.enemyships[i].boss)
+                {
+                    this.enemyships[i].health -= 25;
+                    this.enemyships[i].collided = 13;
+                    this.enemyships[i].velX = n[0] * -13;
+                    this.enemyships[i].velY = n[1] * -13;   
+                }
 
                 if(this.enemyships[i].health <= 0)
                 {
@@ -317,14 +353,13 @@ export default class Background{
                     setTimeout(()=> 
                         {
                             this.enemyships.splice(i, 1);
-                            i--;
                         }, 0);
                 }
         
             }
         }
 
-        for(let i = 0; i <this.drops.length; i++)
+        for(let i = this.drops.length - 1; i >= 0; i--)
         {
             if(this.collidesWith(this.player, this.drops[i]))
             {
@@ -348,7 +383,6 @@ export default class Background{
                 setTimeout(()=> 
                     {
                         this.drops.splice(i, 1);
-                        i--;
                     }, 0);
             }
         }

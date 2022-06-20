@@ -2,6 +2,7 @@
 
 import CircleDamageProjectile from "./circleDamageProjectile";
 import LaserDamageProjectile from "./laserDamageProjectile";
+import LaserBeam from "./laserbeam";
 
 const TYPES = [
     { 
@@ -98,24 +99,42 @@ const TYPES = [
         gold: 3000,
         value: 1.09,
         shotsLeft: 2
+    },
+    { //BOSS 1
+        //laser in middle that flashes first. do it later in the fight when they go there
+
+        velocity: [0, 2.4],
+        endvelocity: [0, 0],
+        health: 3000,
+        damage: 60, //variable!
+        img: '../images/boss1.png',
+        color: "red",
+        blur: 0,
+        rotatable: false,
+        scale: .11, 
+        shootTimerInit: 30,
+        shootTimerInit2: 200,  
+        shootTimerInit3: 500, 
+        gold: 20000,
+        value: 0,
+        shotsLeft: 2 //variable!
+        //add the two minions
     }
 
 
 ];
 
 export default class Ship {
-    constructor(position, type, background) //more later, type?
+    constructor(position, type, background, boss = false) //more later, type?
     {
         this.posX = position[0];
         this.posY = position[1];
-
-        this.canvasX = this.posX;
-        this.canvasY = this.posY;
 
         this.collided = 0;
 
         this.background = background;
         this.type = type;
+        this.boss = boss;
         this.canvasBottom = document.getElementById('game-canvas').getAttribute('height');
         this.setup(type);
     }
@@ -131,6 +150,7 @@ export default class Ship {
             this.width = image.width * TYPES[type].scale;
             this.height = image.height * TYPES[type].scale;
         }
+        
 
         this.velX = TYPES[type].velocity[0];
         this.velY = TYPES[type].velocity[1];
@@ -145,9 +165,26 @@ export default class Ship {
         this.rotatable = TYPES[type].rotatable;
 
         this.shootTimer = TYPES[type].shootTimerInit;
+        if (this.boss)
+        {
+            this.shootTimer2 = TYPES[type].shootTimerInit2;
+            this.shootTimer3 = TYPES[type].shootTimerInit3;
+        }
         this.gold = TYPES[type].gold;
         this.value = TYPES[type].value;
         this.shotsLeft = TYPES[type].shotsLeft;
+        //dependent
+
+        // if(this.boss)
+        // {
+        //     this.dependencies = [];
+        //     switch (this.type)
+        //     {
+        //         case 6:
+        //             //add minions
+
+        //     }
+        // }
     }
 
     draw(context)
@@ -270,10 +307,57 @@ export default class Ship {
 
             }
             this.posY += this.velY;
+        }
+        else if (this.type === 6)
+        {
+            this.posX += this.velX;
+            this.posY += this.velY;
+            //force the minions to move exactly the same way
+            if(this.velY > 1)
+            {
+                this.velY = this.velY * 0.85;
+            }
+            else if(this.velY > .15)
+            {
+                this.velY = this.velY * 0.98;
+            }
+            else
+            {
+                this.velY = 0;
+            }
+        
+        
+            if(this.realX() > this.background.player.realX() + 100)
+            {
+                this.velX = -1;
+            }
+            else if( this.realX() + 100 > this.background.player.realX())
+                this.velX = 1;
+            else if (this.realX() > this.background.player.realX())
+            {
+                this.velX -= 0.003;
+            }
+            else if (this.realX() < this.background.player.realX())
+            {
+                this.velX += 0.003;
+            }
+
+            // this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
+            //make above have cooldown and much larger influence!
+
+            //idk about centering issue
+            if(this.velX > 1.5)
+            {
+                this.velX = 0.5;
+            }
+            if(this.velX < -1.5)
+            {
+                this.velX = -0.5;
+            }
+            
+
             
         }
-
-
     }
 
     // fire()
@@ -305,6 +389,10 @@ export default class Ship {
 
         let speed;
         let cooldown;
+        let speed2;
+        let speed3;
+        let cooldown2;
+        let cooldown3;
         switch(this.type)
         {
             
@@ -466,6 +554,44 @@ export default class Ship {
                     return undefined;
                 }
                 break;
+            case 6: //red ball center
+                speed = 4.1;
+                cooldown = 100;
+
+                speed = 6;
+                cooldown2 = 350;
+                
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 27, 2, 0, 50, 25, 3);
+                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 27, 2, 0, 50, 25, 3);
+            
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+
+                    //constructor(position, velocity, length, width, damage, type, angle)
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
+
+                if(this.shootTimer2 <= 0)
+                {
+                    this.shootTimer2 = cooldown2;
+                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 5], this.canvasBottom, 40, 50, 0);
+                    this.background.lasers.push(proj3);
+                    //constructor(position, velocity, length, width, damage, type, angle)
+                }
+                else
+                {
+                    this.shootTimer2 -= 1;
+                }
+
+    
+                break;
+
 
             default:
                 console.error("unknown projectile type");
