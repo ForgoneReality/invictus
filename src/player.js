@@ -431,7 +431,7 @@ export default class Player {
                     return undefined;
                 }
             case 3:
-                speed = 17 ;
+                speed = 17;
                 cooldown = 6;
                 if(this.shootTimer <= 0)
                 {

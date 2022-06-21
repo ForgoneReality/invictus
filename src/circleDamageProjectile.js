@@ -103,7 +103,6 @@ export default class CircleDamageProjectile extends Projectile{
         // context.restore();
 
         // context.shadowBlur = 0;
-
     }
 
     leftX()
