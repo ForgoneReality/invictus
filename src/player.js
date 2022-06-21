@@ -9,7 +9,8 @@ const TYPES2 = [
         //Basic Player Ship
         basehealth: 500,
         basedamage: 25,
-        img: '../images/enemyship1.png',
+        baseshield: 250,
+        img: '../images/playership1.png',
         scale: .022, 
         defaultprojType: 0
     },
@@ -17,7 +18,8 @@ const TYPES2 = [
             //Level 2 Ship
             basehealth: 1000,
             basedamage: 35,
-            img: '../images/enemyship2.png',
+            baseshield: 400,
+            img: '../images/playership2.png',
             scale: .022, 
             defaultprojType: 1
     }
@@ -35,7 +37,7 @@ export default class Player {
         this.ship_level = 0;
 
         const image = new Image();
-        image.src  = '../images/playership1.png';
+        image.src  = TYPES2[this.ship_level].img;
         image.onload = () => {
             this.image = image;
             const SCALE = 0.02;
@@ -44,6 +46,8 @@ export default class Player {
         }
         this.basehealth = TYPES2[this.ship_level].basehealth;
         this.health = this.basehealth; 
+        this.baseshield = TYPES2[this.ship_level].baseshield;
+        this.shield = this.baseshield;
         this.basedamage = TYPES2[this.ship_level].basedamage;
         this.regen = 0.05;
 
@@ -72,7 +76,14 @@ export default class Player {
 
         context.save();
         context.shadowColor = "red";
-        context.shadowBlur = 9;
+        if(this.shield >0 )
+        {
+            context.shadowBlur = 15;
+        }
+        else
+        {
+            context.shadowBlur = 0;
+        }
         context.translate(this.posX+this.width/2, this.posY+this.height/2);
         context.rotate(this.degrees*Math.PI/180.0);
         context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
@@ -163,7 +174,7 @@ export default class Player {
         if (level === 1)
         {
             const image = new Image();
-            image.src  = '../images/playership2.png';
+            image.src  = TYPES2[level].img;
             image.onload = () => {
                 this.image = image;
                 const SCALE = 0.02;
@@ -174,6 +185,8 @@ export default class Player {
         this.basehealth = TYPES2[level].basehealth;
         this.health = this.basehealth;
         this.basedamage = TYPES2[level].basedamage;
+        this.baseshield =  TYPES2[level].baseshield;
+        this.shield = this.baseshield;
     }
 
     power(direction)
@@ -466,12 +479,24 @@ export default class Player {
 
     dealDamage(dmg)
     {
-        this.health -= dmg;
-        if(this.health <= 0)
+        if(this.shield > 0)
         {
-            // alert("YOU LOSE!");
-            exit;
+            this.shield -= dmg;
+            if(this.shield < 0)
+            {
+                this.shield = 0;
+            }
         }
+        else
+        {
+            this.health -= dmg;
+            if(this.health <= 0)
+            {
+                // alert("YOU LOSE!");
+                exit;
+            }
+        }
+       
     }
 
     updateAngleAndNormalizedVector(mouse_x, mouse_y)

@@ -32,6 +32,14 @@ const TYPES3 = [
         blur: 0,
         scale: .1, 
         rarity: "uncommon"
+    },
+    {   //shield
+        img: '../images/shielddrop.png',
+        color: "blue",
+        blur: 0,
+        scale: .15, 
+        rarity: "common"
+        
     }
 ];
 

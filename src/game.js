@@ -35,7 +35,7 @@ export default class Game
                 {
                     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
                     this.start();
-                }, 10000);
+                }, 10700);
         });
 
         this.starField = new StarField(this.canvas);

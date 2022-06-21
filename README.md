@@ -96,7 +96,7 @@ MAYBE:
 - Not centered: all ships and objects are initialized with their top left corner!
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
 - FIX BOSS MINIONS PEBBLES INTO LASERS (make sure killing minions first works as intended too)
-
+- Fix laser hitboxes
 
 
 ### Special Thanks

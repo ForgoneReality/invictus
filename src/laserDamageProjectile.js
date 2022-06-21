@@ -108,7 +108,7 @@ export default class LaserDamageProjectile extends Projectile{
         {
             return this.posY + this.height * .8
         } 
-        return this.posY
+        return this.posY + this.height;
     }
     
 }

@@ -11,7 +11,7 @@ const TYPES = [
         velocity: [0, 1.65 * (0.4 + Math.random() * 0.8)],
         endvelocity: [0, 1.65],
         health: 135,
-        damage: 50,
+        damage: 60,
         img: '../images/enemyship1.png',
         color: "red",
         blur: 0,
@@ -27,7 +27,7 @@ const TYPES = [
         velocity: [0, 1    * (0.4 + Math.random() * 0.8)],
         endvelocity: [0, 1],
         health: 175,
-        damage: 60,
+        damage: 70,
         img: '../images/enemyship2.png',
         color: "pink",
         blur: 0,
@@ -43,7 +43,7 @@ const TYPES = [
          velocity: [0, 5],
          endvelocity: [0, 1.4],
          health: 250,
-         damage: 40,
+         damage: 60,
          img: '../images/enemyship3.png',
          color: "yellow",
          blur: 0,
@@ -59,7 +59,7 @@ const TYPES = [
         velocity: [0, 10.2],
         endvelocity: [0, 1.8],
         health: 150,
-        damage: 33,
+        damage: 35,
         img: '../images/enemyship4.png',
         color: "cyan",
         blur: 0,
@@ -75,7 +75,7 @@ const TYPES = [
         velocity: [0, 1.6],
         endvelocity: [0, 1.6],
         health: 165,
-        damage: 45,
+        damage: 55,
         img: '../images/enemyship5.png',
         color: "purple",
         blur: 0,
@@ -90,7 +90,7 @@ const TYPES = [
         velocity: [0, 0.6],
         endvelocity: [0, 0.6],
         health: 222,
-        damage: 60,
+        damage: 75,
         img: '../images/enemyship6.png',
         color: "green",
         blur: 0,
@@ -106,8 +106,8 @@ const TYPES = [
 
         velocity: [0, 2.4],
         endvelocity: [0, 0],
-        health: 6666,
-        damage: 60, //variable!
+        health: 8000,
+        damage: 80, //variable!
         img: '../images/boss1.png',
         color: "red",
         blur: 0,
@@ -124,8 +124,8 @@ const TYPES = [
     {
         velocity: [0, 0],
         endvelocity: [0, 0],
-        health: 1500,
-        damage: 30, 
+        health: 2500,
+        damage: 50, 
         img: '../images/bossminion.png',
         color: "red",
         blur: 0,
@@ -382,14 +382,14 @@ export default class Ship {
                 if(this.realX() <= this.background.width * .3)
                     this.velX = 0;
                 else
-                    this.velX = -1;
+                    this.velX = -1.5;
             }
             else if( this.realX() + 30 < this.background.player.realX())
             {
                 if(this.realX() >= this.background.width * .67)
                     this.velX = 0;
                 else
-                    this.velX = 1;
+                    this.velX = 1.5;
             }
             else if (this.realX() > this.background.player.realX())
             {
@@ -601,8 +601,8 @@ export default class Ship {
                 if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
-                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 66, 25, 3);
-                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 66, 25, 3);
+                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
+                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
             
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
@@ -618,7 +618,7 @@ export default class Ship {
                 if(this.shootTimer2 <= 0)
                 {
                     this.shootTimer2 = cooldown;
-                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 3.5, 0, 150);
+                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5, 0, 150);
                     this.background.lasers.push(proj3);
                     this.dependencies.push(proj3);
                     //constructor(position, velocity, length, width, damage, type, angle)
@@ -650,8 +650,8 @@ export default class Ship {
                     let scatter_x = Math.cos(scatter_deg * Math.PI / 180);
                     let scatter_y = -1 * Math.sin(scatter_deg * Math.PI / 180);
 
-                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 20, 18);
-                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 20, 18);
+                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25, 18);
+                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25, 18);
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
                     this.shotsLeft -= 1;
@@ -683,11 +683,12 @@ export default class Ship {
                     let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
 
                     
-                    let proj = new CircleDamageProjectile([this.realX() + rotate_scaler[0], this.realY()+rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 0, this.damage, 5);
-                    let proj2 = new CircleDamageProjectile([this.realX() + rotate_scaler2[0], this.realY()+rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 0, this.damage, 5);
+            
+                    let proj3 = new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY()+rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees + 180, 30, 2, 0, this.damage, 5);
+                    let proj4 = new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY()+rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees + 180, 30, 2, 0, this.damage, 5);
                     
-                    this.background.enemyprojectiles.push(proj);
-                    this.background.enemyprojectiles.push(proj2);
+                    this.background.enemyprojectiles.push(proj3);
+                    this.background.enemyprojectiles.push(proj4);
                     this.shotsLeft -= 1;
                 }
                 else
