@@ -4,7 +4,7 @@ import Projectile from "./projectile"
 const TYPES3 = [
     {
             //healing
-            img: '../images/heart.png',
+            img: 'images/heart.png',
             color: "red",
             blur: 5,
             scale: .06, 
@@ -12,14 +12,14 @@ const TYPES3 = [
     },
     {
             //double fire
-            img: '../images/drop1.png',
+            img: 'images/drop1.png',
             color: "white",
             blur: 0,
             scale: .04, 
             rarity: "common"
     },
     {
-        img: '../images/gold.png',
+        img: 'images/gold.png',
         color: "gold",
         blur: 0,
         scale: .1, 
@@ -27,14 +27,14 @@ const TYPES3 = [
     },
     { 
         //gamma rays
-        img: '../images/gamma.png',
+        img: 'images/gamma.png',
         color: "green",
         blur: 0,
         scale: .1, 
         rarity: "uncommon"
     },
     {   //shield
-        img: '../images/shielddrop.png',
+        img: 'images/shielddrop.png',
         color: "blue",
         blur: 0,
         scale: .15, 

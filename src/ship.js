@@ -12,7 +12,7 @@ const TYPES = [
         endvelocity: [0, 1.65],
         health: 135,
         damage: 60,
-        img: '../images/enemyship1.png',
+        img: 'images/enemyship1.png',
         color: "red",
         blur: 0,
         rotatable: false,
@@ -28,7 +28,7 @@ const TYPES = [
         endvelocity: [0, 1],
         health: 175,
         damage: 70,
-        img: '../images/enemyship2.png',
+        img: 'images/enemyship2.png',
         color: "pink",
         blur: 0,
         rotatable: false,
@@ -44,7 +44,7 @@ const TYPES = [
          endvelocity: [0, 1.4],
          health: 250,
          damage: 60,
-         img: '../images/enemyship3.png',
+         img: 'images/enemyship3.png',
          color: "yellow",
          blur: 0,
          rotatable: false,
@@ -60,7 +60,7 @@ const TYPES = [
         endvelocity: [0, 1.8],
         health: 150,
         damage: 35,
-        img: '../images/enemyship4.png',
+        img: 'images/enemyship4.png',
         color: "cyan",
         blur: 0,
         rotatable: true,
@@ -76,7 +76,7 @@ const TYPES = [
         endvelocity: [0, 1.6],
         health: 165,
         damage: 55,
-        img: '../images/enemyship5.png',
+        img: 'images/enemyship5.png',
         color: "purple",
         blur: 0,
         rotatable: true,
@@ -91,7 +91,7 @@ const TYPES = [
         endvelocity: [0, 0.6],
         health: 222,
         damage: 75,
-        img: '../images/enemyship6.png',
+        img: 'images/enemyship6.png',
         color: "green",
         blur: 0,
         rotatable: false,
@@ -108,7 +108,7 @@ const TYPES = [
         endvelocity: [0, 0],
         health: 8000,
         damage: 80, //variable!
-        img: '../images/boss1.png',
+        img: 'images/boss1.png',
         color: "red",
         blur: 0,
         rotatable: false,
@@ -126,7 +126,7 @@ const TYPES = [
         endvelocity: [0, 0],
         health: 2500,
         damage: 50, 
-        img: '../images/bossminion.png',
+        img: 'images/bossminion.png',
         color: "red",
         blur: 0,
         rotatable: true,
@@ -630,7 +630,7 @@ export default class Ship {
 
                 if(this.shootTimer2 === 100)
                 {
-                    let flare = (new LensFlare([this.realX(), this.realY()+93.5], 98.5, "../images/redflare.png", 0.12, "#8b0000", 20));
+                    let flare = (new LensFlare([this.realX(), this.realY()+93.5], 98.5, "images/redflare.png", 0.12, "#8b0000", 20));
                     this.background.extras.push(flare);
                     this.dependencies.push(flare);
                 }
