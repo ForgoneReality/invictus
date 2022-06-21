@@ -6,7 +6,9 @@ export default class Star3
         this.y = y;
         this.z = z;
         this.radius = radius;
-        this.color = "white";
+        this.r = 255;
+        this.g = 255;
+        this.b = 255;
 
         this.id = starsIndex;
         this.centerX = centerX;
@@ -45,9 +47,9 @@ export default class Star3
     // Function for draw star
     draw(c){
         c.beginPath();
-        c.shadowColor = "white";
+        c.shadowColor = `rgb(${this.r}, ${this.g}, ${this.b})`;
         c.shadowBlur = this.starRadius * 2;
-        c.fillStyle = this.color;
+        c.fillStyle = `rgb(${this.r}, ${this.g}, ${this.b})`;
         c.arc(this.starX,this.starY,this.starRadius, 2*Math.PI, false);
         c.fill();
         c.closePath();

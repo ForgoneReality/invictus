@@ -21,25 +21,11 @@ export default class StarField
         this.starX_dir = 0;
         this.starY_dir = 0;
         this.continue = true;
+        this.initiateEnd = false;
 
 
         canvas.width = this.innerWidth;
         canvas.height = this.innerHeight;
-
-        canvas.addEventListener('mousewheel', function(e){
-            if(e.deltaY < 0){
-            this.focalLength *= 1.1;
-            }else{
-            this.focalLength /= 1.1;
-            }
-            
-            if(this.focalLength >= this.innerWidth){
-            this.focalLength = this.innerWidth - 20;
-            }else if(this.focalLength < 100){
-            this.focalLength = 100;
-            }
-            
-        }, false);
 
         this.start();
     }
@@ -68,7 +54,25 @@ export default class StarField
             c.fillRect(0,0,this.innerWidth,this.innerHeight);
         
             for(let i = 1; i < 500; i++){
+                this.stars[i].focalLength = this.focalLength;
                 this.stars[i].update(c);
+                if(this.initiateEnd && this.focalLength > 500)
+                {
+                    this.stars[i].r -= 1;
+                    this.stars[i].g -= 1;
+                    this.stars[i].b -= 1;
+                }
+            }
+            if (this.initiateEnd)
+            {
+                if (this.focalLength < 1200)
+                {
+                    this.focalLength = this.focalLength + 2;
+                }
+                else
+                {
+                    this.continue = false;
+                }
             }
         }
         else
@@ -76,7 +80,5 @@ export default class StarField
             this.stars = null;
         }
 
-
-        
     }
 };
