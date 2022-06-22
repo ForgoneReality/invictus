@@ -22,6 +22,43 @@ export default class StarField
         this.starY_dir = 0;
         this.continue = true;
         this.initiateEnd = false;
+        
+        const image = new Image();
+        image.src  = "images/instructions.png";
+        image.onload = () => {
+            this.instructions = image;
+            this.i_width = this.innerWidth * .6;
+            this.i_height = this.innerHeight * .8;
+        }
+
+        const spacebar = new Image();
+        spacebar.src  = "images/spacebar.png";
+        spacebar.onload = () => {
+            this.spacebar = spacebar;
+            const SCALE = 0.4;
+            this.s_width = spacebar.width * SCALE;
+            this.s_height = spacebar.height * SCALE;
+        }
+
+        const wasd = new Image();
+        wasd.src  = "images/wasd.png";
+        wasd.onload = () => {
+            this.wasd = wasd;
+            const SCALE = 0.5;
+            this.w_width = wasd.width * SCALE;
+            this.w_height = wasd.height * SCALE;
+        }
+
+        const mousey = new Image();
+        mousey.src  = "images/mouse.png";
+        mousey.onload = () => {
+            this.mousey = mousey;
+            const SCALE = 0.12;
+            this.m_width = mousey.width * SCALE;
+            this.m_height = mousey.height * SCALE;
+        }
+
+        this.instructionsOn = false;
 
 
         canvas.width = this.innerWidth;
@@ -53,16 +90,39 @@ export default class StarField
             c.fillStyle = "black";
             c.fillRect(0,0,this.innerWidth,this.innerHeight);
         
-            for(let i = 1; i < 500; i++){
-                this.stars[i].focalLength = this.focalLength;
-                this.stars[i].update(c);
-                if(this.initiateEnd && this.focalLength > 500)
-                {
-                    this.stars[i].r -= 1;
-                    this.stars[i].g -= 1;
-                    this.stars[i].b -= 1;
+            
+            if(!this.instructionsOn) //until made into a black background that is transparent
+            {
+                for(let i = 1; i < 500; i++){
+                    this.stars[i].focalLength = this.focalLength;
+                    this.stars[i].update(c);
+                    if(this.initiateEnd && this.focalLength > 500)
+                    {
+                        this.stars[i].r -= 1;
+                        this.stars[i].g -= 1;
+                        this.stars[i].b -= 1;
+                    }
                 }
             }
+
+            if(this.instructionsOn)
+            {   
+                c.canvas.width = 1280;
+                c.canvas.height = 720;
+                c.drawImage(this.instructions, this.innerWidth * .16, this.i_height * .06, this.i_width, this.i_height);
+                c.drawImage(this.spacebar, this.innerWidth * .33, this.innerHeight * .53, this.s_width, this.s_height);
+                c.drawImage(this.wasd, this.innerWidth * .33, this.innerHeight * .28, this.w_width, this.w_height);
+                c.drawImage(this.mousey, this.innerWidth * .55, this.innerHeight * .26, this.m_width, this.m_height);
+                c.font = '16px Planer';
+                c.fillStyle = "white";
+                c.fillText('Move Ship', this.innerWidth * .342, this.innerHeight * .44);
+                c.fillText('Aim Lasers', this.innerWidth * .54, this.innerHeight * .44);
+                c.fillText('Fire Lasers', this.innerWidth * .344, this.innerHeight * .67);
+
+                c.font = '35px Neuropol';
+                c.fillText('INSTRUCTIONS', this.innerWidth * .345, this.innerHeight * .19)
+
+            }            
             if (this.initiateEnd)
             {
                 if (this.focalLength < 1200)

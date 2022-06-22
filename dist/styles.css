@@ -7,6 +7,15 @@
 }
 
 @font-face {
+    font-family: "Neuropol";
+    src: url('neuropol.otf');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
     font-family: "Xolonium";
     src: url('Xolonium-Regular.ttf');
 
@@ -99,3 +108,4 @@ body
     margin-top: 8px;
     width: 30%;
 }
+

@@ -15,6 +15,7 @@ export default class Game
         this.context = this.canvas.getContext('2d');
         this.state = "new-game";
         this.level = 1;
+
     
         this.loading_screen();
 
@@ -25,7 +26,8 @@ export default class Game
     {
         const loadingscreen = document.querySelectorAll('.mainmenu');
         const new_game = document.querySelector('#new-game-butt');
-
+        const howtoplay = document.querySelector('#instructions');
+    
         new_game.addEventListener("click", () =>
         {
             loadingscreen.forEach( (thing) =>{
@@ -45,7 +47,30 @@ export default class Game
         });
 
         this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
+        howtoplay.addEventListener("click", () =>
+        {
+            loadingscreen.forEach( (thing) =>{
+                thing.style.display = "none";
+            });
 
+            this.starField.instructionsOn = true;
+            
+
+            function exitInstructions()
+            {
+                loadingscreen.forEach( (thing) =>{
+                    thing.style.display = "inline-block";
+                });
+                this.starField.instructionsOn = false;
+
+            }
+            
+            setTimeout(()=> 
+            {
+                    document.addEventListener("click", exitInstructions.bind(this), {once: true});
+            }, 100);
+    
+        });
     }
 
     start()
