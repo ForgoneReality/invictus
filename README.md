@@ -72,7 +72,8 @@ Under Construction...
 SOON:
 - Fix Yellow Ship... Looks out-of-place. Darken and edit
 - Recolor some ships
-- RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
+- RESOLUTION CHANGE - MAP SHIFT
+- Make resolution adjustable: RIGHT NOW ONLY LARGER SCREENS CAN PLAY IT
 
 LATER: 
 - Instructions
@@ -93,16 +94,18 @@ MAYBE:
 - Make drops intervally shadow blur
 - LAG: WHEN UPGRADING SHIP, CREATING DROP (load image?)
 - RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
-- Not centered: all ships and objects are initialized with their top left corner!
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
-- FIX BOSS MINIONS PEBBLES INTO LASERS (make sure killing minions first works as intended too)
-- Fix laser hitboxes
+- Fix Boss -> Should be able to move off-screen
 
 
 ### Special Thanks
 
-_MIT for README formatting
-Kidzgames for inspiration and sprites_
+- MIT for README formatting
+- Kidzgames for inspiration and sprites
+- Planer, Xolonium, Skirmisher fonts
+
+_Based on Kidzgames's Enigmata_
+
 
 **Thanks for playing!**
 

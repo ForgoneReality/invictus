@@ -71,8 +71,7 @@ export default class Player {
         if (this.image)
         {
         this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
-        // console.log(this.degrees);
-        // console.log(this.normalVector);
+
 
         context.save();
         context.shadowColor = "red";
@@ -82,7 +81,7 @@ export default class Player {
         }
         else
         {
-            context.shadowBlur = 0;
+            context.shadowBlur = 5;
         }
         context.translate(this.posX+this.width/2, this.posY+this.height/2);
         context.rotate(this.degrees*Math.PI/180.0);
@@ -424,7 +423,6 @@ export default class Player {
                     let y_modifier2 = x * Math.sin(Math.PI / 6) + y * Math.cos(Math.PI / 6);
                     let x_modifier = x * Math.cos(- Math.PI / 6) - y * Math.sin(- Math.PI / 6);
                     let y_modifier = x * Math.sin(- Math.PI / 6) + y * Math.cos(- Math.PI / 6);
-                    console.log([x_modifier,y_modifier]);
 
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));

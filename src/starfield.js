@@ -2,16 +2,16 @@ import Star3 from "./star3"
 
 export default class StarField
 {
-    constructor(canvas){
+    constructor(canvas, width, height){
         this.canvas = canvas;
         this.context = canvas.getContext('2d');
-        this.innerWidth = window.innerWidth - 20;
-        this.innerHeight = window.innerHeight - 20;
+        this.innerWidth = width - 10;
+        this.innerHeight = height- 10;
         this.radius = 1;
         this.starsIndex = 0;
         this.stars = [];
-        this.centerX = innerWidth/2;
-        this.centerY = innerHeight/2;
+        this.centerX = width/2;
+        this.centerY = height/2;
         this.focalLength = 100;
         this.starRadius = null;
         this.starX = null;

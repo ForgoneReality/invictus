@@ -104,7 +104,7 @@ const TYPES = [
     { //BOSS 1
         //laser in middle that flashes first. do it later in the fight when they go there
 
-        velocity: [0, 2.4],
+        velocity: [0, 0.5],
         endvelocity: [0, 0],
         health: 8000,
         damage: 80, //variable!
@@ -230,8 +230,6 @@ export default class Ship {
 
     animate(context)
     {
-        // console.log("posX", this.posX);
-        // console.log("posY", this.posY);
         if(this.posY+this.height / 2 + 1 >= 0)
         {
             this.move();
@@ -379,14 +377,14 @@ export default class Ship {
         
             if(this.realX() > this.background.player.realX() + 30)
             {
-                if(this.realX() <= this.background.width * .3)
+                if(this.realX() <= this.background.width * .4)
                     this.velX = 0;
                 else
                     this.velX = -1.5;
             }
             else if( this.realX() + 30 < this.background.player.realX())
             {
-                if(this.realX() >= this.background.width * .67)
+                if(this.realX() >= this.background.width * .6)
                     this.velX = 0;
                 else
                     this.velX = 1.5;

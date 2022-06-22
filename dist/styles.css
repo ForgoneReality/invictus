@@ -1,18 +1,101 @@
-#loading
+@font-face {
+    font-family: "Planer";
+    src: url('Planer.ttf');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Xolonium";
+    src: url('Xolonium-Regular.ttf');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: "Xolonium";
+    src: url('Xolonium-Bold.ttf');
+
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+body
+{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: black;
+}
+
+#logo
 {
     position: absolute;
     background-color:none;
-    top: 50%;
+    top: 22%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    padding: 40px;
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+
+
+#mainmenu
+{
+    position: absolute;
+    background-color:none;
+    top: 53%;
     transform: translate(-50%, -50%);
     left: 50%;
     padding: 16px;
-    max-width: 500px;
+    /* max-width: 600px; */
     width: 100%;
     text-align: center;
     border-radius: 5px;
 }
 
-#loading > button
+#mainmenu > button
 {   
-    background-color: red;
+    font-family: "Xolonium", "Planer", Verdana; 
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    /* background-color: red; */
+    background-color: #0D6172;
+    border-color: cyan;
+    border-radius: 10px;
+    color: cyan;
+    opacity: 0.9;
+    padding: 18px;
+    margin-left: 21%;
+    margin-right: 21%;
+    margin-top: 8px;
+    width: 30%;
+}
+
+#mainmenu > button:hover
+{   
+    font-family: "Xolonium", "Planer", Verdana; 
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    /* background-color: red; */
+    background-color: cyan;
+    border-color: cyan;
+    border-radius: 10px;
+    color: #0D6172;
+    opacity: 1;
+    padding: 18px;
+    margin-left: 21%;
+    margin-right: 21%;
+    margin-top: 8px;
+    width: 30%;
 }

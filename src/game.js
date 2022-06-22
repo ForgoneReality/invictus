@@ -6,14 +6,16 @@ export default class Game
 {
     constructor(canvas){
         this.canvas = canvas;
+
+        
+        this.width = 1280;
+        this.height = 720;
         this.canvas.width = innerWidth;
         this.canvas.height = innerHeight;
         this.context = this.canvas.getContext('2d');
         this.state = "new-game";
         this.level = 1;
-        
-        this.width = this.canvas.width;
-        this.height = this.canvas.height;
+    
         this.loading_screen();
 
         // this.start();//initially new game every time... loading functionality later
@@ -21,12 +23,14 @@ export default class Game
 
     loading_screen()
     {
-        const loadingscreen = document.querySelector('#loading');
+        const loadingscreen = document.querySelectorAll('.mainmenu');
         const new_game = document.querySelector('#new-game-butt');
 
         new_game.addEventListener("click", () =>
         {
-            loadingscreen.style.display = 'none';
+            loadingscreen.forEach( (thing) =>{
+                thing.style.display = "none";
+            });
             
             this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
             this.starField = null; //:/ kind of annoying tbh
@@ -34,11 +38,13 @@ export default class Game
             setTimeout(()=> 
                 {
                     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    this.canvas.width = this.width;
+                    this.canvas.height = this.height;
                     this.start();
-                }, 10700);
+                }, 11000);
         });
 
-        this.starField = new StarField(this.canvas);
+        this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
 
     }
 
