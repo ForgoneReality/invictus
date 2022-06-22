@@ -454,7 +454,7 @@ export default class Player {
 
                     let rotate_scaler = this.offset(offset_x, offset_y);
 
-                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 3, this.basedamage * 2.5, 4, 2, "../images/gamma.png"));
+                    projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 3, this.basedamage * 2.5, 4, 2, "images/gamma.png"));
                     if (this.shotsLeft <= 0)
                     {
                         this.projectileType = TYPES2[this.ship_level].defaultprojType;
