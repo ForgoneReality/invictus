@@ -18,7 +18,7 @@ const TYPES2 = [
             //Level 2 Ship
             basehealth: 750,
             basedamage: 40,
-            baseshield: 300,
+            baseshield: 350,
             img: 'images/playership2.png',
             scale: .022, 
             defaultprojType: 0
@@ -540,12 +540,10 @@ export default class Player {
                     {
                     
                     audio.gameover.play();
-                    setTimeout( () => {
-                        alert("YOU LOSE!");
-                        alert("Didn't implement real lose screen yet :/");
-                        alert("So you're stuck with these");
-                        exit();
-                    }, 1500);
+                    alert("YOU LOSE!");
+                    alert("Didn't implement real lose screen yet :/");
+                    alert("So you're stuck with these");
+                    exit();
                 }
                 else
                 {
