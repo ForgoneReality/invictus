@@ -27,12 +27,16 @@ export default class Game
         const loadingscreen = document.querySelectorAll('.mainmenu');
         const new_game = document.querySelector('#new-game-butt');
         const howtoplay = document.querySelector('#instructions');
-    
+
+        audio.mountainpeak.play();
+
         new_game.addEventListener("click", () =>
         {
             loadingscreen.forEach( (thing) =>{
                 thing.style.display = "none";
             });
+
+            audio.beep1.play();
             
             this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
             this.starField = null; //:/ kind of annoying tbh
@@ -67,7 +71,7 @@ export default class Game
             
             setTimeout(()=> 
             {
-                    document.addEventListener("click", exitInstructions.bind(this), {once: true});
+                document.addEventListener("click", exitInstructions.bind(this), {once: true});
             }, 100);
     
         });

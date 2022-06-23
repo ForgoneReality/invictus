@@ -96,6 +96,7 @@ MAYBE:
 - RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
 - Fix Boss -> Should be able to move off-screen
+- Instructions not centered
 
 
 ### Special Thanks

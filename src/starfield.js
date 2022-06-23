@@ -91,24 +91,31 @@ export default class StarField
             c.fillRect(0,0,this.innerWidth,this.innerHeight);
         
             
-            if(!this.instructionsOn) //until made into a black background that is transparent
-            {
-                for(let i = 1; i < 500; i++){
-                    this.stars[i].focalLength = this.focalLength;
-                    this.stars[i].update(c);
-                    if(this.initiateEnd && this.focalLength > 500)
-                    {
-                        this.stars[i].r -= 1;
-                        this.stars[i].g -= 1;
-                        this.stars[i].b -= 1;
-                    }
+            
+            for(let i = 1; i < 500; i++){
+                this.stars[i].focalLength = this.focalLength;
+                this.stars[i].update(c);
+                if(this.initiateEnd && this.focalLength > 500)
+                {
+                    this.stars[i].r -= 1;
+                    this.stars[i].g -= 1;
+                    this.stars[i].b -= 1;
                 }
             }
 
             if(this.instructionsOn)
             {   
-                c.canvas.width = 1280;
-                c.canvas.height = 720;
+                
+                // c.canvas.width = 1280;
+                // c.canvas.height = 720;
+                c.save();
+                c.globalAlpha = 0.7;
+                c.fillStyle="black";
+                c.fillRect(this.innerWidth * .203, this.innerHeight * .22, this.i_width * .86, this.i_height *.75);
+                c.fillStyle="black";
+                c.globalAlpha = 1;
+                c.fillRect(this.innerWidth * .203, this.innerHeight * .12, this.i_width * .86, this.i_height *.123);
+                c.restore();
                 c.drawImage(this.instructions, this.innerWidth * .16, this.i_height * .06, this.i_width, this.i_height);
                 c.drawImage(this.spacebar, this.innerWidth * .33, this.innerHeight * .53, this.s_width, this.s_height);
                 c.drawImage(this.wasd, this.innerWidth * .33, this.innerHeight * .28, this.w_width, this.w_height);
