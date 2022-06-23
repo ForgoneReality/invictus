@@ -89,7 +89,7 @@ const TYPES = [
     {
         velocity: [0, 0.6],
         endvelocity: [0, 0.6],
-        health: 222,
+        health: 350,
         damage: 75,
         img: 'images/enemyship6.png',
         color: "green",
@@ -321,10 +321,10 @@ export default class Ship {
             {
                 if(this.posX > this.background.player.posX)
                 {
-                    this.velX = -1;
+                    this.velX = -1.75;
                 }
                 else
-                    this.velX = 1;
+                    this.velX = 1.75;
 
                 this.posX += this.velX;
 
@@ -377,14 +377,14 @@ export default class Ship {
         
             if(this.realX() > this.background.player.realX() + 30)
             {
-                if(this.realX() <= this.background.width * .4)
+                if(this.realX() <= this.background.width * .3)
                     this.velX = 0;
                 else
                     this.velX = -1.5;
             }
             else if( this.realX() + 30 < this.background.player.realX())
             {
-                if(this.realX() >= this.background.width * .6)
+                if(this.realX() >= this.background.width * .7)
                     this.velX = 0;
                 else
                     this.velX = 1.5;
@@ -439,6 +439,7 @@ export default class Ship {
                 if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
+                    audio.laser2.play();
                     let proj = new CircleDamageProjectile([this.realX(), this.realY()+30], [speed * this.normalVector[0], speed*this.normalVector[1]], 4.5, 2, 0, this.damage, 20);
                     this.background.enemyprojectiles.push(proj);
                     this.shotsLeft -= 1;
@@ -455,6 +456,7 @@ export default class Ship {
                 cooldown = 150;
                 if(this.shootTimer <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer = cooldown;
                     let proj = new CircleDamageProjectile([this.realX()+40, this.realY()+30], [speed * Math.sqrt(2) / 2, speed * Math.sqrt(2) / 2], 6, 2, 1, this.damage, 20, -1 * Math.PI / 4, 3 * Math.PI / 4);
                     this.background.enemyprojectiles.push(proj);
@@ -480,6 +482,7 @@ export default class Ship {
                 cooldown = 18;
                 if (this.shotsLeft <= 0) 
                 {
+                    
                     this.shootTimer = 150;
                     this.shotsLeft = 8;
                     return undefined;
@@ -496,6 +499,7 @@ export default class Ship {
                     {
                         offset = -26.5;
                     }
+                    audio.laser2.play();
                     let proj = new LaserDamageProjectile([this.realX() + offset, this.realY()+30], [0, speed], 0, 15, 2, 2, this.damage, 25);
                     this.background.enemyprojectiles.push(proj);
                     this.shotsLeft -= 1;
@@ -517,6 +521,7 @@ export default class Ship {
                 }
                 if(this.shootTimer <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer = cooldown;
                     let scatter_x = this.normalVector[0] * (Math.random(0.4) + 0.8);
                     let scatter_y = this.normalVector[1] * (Math.random(0.4) + 0.8);
@@ -541,6 +546,7 @@ export default class Ship {
                 }
                 if(this.shootTimer <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer = cooldown;
 
                     let offset_x = 27;
@@ -576,6 +582,7 @@ export default class Ship {
                 }
                 if(this.shootTimer <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer = cooldown;
                     let proj = new CircleDamageProjectile([this.realX()-40, this.realY()+30], [speed * this.normalVector[0], speed*this.normalVector[1]], 5, 2, 5, this.damage, 20);
                     this.background.enemyprojectiles.push(proj);
@@ -598,6 +605,7 @@ export default class Ship {
                 
                 if(this.shootTimer <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer = cooldown;
                     let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
                     let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
@@ -615,6 +623,7 @@ export default class Ship {
 
                 if(this.shootTimer2 <= 0)
                 {
+                    audio.laserbeam.play();
                     this.shootTimer2 = cooldown;
                     let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5, 0, 150);
                     this.background.lasers.push(proj3);
@@ -628,6 +637,7 @@ export default class Ship {
 
                 if(this.shootTimer2 === 100)
                 {
+                    audio.lasercharge.play();
                     let flare = (new LensFlare([this.realX(), this.realY()+93.5], 98.5, "images/redflare.png", 0.12, "#8b0000", 20));
                     this.background.extras.push(flare);
                     this.dependencies.push(flare);
@@ -643,6 +653,7 @@ export default class Ship {
                 }
                 if(this.shootTimer3 <= 0)
                 {
+                    audio.laser2.play();
                     this.shootTimer3 = cooldown;
                     let scatter_deg = Math.random() * 60 + 240;
                     let scatter_x = Math.cos(scatter_deg * Math.PI / 180);
@@ -680,7 +691,7 @@ export default class Ship {
                     let rotate_scaler = this.offset(offset_x, offset_y);
                     let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
 
-                    
+                    audio.laser2.play();
             
                     let proj3 = new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY()+rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees + 180, 30, 2, 0, this.damage, 5);
                     let proj4 = new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY()+rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees + 180, 30, 2, 0, this.damage, 5);

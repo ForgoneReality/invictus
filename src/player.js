@@ -7,25 +7,35 @@ import LaserDamageProjectile from "./laserDamageProjectile";
 const TYPES2 = [
     { 
         //Basic Player Ship
-        basehealth: 500,
-        basedamage: 25,
-        baseshield: 250,
+        basehealth: 600,
+        basedamage: 30,
+        baseshield: 300,
         img: 'images/playership1.png',
         scale: .022, 
         defaultprojType: 0
     },
     {
             //Level 2 Ship
-            basehealth: 1000,
-            basedamage: 35,
-            baseshield: 400,
+            basehealth: 600,
+            basedamage: 40,
+            baseshield: 300,
             img: 'images/playership2.png',
+            scale: .022, 
+            defaultprojType: 0
+    },
+    {
+            //Level 3 Ship
+            basehealth: 1500,
+            basedamage: 500,
+            baseshield: 500,
+            img: 'images/playership3.png',
             scale: .022, 
             defaultprojType: 1
     }
+
 ]
 export default class Player {
-    constructor(position) //more later, type?
+    constructor(position, ship_level = 0) //more later, type?
     {
         this.posX = position[0];
         this.posY = position[1];
@@ -34,7 +44,7 @@ export default class Player {
 
         this.canvasX = this.posX * 2;
         this.canvasY = this.posY + 50;
-        this.ship_level = 0;
+        this.ship_level = ship_level;
 
         const image = new Image();
         image.src  = TYPES2[this.ship_level].img;
@@ -58,12 +68,13 @@ export default class Player {
 
         // this.color = "red";
         this.normalVector = [0,-1];
-        this.projectileType = 0;
+        this.projectileType = TYPES2[this.ship_level].defaultprojType;
         this.shotsLeft = 0;
         this.shootTimer = 0;
 
         this.collided = 0;
         this.interval = 1; //multi-purpose for variying shots
+        this.dead = false;
     }
 
     draw(context, mouse_x, mouse_y)
@@ -336,6 +347,7 @@ export default class Player {
         this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
         let speed;
         let cooldown;
+
         switch(type)
         {
             case -1:
@@ -347,18 +359,21 @@ export default class Player {
                 cooldown = 8;
                 if(this.shootTimer <= 0)
                 {
+                    
                     let projs = [];
                     this.shootTimer = cooldown;
                     let offset_x = 17;
                     let offset_y = -30;// defaults for level === 1
                     if (this.interval === 1)
                     {
+                    
                         let rotate_scaler = this.offset(offset_x, offset_y);
                         projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                         this.interval = 0;
                     }
                     else if (this.interval === 0)
                     {
+                        
                         let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
                         projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                         this.interval = 1;
@@ -376,6 +391,7 @@ export default class Player {
                 cooldown = 12;
                 if(this.shootTimer <= 0)
                 {
+                   
                     let projs = [];
                     this.shootTimer = cooldown;
                     let offset_x = 17;
@@ -385,6 +401,7 @@ export default class Player {
                     let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
                     
 
+                    
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     return projs;
@@ -398,9 +415,10 @@ export default class Player {
                 break;
             case 2: //double shot
                 speed = 12;
-                cooldown = 12;
+                cooldown = 10.5;
                 if(this.shootTimer <= 0)
                 {
+                 
                     this.shotsLeft--;
                     let projs = [];
                     this.shootTimer = cooldown;
@@ -469,6 +487,34 @@ export default class Player {
                 }
                 //remember to return an array!
                 break;
+            case 4: //basic lasers double
+               
+            speed = 16;
+            cooldown = 7.5;
+            if(this.shootTimer <= 0)
+            {
+               
+                let projs = [];
+                this.shootTimer = cooldown;
+                let offset_x = 25;
+                let offset_y = -40;// defaults for level === 1
+
+                let rotate_scaler = this.offset(offset_x, offset_y);
+                let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+                
+
+                
+                projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                return projs;
+            }
+            else
+            {
+                this.shootTimer -= 1;
+                return undefined;
+            }
+            //remember to return an array!
+            break;
 
             default:
                 // console.error("unknown projectile type");
@@ -490,8 +536,21 @@ export default class Player {
             this.health -= dmg;
             if(this.health <= 0)
             {
-                // alert("YOU LOSE!");
-                exit;
+                if(this.dead)
+                    {
+                    
+                    audio.gameover.play();
+                    setTimeout( () => {
+                        alert("YOU LOSE!");
+                        alert("Didn't implement real lose screen yet :/");
+                        alert("So you're stuck with these");
+                        exit();
+                    }, 1500);
+                }
+                else
+                {
+                    this.dead = true;
+                }
             }
         }
        

@@ -109,3 +109,200 @@ body
     width: 30%;
 }
 
+#shop
+{
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    /* padding: 16px; */
+    /* max-width: 600px; */
+    z-index: 2;    
+}
+
+#shopimage
+{ 
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 800px;
+    height: 600px;
+    z-index: 3;
+}
+
+#ships
+{
+    position: absolute;
+    background-color: none;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    left: -290%;
+    width: 210px;
+    height: 350px;
+    z-index: 4;
+}
+
+#skills
+{
+    position: absolute;
+    background-color: none;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    left: 310%;
+    width: 210px;
+    height: 350px;
+    z-index: 4;
+}
+
+#shipselect1
+{ 
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    /* padding: 16px; */
+    /* max-width: 600px; */
+    z-index: 2;    
+}
+
+#shipimg1
+{ 
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 800px;
+    height: 600px;
+    z-index: 3;
+}
+
+
+#shipselect2
+{ 
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    /* padding: 16px; */
+    /* max-width: 600px; */
+    z-index: 2;    
+}
+
+
+#shipimg2
+{ 
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 800px;
+    height: 600px;
+    z-index: 3;
+}
+
+#shipselect3
+{ 
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    /* padding: 16px; */
+    /* max-width: 600px; */
+    z-index: 2;    
+}
+
+
+#shipimg3
+{ 
+    position: absolute;
+    background-color: none;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 800px;
+    height: 600px;
+    z-index: 3;
+}
+
+
+#bought
+{
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    left: 64.5%;
+    z-index: 6;
+    width: 90px;
+    height: 27px;
+}
+
+#buy
+{
+    display: none;
+    position: absolute;
+    background-color: none;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    left: 64.5%;
+    z-index: 6;
+    width: 90px;
+    height: 27px;
+}
+
+#nextlevel
+{
+    position: absolute;
+    background-color: none;
+    background: transparent;
+    border: none !important;
+    font-size:0;
+    right: 24%;
+    top: 6%;
+    padding: 27px;
+    margin-left: auto;
+    width: 5%;
+    z-index: 9;
+}
+
+
+#nextship
+{
+    position: absolute;
+    background-color: none;
+    background: transparent;
+    border: none !important;
+    font-size:0;
+    right: 22.5%;
+    padding: 18px;
+    margin-left: auto;
+    width: 3%;
+    z-index: 5;
+}
+
+#nextship2
+{
+    position: absolute;
+    background-color: none;
+    background: transparent;
+    border: none !important;
+    font-size:0;
+    right: 22.5%;
+    padding: 18px;
+    margin-left: auto;
+    width: 3%;
+    z-index: 4;
+}
