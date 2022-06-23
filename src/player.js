@@ -59,7 +59,7 @@ export default class Player {
         this.baseshield = TYPES2[this.ship_level].baseshield;
         this.shield = this.baseshield;
         this.basedamage = TYPES2[this.ship_level].basedamage;
-        this.regen = 0.05;
+        this.regen = 0.1;
 
         this.movedX = 0;
         this.movedY = 0;
