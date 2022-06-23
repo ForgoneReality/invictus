@@ -16,7 +16,7 @@ const TYPES2 = [
     },
     {
             //Level 2 Ship
-            basehealth: 600,
+            basehealth: 750,
             basedamage: 40,
             baseshield: 300,
             img: 'images/playership2.png',
@@ -26,7 +26,7 @@ const TYPES2 = [
     {
             //Level 3 Ship
             basehealth: 1500,
-            basedamage: 500,
+            basedamage: 50,
             baseshield: 500,
             img: 'images/playership3.png',
             scale: .022, 

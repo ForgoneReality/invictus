@@ -478,7 +478,7 @@ export default class Background{
                         break;
                     case 3: //gamma ray
                         this.player.projectileType = 3;
-                        this.player.shotsLeft = 50;
+                        this.player.shotsLeft = 60;
                         break;
                     case 4: 
                         this.player.shield = this.player.baseshield;

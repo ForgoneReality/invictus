@@ -242,8 +242,6 @@ export default class Game
         
         // //need a hashmap for level's bgsong
         // this.background= new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this);
-        
     }
-
    
 }
