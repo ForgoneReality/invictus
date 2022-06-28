@@ -197,6 +197,7 @@ export default class Game
 
         my_shop.style.display = "flex";
 
+        //the following code is super duper garbage and needs to be refactored (made for presentation's purpose last-minute cram)
         function enterShips()
         {
             my_shop.style.display = "none";
@@ -234,6 +235,7 @@ export default class Game
             }
             nextship1.addEventListener("click", enterShips2.bind(this), {once: true});
         }
+        //super duper garbage code end
         
         setTimeout(()=> 
         {

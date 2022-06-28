@@ -6,7 +6,7 @@
 ## How To Play
 
 Under Construction...
-- __Arrow Keys or WASD:__ Move spaceship
+- __WASD:__ Move spaceship
 - Mouse Move: Change aiming location
 - Mouse Click or SPACE: Shoot
 - Numbers [1,2,3,4,5]: Use Special Abilities
@@ -76,16 +76,10 @@ SOON:
 - Make resolution adjustable: RIGHT NOW ONLY LARGER SCREENS CAN PLAY IT
 
 LATER: 
-- Instructions
 - Loading...
 - Upgrade background: planets, nebulas, etc.
 - Drawing off-screen ships (slightly off atm)
 - Consistent graphics -> change drop images, UI, etc.
-- Sound!!!
-
-MAYBE:
-- Make cheats
-- Dynamic Hitboxes (instead of large, inaccurate boxes)
 
 ## Known Bugs
 
@@ -97,6 +91,8 @@ MAYBE:
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
 - Fix Boss -> Should be able to move off-screen
 - Instructions not centered
+- SHOP NEEDS COMPLETE REFACTORING - Not Full Images for everyshop screen, just add the necessary stuff
+- SHOP is currently hard-coded and does not have implemented backwards functionality (or scalability)
 
 
 ### Special Thanks
