@@ -135,7 +135,23 @@ const TYPES = [
         gold: 0,
         value: 0,
         shotsLeft: 2 //variable!
+    },
+    {
+        velocity: [0, 2],
+        endvelocity: [0, 2],
+        health: 135,
+        damage: 80, 
+        img: 'images/enemyship7.png',
+        color: "blue",
+        blur: 0,
+        rotatable: false,
+        scale: .082, 
+        shootTimerInit: -1,
+        gold: 2500,
+        value: 0,
+        shotsLeft: -1 //variable!
     }
+
 
 
 ];
@@ -280,7 +296,7 @@ export default class Ship {
             this.posY += this.velY;
             
         }
-        else if (this.type === 1 || this.type === 4)
+        else if (this.type === 1 || this.type === 4 || this.type === 8)
         {
             this.posX += this.velX;
             this.posY += this.velY;
@@ -706,6 +722,9 @@ export default class Ship {
                 }
 
                 break;
+            case 8:
+                //do nothing
+            break;
 
 
             default:
