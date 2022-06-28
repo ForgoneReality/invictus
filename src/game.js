@@ -164,7 +164,7 @@ export default class Game
             audio.buyship.play();
             buy.style.display = "none";
             bought.style.display = "flex";
-            this.ship_level++;// or one
+            this.ship_level++;// or one -< needs fix
             this.gold -= 100000;
         }
     }

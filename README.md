@@ -99,7 +99,10 @@ LATER:
 
 - MIT for README formatting
 - Kidzgames for inspiration and sprites
-- Planer, Xolonium, Skirmisher fonts
+- Planer, Xolonium, Skirmisher, Neuropol fonts
+- Intro: Road 96 - Mountain Peak
+- Level 1 Theme: DEFRAG - The Dawn of Utopia
+- Level 1 Boss: Greg Dombrowski - Devour
 
 _Based on Kidzgames's Enigmata_
 

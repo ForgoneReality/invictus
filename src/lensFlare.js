@@ -1,11 +1,8 @@
 //projectile.js
 //just pass context around into draw and animate specifically
 
-//BE AWARE LASER IS INACCURATE AND ASSUMES FULL MAP ACCESS
-//If want limited length laserbeam, minor refactoring is needed
-
 export default class LensFlare {
-    constructor(position, duration, img_src, scale, color, blur)//null optional
+    constructor(position, duration, img_src, scale, color, blur)
     {
         this.posX = position[0];
         this.posY = position[1];
