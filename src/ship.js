@@ -114,7 +114,7 @@ const TYPES = [
         rotatable: false,
         scale: .11, 
         shootTimerInit: 30,
-        shootTimerInit2: 444,  
+        shootTimerInit2: 693,  
         shootTimerInit3: 250, 
         gold: 20000,
         value: 0,

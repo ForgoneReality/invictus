@@ -115,6 +115,14 @@ export default class Background{
             this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
+            // this.enemyships.push(new Ship([.5*this.width, -4200*1.25], 0, this)); 
+            // this.enemyships.push(new Ship([.38*this.width, -4300*1.25], 0, this)); 
+            // this.enemyships.push(new Ship([.62*this.width, -4300*1.25], 0, this)); 
+            // this.enemyships.push(new Ship([.26*this.width, -4400*1.25], 0, this)); 
+            // this.enemyships.push(new Ship([.74*this.width, -4400*1.25], 0, this));
+            // this.enemyships.push(new Ship([.14*this.width, -4510*1.25], 0, this)); 
+            // this.enemyships.push(new Ship([.87*this.width, -4510*1.25], 0, this));  
+
             this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
       
@@ -165,7 +173,11 @@ export default class Background{
             //     this.player.levelup(1);
             // }
             this.timer += 1;
-            if(this.timer === 5500)
+            if(this.timer === 5400)
+            {
+                this.bgsong.fade(0.15, 0, 1500)
+            } 
+            if(this.timer === 5550)
             {
                 let bgsong2 = audio.devour;
 
