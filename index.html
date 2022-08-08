@@ -16,6 +16,9 @@
         <img src="images/logo4.png" alt="Logo">
     </header>
 
+    <img src="images/loading2.gif" id="loading">
+
+    <img src="images/intro.png" id="intro-text" class="blink_me">
 
     <section id="mainmenu" class="mainmenu">
         <!-- <p style="font-size: 14px; color: red;"> Just Testing </p> -->
@@ -26,34 +29,135 @@
     </section>
 
     <!-- <div id="shop-full"> -->
-    <section id="shop" class="shop">
+    <!-- <section id="shop" class="shop">
         <img id="shopimage" src="images/shop.png" alt="Shop">
         <ul>
             <li> <img id= "ships" src="images/ships.png" alt="Ships"> </li>
             <li> <img id="skills" src="images/skills.png" alt="Skills"> </li>
         </ul>   
+    </section> -->
+
+    <section id="shop" class="shop">
+        <img id="shopimage" src="images/shop.png" alt="Shop">
+        <div>
+            <img id= "ships" src="images/ships.png" alt="Ships"> 
+            <img id="skills" src="images/skills.png" alt="Skills">
+        </div>
     </section>
 
-    <section id="shipselect1" class="shipselect1">
-        <img id="shipimg1" src="images/shipselect1.png" alt="Shop">
+    <section id="shipselect" class="shipselect">
+        <img id="ship-select-outline" src="images/spaceship-select.png" alt="Shop">
     </section>
 
-    <img id="bought" src="images/bought.png" class="shipselect1" alt="Bought">
-
-    <section id="shipselect2" class="shipselect2">
-        <img id="shipimg2" src="images/shipselect2.png" alt="Shop">
+    <section id="hp1" class="hp">
+        <img id="hp1-img" src="images/1of5.png"/>
     </section>
 
-    <img id="buy" src="images/buy.png" class="shipselect2" alt="Buy">
-
-    <section id="shipselect3" class="shipselect3">
-        <img id="shipimg3" src="images/shipselect3.png" alt="Shop">
+    <section id="hp2" class="hp">
+        <img id="hp2-img" src="images/2of5.png"/>
     </section>
 
+    <section id="hp3" class="hp">
+        <img id="hp3-img" src="images/3of5.png"/>
+    </section>
 
-        <button id="nextship"> </button>
-        <button id="nextship2"> </button>
-        <button id="nextlevel"> </button>
+    <section id="hp4" class="hp">
+        <img id="hp4-img" src="images/4of5.png"/>
+    </section>
+
+    <section id="hp5" class="hp">
+        <img id="hp5-img" src="images/5of5.png"/>
+    </section>
+
+    <section id="dmg1" class="dmg">
+        <img id="dmg1-img" src="images/1of5.png"/>
+    </section>
+
+    <section id="dmg2" class="dmg">
+        <img id="dmg2-img" src="images/2of5.png"/>
+    </section>
+
+    <section id="dmg3" class="dmg">
+        <img id="dmg3-img" src="images/3of5.png"/>
+    </section>
+
+    <section id="dmg4" class="dmg">
+        <img id="dmg4-img" src="images/4of5.png"/>
+    </section>
+
+    <section id="dmg5" class="dmg">
+        <img id="dmg5-img" src="images/5of5.png"/>
+    </section>
+
+    <section id="ships-leftside-text">
+        <p>MODEL</p>
+        <p>HEALTH</p>
+        <p>DAMAGE</p>
+        <p>SKILLS</p>
+        <p>PRICE</p>
+    </section>
+
+    <section id="model-name">
+        <p id="model-name-text" class="ships-rightside-text">Testing again</p>
+    </section>
+
+    <section id="skills-number">
+        <p id="skills-number-text" class="ships-rightside-text">0</p>
+    </section>
+
+    <section id="select-ship" class="ship-button">
+        <img src="images/select.png">
+    </section>
+
+    <section id="priced-ship" class="ship-button">
+        <img src="images/priced.png">
+        <div>100000</div>
+    </section>
+
+    <section id="chosen-ship" class="ship-button">
+        <img src="images/chosen.png">
+    </section>
+
+    <section id="locked" class="ship-button">
+        <img src="images/locked.png">
+    </section>
+
+    <section id="one-star" class="ship-stars">
+        <img src="images/one_star.png">
+    </section>
+
+    <section id="two-stars" class="ship-stars">
+        <img src="images/two_stars.png">
+    </section>
+    
+    <section id="three-stars" class="ship-stars">
+        <img src="images/three_stars.png">
+    </section>
+    
+    <section id="four-stars" class="ship-stars">
+        <img src="images/four_stars.png">
+    </section>
+
+    <section id="shippie1" class="ship-birbs">
+        <img src="images/playership1.png">
+    </section>
+
+    <section id="shippie2" class="ship-birbs">
+        <img src="images/playership2.png">
+    </section>
+
+    <section id="shippie3" class="ship-birbs">
+        <img src="images/playership3.png">
+    </section>
+
+    <section id="shippie4" class="ship-birbs">
+        <img src="images/playership4.png">
+    </section>
+
+    <button id="nextship"> </button>
+    <button id="prevship"> </button>
+
+    <button id="nextlevel"> </button>
     <!-- </div> -->
     <div>
         <canvas id="game-canvas"></canvas>

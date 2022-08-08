@@ -56,6 +56,37 @@ body
     text-align: center;
 }
 
+#intro-text{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: auto;
+}
+
+.mainmenu{
+    display: none;
+}
+
+#loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.blink_me {
+    animation: blinker 2.5s linear infinite;
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
 
 #mainmenu
 {
@@ -114,12 +145,13 @@ body
     display: none;
     position: absolute;
     background-color: none;
-    top: 45%;
+    top: 50%;
     transform: translate(-50%, -50%);
     left: 50%;
     /* padding: 16px; */
-    /* max-width: 600px; */
     z-index: 2;    
+    width: 100%;
+    height: 100%;
 }
 
 #shopimage
@@ -134,13 +166,21 @@ body
     z-index: 3;
 }
 
+#shop > div{
+    display: flex;
+    position: absolute;
+    justify-content: space-between;
+    top: 53%;
+    left: 49.5%;
+    width: 480px;
+    height: 350px;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    
+}
+
 #ships
 {
-    position: absolute;
-    background-color: none;
-    top: 100%;
-    transform: translate(-50%, -50%);
-    left: -290%;
     width: 210px;
     height: 350px;
     z-index: 4;
@@ -148,22 +188,17 @@ body
 
 #skills
 {
-    position: absolute;
-    background-color: none;
-    top: 100%;
-    transform: translate(-50%, -50%);
-    left: 310%;
     width: 210px;
     height: 350px;
     z-index: 4;
 }
 
-#shipselect1
+#shipselect
 { 
     display: none;
     position: absolute;
     background-color: none;
-    top: 45%;
+    top: 44.5%;
     transform: translate(-50%, -50%);
     left: 50%;
     /* padding: 16px; */
@@ -171,7 +206,7 @@ body
     z-index: 2;    
 }
 
-#shipimg1
+#ship-select-outline /*soon to be replaced like below*/
 { 
     position: absolute;
     background-color: none;
@@ -183,60 +218,102 @@ body
     z-index: 3;
 }
 
-
-#shipselect2
-{ 
+.hp{
     display: none;
     position: absolute;
-    background-color: none;
-    top: 45%;
     transform: translate(-50%, -50%);
-    left: 50%;
-    /* padding: 16px; */
-    /* max-width: 600px; */
-    z-index: 2;    
+    left: 63%;
+    top: 39.1%;
+    z-index: 5;
+    height: 23px;
+    width: auto;
+    /* width: 111px; */
 }
 
-
-#shipimg2
-{ 
-    position: absolute;
-    background-color: none;
-    top: 45%;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    width: 800px;
-    height: 600px;
-    z-index: 3;
-}
-
-#shipselect3
-{ 
+.dmg{
     display: none;
     position: absolute;
-    background-color: none;
-    top: 45%;
     transform: translate(-50%, -50%);
-    left: 50%;
-    /* padding: 16px; */
-    /* max-width: 600px; */
-    z-index: 2;    
+    left: 63%;
+    top: 43.9%;
+    z-index: 5;
+    height: 23px;
+    width: auto;
+    /* width: 111px; */
 }
 
-
-#shipimg3
-{ 
+#ships-leftside-text{
+    display: none;
     position: absolute;
-    background-color: none;
-    top: 45%;
     transform: translate(-50%, -50%);
-    left: 50%;
-    width: 800px;
-    height: 600px;
-    z-index: 3;
+    left: 37%;
+    top: 44.5%;
+    z-index: 5;
+    flex-direction: column;
+}
+
+#ships-leftside-text > p{
+    font-size: 14px;
+    color: white;
+    font-family: "Neuropol";
+    margin: 0px;
+    margin-bottom: 16px;
+}
+
+#model-name{
+    display: none;
+    position: absolute; 
+    top: 34%;
+    right: 28.2%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    justify-content: flex-end;
+    width: 180px;
+}
+
+.ships-rightside-text{
+    font-size: 14px;
+    color: #00ffff;
+    font-family: "Neuropol";
+}
+
+#skills-number{
+    display: none;
+    position: absolute; 
+    top: 48.6%;
+    right: 28.2%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    justify-content: flex-end;
+    width: 180px;
+}
+
+.ship-button{
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 27%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    scale: 0.36;
+    width: 212px;
+    height: 66px;
+}
+
+#priced-ship > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    line-height: 66px;
+    color: #00ffff;
+    font-family: "Neuropol";
+    z-index: 6;
+    text-align: center;
 }
 
 
+/* 
 #bought
 {
     display: none;
@@ -261,7 +338,7 @@ body
     z-index: 6;
     width: 90px;
     height: 27px;
-}
+} */
 
 #nextlevel
 {
@@ -284,25 +361,85 @@ body
     position: absolute;
     background-color: none;
     background: transparent;
-    border: none !important;
+    /* border: none !important; */
+    border: red solid 1px;
     font-size:0;
-    right: 22.5%;
+    right: 21%;
+    top: 48.4%;
     padding: 18px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    transform: translate(-50%, -50%);
     margin-left: auto;
     width: 3%;
     z-index: 5;
 }
 
-#nextship2
+#prevship
 {
     position: absolute;
     background-color: none;
     background: transparent;
-    border: none !important;
+    /* border: none !important; */
+    border: red solid 1px;
     font-size:0;
-    right: 22.5%;
+    left: 24.5%;
+    top: 48.4%;
     padding: 18px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    transform: translate(-50%, -50%);
     margin-left: auto;
     width: 3%;
-    z-index: 4;
+    z-index: 5;
+}
+
+.ship-stars{
+    display: none;
+    position: absolute;
+    bottom: 18.5%;
+    left: 50.3%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    height: 22px;
+    width: auto;
+}
+
+.ship-birbs{
+    display: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+#shippie1{
+    height: 46px;
+    width: auto;
+    bottom: 25.3%;
+    left: 50.2%;
+    filter: drop-shadow(0 0 0.75rem red);
+}
+
+#shippie2{
+    height: 85px;
+    width: auto;
+    bottom: 20%;
+    left: 50.1%;
+    filter: drop-shadow(0 0 0.75rem red);
+}
+
+#shippie3{
+    height: 98px;
+    width: auto;
+    bottom: 19%;
+    left: 50.2%;
+    filter: drop-shadow(0 0 1rem red);
+}
+
+#shippie4{
+    height: 103px;
+    width: auto;
+    bottom: 14%;
+    left: 50.2%;
+    filter: drop-shadow(0 0 1.15rem red);
 }

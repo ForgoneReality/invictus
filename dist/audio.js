@@ -6,6 +6,7 @@ const audio = {
     mountainpeak: new Howl({
         src: "sounds/mountainpeak.mp3",
         html5: true,
+        loop: true,
         volume: 0.8
     }),
     dawnutopia: new Howl({
@@ -92,5 +93,10 @@ const audio = {
         src: "sounds/buyship.mp3",
         html5: true,
         volume: 0.1
+    }),
+    beep2: new Howl({
+        src: "sounds/beep2.mp3",
+        html5: true,
+        volume: 0.4
     })
 }
