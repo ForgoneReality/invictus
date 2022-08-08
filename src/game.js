@@ -74,6 +74,7 @@ export default class Game
 
         this.displayed_atm_container = [];
         this.displayed_atm_id = -1;
+        this.selected_atm = 0;
         this.intro_screen();
 
         // this.loading_screen();
@@ -97,7 +98,10 @@ export default class Game
         setTimeout( () => {
             const loading = document.querySelector("#loading");
             const intro = document.querySelector("#intro-text");
+            const recommended = document.querySelector("#recommended");
+
             loading.style.display = "none";
+            recommended.style.display = "none";
             intro.style.display = "flex";
         
             document.body.addEventListener('click', () => {
@@ -105,8 +109,7 @@ export default class Game
                 this.playSound(audio.mountainpeak);
                 this.loading_screen();
             }, {once: true});
-        }, 4000);
-        
+        }, 6000);   
     }
 
     loading_screen()
@@ -442,7 +445,7 @@ export default class Game
             // bought.style.display = "flex";
             next_level.style.display = "flex";
             next_level.addEventListener("click", this.start.bind(this), {once: true});
-            this.displayed_atm_id = 2;
+            this.displayed_atm_id = this.selected_atm;
             this.displayCurrentShip();
 
             nextship.addEventListener("click", this.nextShip.bind(this));

@@ -75,6 +75,16 @@ body
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+}
+
+#recommended{
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: auto;
 }
 
 .blink_me {
@@ -92,7 +102,7 @@ body
 {
     position: absolute;
     background-color:none;
-    top: 53%;
+    top: 57%;
     transform: translate(-50%, -50%);
     left: 50%;
     padding: 16px;
