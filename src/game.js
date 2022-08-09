@@ -34,7 +34,7 @@ export default class Game
             },
             {
                 minimum_level: 1,
-                price: -2, //until tutorial is made
+                price: -1, //until tutorial is made
                 ship_id: 1,
                 stars: 2,
                 skills: 1,
@@ -47,7 +47,7 @@ export default class Game
             },
             {
                 minimum_level: 2,
-                price: 250000,
+                price: 100000,
                 ship_id: 2,
                 stars: 3,
                 skills: 3,
@@ -74,7 +74,6 @@ export default class Game
 
         this.displayed_atm_container = [];
         this.displayed_atm_id = -1;
-        this.selected_atm = 0;
         this.intro_screen();
 
         // this.loading_screen();
@@ -216,20 +215,6 @@ export default class Game
         // this.animate();
     }
 
-    hellomoto()
-    {
-        const bought = document.querySelector("#bought");
-        const buy = document.querySelector("#buy");
-        if(this.gold >= 100000)
-        {
-            audio.buyship.play();
-            buy.style.display = "none";
-            bought.style.display = "flex";
-            this.ship_level++;// or one -< needs fix
-            this.gold -= 100000;
-        }
-    }
-
     displayCurrentShip()
         {
             let info = this.all_ships[this.displayed_atm_id];
@@ -358,17 +343,40 @@ export default class Game
             {
                 the_big_button = document.querySelector("#locked");
             }
-            else if(info.price === -2)
+            else if(info.price === -1 && this.displayed_atm_id === this.ship_level)
             {
                 the_big_button = document.querySelector("#chosen-ship");
             }
             else if(info.price === -1)
             {
                 the_big_button = document.querySelector("#select-ship");
+                the_big_button.addEventListener("click", ()=>{
+                    this.ship_level = this.displayed_atm_id;
+                    const chosen = document.querySelector("#chosen-ship");
+                    chosen.style.display = "flex";
+                    this.displayed_atm_container.push(chosen);
+                    the_big_button.style.display = "none";
+                    audio.buyship.play();
+                    //can techncially remove big button but w/e
+                }, {once: true})
             }
             else
             {
                 the_big_button = document.querySelector("#priced-ship");
+                the_big_button.addEventListener("click", ()=>{
+                    if(this.gold >= info.price)
+                    {
+                        this.gold -= info.price;
+                        audio.buyship.play();
+                        this.all_ships[this.displayed_atm_id].price = -1;
+                        this.ship_level = this.displayed_atm_id;
+                        const chosen = document.querySelector("#chosen-ship");
+                        chosen.style.display = "flex";
+                        this.displayed_atm_container.push(chosen);
+                        the_big_button.style.display = "none";
+                    }
+                    //can techncially remove big button but w/e
+                }, {once: true})
             }
 
             the_big_button.style.display = "flex";
@@ -384,6 +392,7 @@ export default class Game
             this.displayed_atm_container.forEach((ele) => {
                 ele.style.display = "none";
             });
+            this.displayed_atm_container = [];
             this.displayed_atm_id++;
             this.displayCurrentShip();
         }
@@ -398,10 +407,10 @@ export default class Game
         if(this.displayed_atm_id >= 1)
         {
             audio.beep1.play();
-            console.log(this.displayed_atm_container, "hello?");
             this.displayed_atm_container.forEach((ele) => {
                 ele.style.display = "none";
             });
+            this.displayed_atm_container = [];
             this.displayed_atm_id--;
             this.displayCurrentShip();
         }
@@ -441,19 +450,26 @@ export default class Game
             my_shop.style.display = "none";
             audio.beep1.play();
             // shipselect1.style.display = "flex"; 
-            shipselect.style.display = "flex"; //THIS NEEDS TO BE IMPLEMENTED 
+            shipselect.style.display = "flex";  
             // bought.style.display = "flex";
             next_level.style.display = "flex";
-            next_level.addEventListener("click", this.start.bind(this), {once: true});
-            this.displayed_atm_id = this.selected_atm;
+            next_level.addEventListener("click", () => {
+                this.displayed_atm_container.forEach((ele) => {
+                    ele.style.display = "none";
+                });
+                shipselect.style.display = "none";  
+                next_level.style.display = "none";
+
+                this.displayed_atm_container = [];
+                this.start();
+            }
+            , {once: true});
+            this.displayed_atm_id = this.ship_level;
             this.displayCurrentShip();
 
             nextship.addEventListener("click", this.nextShip.bind(this));
-            prevship.addEventListener("click", this.prevShip.bind(this));
-
-           
+            prevship.addEventListener("click", this.prevShip.bind(this));           
         }
-        //super duper garbage code end
         
         setTimeout(()=> 
         {

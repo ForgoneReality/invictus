@@ -304,24 +304,37 @@ body
     top: 50%;
     right: 27%;
     transform: translate(-50%, -50%);
-    z-index: 5;
     scale: 0.36;
     width: 212px;
     height: 66px;
+    z-index: 5;
 }
 
-#priced-ship > div{
-    display: flex;
+a:hover {
+    cursor:pointer;
+}
+
+#priced-ship{
+    display: none;
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: 21px;
     line-height: 66px;
     color: #00ffff;
     font-family: "Neuropol";
-    z-index: 6;
+    z-index: 7;
     text-align: center;
 }
 
+#priced-ship > figure{
+    margin: auto;
+    height: 100%;
+}
+
+.text1{
+    position: absolute;
+    padding-left: 45px;
+}
 
 /* 
 #bought
@@ -449,7 +462,7 @@ body
 #shippie4{
     height: 103px;
     width: auto;
-    bottom: 14%;
+    bottom: 17%;
     left: 50.2%;
     filter: drop-shadow(0 0 1.15rem red);
 }

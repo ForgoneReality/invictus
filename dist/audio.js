@@ -97,6 +97,6 @@ const audio = {
     beep2: new Howl({
         src: "sounds/beep2.mp3",
         html5: true,
-        volume: 0.4
+        volume: 0.25
     })
 }
