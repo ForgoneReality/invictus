@@ -107,7 +107,7 @@ const TYPES = [
         velocity: [0, 0.5],
         endvelocity: [0, 0],
         // health: 8000,
-        health: 80,
+        health: 8000,
         damage: 80, //variable!
         img: 'images/boss1.png',
         color: "red",
@@ -151,6 +151,21 @@ const TYPES = [
         gold: 2500,
         value: 0,
         shotsLeft: -1 //variable!
+    },
+    {
+        velocity: [0,2],
+        endvelocity: [0,2],
+        health: 200,
+        damage: 111,
+        img: "images/enemyship9.png",
+        color: "green",
+        blur: 0,
+        rotatable: false,
+        scale: 0.07,
+        shootTimerInit: 66,
+        gold: 3500,
+        value: 1.15,
+        shotsLeft: 40
     }
 
 
@@ -280,7 +295,7 @@ export default class Ship {
             return;
         }
         //to be implemented
-        if (this.type === 0)
+        if (this.type === 0 || this.type === 9)
         {   
             if(this.posY + 100 < this.background.player.posY)
             {
@@ -295,7 +310,6 @@ export default class Ship {
 
             }
             this.posY += this.velY;
-            
         }
         else if (this.type === 1 || this.type === 4 || this.type === 8)
         {
@@ -725,6 +739,23 @@ export default class Ship {
                 break;
             case 8:
                 //do nothing
+            break;
+
+            case 9:
+                speed = 4.25;
+                cooldown = 60;
+                
+                if(this.shootTimer <= 0)
+                {
+                    this.shootTimer = cooldown;
+
+                    let proj1 = new CircleDamageProjectile([this.realX(), this.realY()+40], [0, speed*this.normalVector[1]], 4.5, 2, 7, this.damage, 20);
+                    this.background.enemyprojectiles.push(proj1);
+                    audio.laser3.play();
+                }
+                else{
+                    this.shootTimer -= 1;
+                }
             break;
 
 

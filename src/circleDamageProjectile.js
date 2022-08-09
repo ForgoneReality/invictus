@@ -71,9 +71,15 @@ export default class CircleDamageProjectile extends Projectile{
             gradient_a = "#0019FF";
             gradient_b = "#1121B7";
         }
+        else if(this.type === 7)
+        {
+            color = "green";
+            gradient_a = "springgreen";
+            gradient_b = "green";
+        }
 
    
-        // context.save();
+        context.save();
         context.beginPath();
         setShadow(context, color, 0, 0, this.blur);
         let grd = context.createRadialGradient(this.posX, this.posY, 0, this.posX, this.posY, this.size / 2);
@@ -91,10 +97,19 @@ export default class CircleDamageProjectile extends Projectile{
         
         context.fillStyle = grd;
 
-        context.arc(this.posX, this.posY, this.size, this.arc_start, this.arc_end, false);
+        if(this.type === 7)
+        {
+            // context.rotate(Math.PI);
+            context.scale(-1,1);
+            context.arc(150, 150, 60, (Math.PI/180)*40, (Math.PI/180)*320);
+            context.bezierCurveTo(110, 75, 110, 225, 196, 188);
+        }
+        else{
+            context.arc(this.posX, this.posY, this.size, this.arc_start, this.arc_end, false);
+        }
         context.fill();
         context.closePath();
-        // context.restore();
+        context.restore();
 
         context.shadowBlur = 0;
 

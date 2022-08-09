@@ -47,8 +47,10 @@ export default class Background{
         //note: as explained in Player#animate, movement and other spontaneous events cannot be added here
         document.addEventListener('mousemove', handleMousemove);
 
-        if (level === 1 || level === 2)
+        if (level === 1)
         {
+            this.enemyships.push(new Ship([.5*this.width, -100], 9, this));
+            
             // this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             // this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             // this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -115,16 +117,29 @@ export default class Background{
             // this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             // this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            // this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
-
-            this.enemyships.push(new Ship([.12*this.width, -48*1.25], 6, this, true)); 
-
+            this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
       
         if (level === 2)
         {
-            this.enemyships.push(new Ship([.5*this.width, -100], 8, this));
-            this.enemyships.push(new Ship([.23*this.width, -300], 8, this));
+            this.enemyships.push(new Ship([.5*this.width, -100], 9, this));
+
+            // this.enemyships.push(new Ship([.5*this.width, -100], 8, this));
+            // this.enemyships.push(new Ship([.7*this.width, -200], 3, this));
+            // this.enemyships.push(new Ship([.23*this.width, -300], 8, this));
+            // this.enemyships.push(new Ship([.42*this.width, -380], 4, this));
+            // this.enemyships.push(new Ship([.56*this.width, -440], 4, this));
+            // this.enemyships.push(new Ship([.7*this.width, -500], 5, this));
+            // this.enemyships.push(new Ship([.3*this.width, -555], 8, this));
+            // this.enemyships.push(new Ship([.55*this.width, -600], 1, this));
+            // this.enemyships.push(new Ship([.71*this.width, -666], 2, this));
+            // this.enemyships.push(new Ship([.5*this.width, -700], 8, this));
+            // this.enemyships.push(new Ship([.8*this.width, -750], 5, this));
+            // this.enemyships.push(new Ship([.42*this.width, -888], 4, this));
+            // this.enemyships.push(new Ship([.5*this.width, -950], 8, this));
+            // this.enemyships.push(new Ship([.35*this.width, -1000], 8, this));
+            // this.enemyships.push(new Ship([.65*this.width, -1000], 8, this));
+            // this.enemyships.push(new Ship([.47*this.width, -1075], 2, this));
         }
     }
 
