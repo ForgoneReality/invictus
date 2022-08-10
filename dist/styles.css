@@ -384,8 +384,7 @@ a:hover {
     position: absolute;
     background-color: none;
     background: transparent;
-    /* border: none !important; */
-    border: red solid 1px;
+    border: none !important;
     font-size:0;
     right: 21%;
     top: 48.4%;
@@ -403,8 +402,7 @@ a:hover {
     position: absolute;
     background-color: none;
     background: transparent;
-    /* border: none !important; */
-    border: red solid 1px;
+    border: none !important;
     font-size:0;
     left: 24.5%;
     top: 48.4%;

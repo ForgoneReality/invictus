@@ -47,7 +47,7 @@ export default class Game
             },
             {
                 minimum_level: 2,
-                price: 100000,
+                price: 250000,
                 ship_id: 2,
                 stars: 3,
                 skills: 3,

@@ -2,6 +2,7 @@
 
 import CircleDamageProjectile from "./circleDamageProjectile";
 import LaserDamageProjectile from "./laserDamageProjectile";
+import EllipseDamageProjectile from "./ellipseDamageProjectile";
 import LaserBeam from "./laserbeam";
 import LensFlare from "./lensflare"
 
@@ -140,37 +141,55 @@ const TYPES = [
     {
         velocity: [0, 2],
         endvelocity: [0, 2],
-        health: 135,
-        damage: 80, 
+        health: 175,
+        damage: 135, 
         img: 'images/enemyship7.png',
         color: "blue",
         blur: 0,
         rotatable: false,
         scale: .082, 
         shootTimerInit: -1,
-        gold: 2500,
+        gold: 500,
         value: 0,
         shotsLeft: -1 //variable!
     },
     {
-        velocity: [0,2],
-        endvelocity: [0,2],
-        health: 200,
-        damage: 111,
+        velocity: [0, 0.66],
+        endvelocity: [0, 0.66],
+        health: 400,
+        damage: 175,
+        img: "images/enemyship8.png",
+        color: "GoldenRod",
+        blur: 0,
+        rotatable: false,
+        scale: .08,
+        shootTimerInit: 130,
+        gold: 3500,
+        value: 1.15,
+        shotsLeft: 2
+    },
+    {
+        velocity: [0,1],
+        endvelocity: [0,1],
+        health: 275,
+        damage: 140,
         img: "images/enemyship9.png",
         color: "green",
         blur: 0,
         rotatable: false,
-        scale: 0.07,
-        shootTimerInit: 66,
+        scale: 0.08,
+        shootTimerInit: 120,
         gold: 3500,
         value: 1.15,
         shotsLeft: 40
     }
-
-
-
 ];
+
+const LEVEL_MODIFIER = {
+    //health, damage, 
+    1: [1, 1],
+    2: [1.1, 1.05]
+}
 
 export default class Ship {
     constructor(position, type, background, boss = false) //more later, type?
@@ -202,8 +221,8 @@ export default class Ship {
 
         this.velX = TYPES[type].velocity[0];
         this.velY = TYPES[type].velocity[1];
-        this.health = TYPES[type].health; 
-        this.damage = TYPES[type].damage;
+        this.health = TYPES[type].health * LEVEL_MODIFIER[this.background.level_id][0]; 
+        this.damage = TYPES[type].damage * LEVEL_MODIFIER[this.background.level_id][1];
 
         this.degrees = 0;
 
@@ -295,7 +314,7 @@ export default class Ship {
             return;
         }
         //to be implemented
-        if (this.type === 0 || this.type === 9)
+        if (this.type === 0)
         {   
             if(this.posY + 100 < this.background.player.posY)
             {
@@ -311,7 +330,7 @@ export default class Ship {
             }
             this.posY += this.velY;
         }
-        else if (this.type === 1 || this.type === 4 || this.type === 8)
+        else if (this.type === 1 || this.type === 4 || this.type === 8 || this.type === 10)
         {
             this.posX += this.velX;
             this.posY += this.velY;
@@ -445,6 +464,22 @@ export default class Ship {
         else if (this.type === 7)
         {
             //do nothing
+        }
+        else if (this.type === 9)
+        {   
+            if(this.posY + 100 < this.background.player.posY)
+            {
+                if(this.posX > this.background.player.posX)
+                {
+                    this.velX = -0.3;
+                }
+                else
+                    this.velX = 0.3;
+
+                this.posX += this.velX;
+
+            }
+            this.posY += this.velY;
         }
     }
 
@@ -741,16 +776,55 @@ export default class Ship {
                 //do nothing
             break;
 
-            case 9:
-                speed = 4.25;
-                cooldown = 60;
+            case 9: 
+                speed = 10.5;
+                cooldown = 50;
+
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 170;
+                    this.shotsLeft = 2;
+                    return undefined;
+                }
+                
+                if(this.shootTimer <= 0)
+                {
+                    audio.laser3.play();
+                    this.shootTimer = cooldown;
+                    
+                    // let proj = new LaserDamageProjectile([this.realX()-55, this.realY()+60], [0, speed], 0, 55, 2, 4, this.damage, 15, 3);
+                    // let proj2 = new LaserDamageProjectile([this.realX()+55, this.realY()+60], [0, speed], 0, 55, 2, 4, this.damage, 15, 3);
+
+                    let proj = new EllipseDamageProjectile([this.realX()-55, this.realY()+80], [0, speed], 3, 50, 0, this.damage, 15);
+                    let proj2 = new EllipseDamageProjectile([this.realX()+55, this.realY()+80], [0, speed], 3, 50, 0, this.damage, 15);
+                    
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft -= 1;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
+
+                break;
+            case 10:
+                speed = 3.7;
+                cooldown = 165;
                 
                 if(this.shootTimer <= 0)
                 {
                     this.shootTimer = cooldown;
 
-                    let proj1 = new CircleDamageProjectile([this.realX(), this.realY()+40], [0, speed*this.normalVector[1]], 4.5, 2, 7, this.damage, 20);
-                    this.background.enemyprojectiles.push(proj1);
+                    let proj = new LaserDamageProjectile([this.realX()-42, this.realY()+30], [0, speed], 0, -1, 2, 4, this.damage, 15, 3, "images/attackprojectile1.png");
+                    let proj2 = new LaserDamageProjectile([this.realX()-42, this.realY()+30], [-1 * speed * Math.sqrt(2) / 2 , speed * Math.sqrt(2)/2], 45, -1, 2, 4, this.damage, 15, 3, "images/attackprojectile1.png");
+                    let proj3 = new LaserDamageProjectile([this.realX()-42, this.realY()+30], [speed * Math.sqrt(2) / 2 , speed * Math.sqrt(2)/2], -45, -1, 2, 4, this.damage, 15, 3, "images/attackprojectile1.png");
+                    
+                    // let proj2 = new LaserDamageProjectile([this.realX()+55, this.realY()+60], [0, speed], 0, 55, 2, 4, this.damage, 15, 3);
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.background.enemyprojectiles.push(proj3);
+
                     audio.laser3.play();
                 }
                 else{

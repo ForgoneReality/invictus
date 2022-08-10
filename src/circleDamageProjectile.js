@@ -71,12 +71,6 @@ export default class CircleDamageProjectile extends Projectile{
             gradient_a = "#0019FF";
             gradient_b = "#1121B7";
         }
-        else if(this.type === 7)
-        {
-            color = "green";
-            gradient_a = "springgreen";
-            gradient_b = "green";
-        }
 
    
         context.save();
@@ -97,16 +91,17 @@ export default class CircleDamageProjectile extends Projectile{
         
         context.fillStyle = grd;
 
-        if(this.type === 7)
-        {
-            // context.rotate(Math.PI);
-            context.scale(-1,1);
-            context.arc(150, 150, 60, (Math.PI/180)*40, (Math.PI/180)*320);
-            context.bezierCurveTo(110, 75, 110, 225, 196, 188);
-        }
-        else{
+        // if(this.type === 7)
+        // {
+        //     // context.setTransform(1, 0, 0, 1, 150, 150);
+        //     // context.rotate(3 * Math.PI/2);//I hoped this line would rotate it to point downards (so the enemy ship shoots downwards), but it just makes it disappear
+        //     // context.scale(-1,1);
+        //     context.arc(150, 150, 60, (Math.PI/180)*40, (Math.PI/180)*320);
+        //     context.bezierCurveTo(110, 75, 110, 225, 196, 188);
+        // }
+        // else{
             context.arc(this.posX, this.posY, this.size, this.arc_start, this.arc_end, false);
-        }
+        // }
         context.fill();
         context.closePath();
         context.restore();

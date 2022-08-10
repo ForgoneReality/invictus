@@ -19,6 +19,10 @@ export default class LaserDamageProjectile extends Projectile{
             {
                 scale = 0.1;
             }
+            else if(type === 4)
+            {
+                scale = 0.19;
+            }
 
             const image = new Image();
             image.src  = img;
@@ -52,6 +56,10 @@ export default class LaserDamageProjectile extends Projectile{
         else if (this.type === 3)
         {
             color = "#39FF14";
+        }
+        else if (this.type === 4)
+        {
+            color = "Green";
         }
     
         context.save();
