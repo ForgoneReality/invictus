@@ -208,6 +208,10 @@ export default class Game
         if(this.level === 2)
         {
             this.playSound(audio.orbit);
+            if(this.bgsong)
+            {
+                this.bgsong.fade(0,1, 6000); 
+            }
         }
 
         this.context = this.canvas.getContext('2d');
