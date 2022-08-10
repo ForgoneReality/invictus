@@ -103,6 +103,8 @@ LATER:
 - Intro: Road 96 - Mountain Peak
 - Level 1 Theme: DEFRAG - The Dawn of Utopia
 - Level 1 Boss: Greg Dombrowski - Devour
+- Level 2 Theme: Undecided
+- Level ? Theme: Reconfig - Shortwire
 - Charles Patterson for "LOADING"
 
 _Based on Kidzgames's Enigmata_

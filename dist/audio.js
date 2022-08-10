@@ -28,7 +28,7 @@ const audio = {
     laser3: new Howl({
         src: "sounds/laser3.mp3",
         html5: true,
-        volume: 0.085,
+        volume: 0.07,
         loop: false
     }),
     laser2: new Howl({
@@ -98,5 +98,10 @@ const audio = {
         src: "sounds/beep2.mp3",
         html5: true,
         volume: 0.25
+    }),
+    orbit: new Howl({
+        src: "sounds/orbit.mp3",
+        html5: true,
+        volume: 0.2
     })
 }

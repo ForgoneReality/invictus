@@ -204,7 +204,11 @@ export default class Game
         const buy = document.querySelector("#buy");
         my_shop.style.display = "none";
         next_level.style.display = "none";
-        
+
+        if(this.level === 2)
+        {
+            this.playSound(audio.orbit);
+        }
 
         this.context = this.canvas.getContext('2d');
         this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this);
@@ -452,13 +456,17 @@ export default class Game
             // shipselect1.style.display = "flex"; 
             shipselect.style.display = "flex";  
             // bought.style.display = "flex";
-            next_level.style.display = "flex";
+            next_level.style.display = "flex"; //this is in the wrong place for sure!!!!!!!!!!!!!!!!
             next_level.addEventListener("click", () => {
                 this.displayed_atm_container.forEach((ele) => {
                     ele.style.display = "none";
                 });
                 shipselect.style.display = "none";  
                 next_level.style.display = "none";
+                if(this.bgsong!= null)
+                {
+                    this.bgsong.stop();
+                }
 
                 this.displayed_atm_container = [];
                 this.start();
