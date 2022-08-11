@@ -141,7 +141,7 @@ const TYPES = [
         velocity: [0, 0.75],
         endvelocity: [0, 0.75],
         health: 175,
-        damage: 120, 
+        damage: 100, 
         img: 'images/enemyship7.png',
         color: "blue",
         blur: 0,
@@ -156,7 +156,7 @@ const TYPES = [
         velocity: [0, 0.66],
         endvelocity: [0, 0.66],
         health: 400,
-        damage: 150,
+        damage: 125,
         img: "images/enemyship8.png",
         color: "GoldenRod",
         blur: 0,
@@ -170,14 +170,14 @@ const TYPES = [
     {
         velocity: [0,1],
         endvelocity: [0,1],
-        health: 275,
-        damage: 130,
+        health: 333,
+        damage: 140,
         img: "images/enemyship9.png",
         color: "green",
         blur: 0,
         rotatable: false,
         scale: 0.08,
-        shootTimerInit: 120,
+        shootTimerInit: 77,
         gold: 3500,
         value: 1.15,
         shotsLeft: 40
@@ -187,7 +187,7 @@ const TYPES = [
 const LEVEL_MODIFIER = {
     //health, damage, 
     1: [1, 1],
-    2: [1.1, 1.05]
+    2: [1, 1]
 }
 
 export default class Ship {
@@ -808,8 +808,8 @@ export default class Ship {
 
                 break;
             case 10:
-                speed = 3.7;
-                cooldown = 165;
+                speed = 4.3;
+                cooldown = 155;
                 
                 if(this.shootTimer <= 0)
                 {

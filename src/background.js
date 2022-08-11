@@ -49,6 +49,15 @@ export default class Background{
 
         if (level === 1)
         {
+            //
+            
+                    
+            
+            
+
+            
+            
+
             // this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             // this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             // this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -120,6 +129,7 @@ export default class Background{
       
         if (level === 2)
         {
+         
             this.enemyships.push(new Ship([.5*this.width, -100 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.7*this.width, -200 * 1.5 -900], 3, this));
             this.enemyships.push(new Ship([.23*this.width, -300 * 1.5 -900], 8, this));
@@ -158,15 +168,1007 @@ export default class Background{
             this.enemyships.push(new Ship([.64*this.width, -2123 * 1.5 -900], 4, this));
             this.enemyships.push(new Ship([.5*this.width, -2180 * 1.5 -900], 5, this));
             this.enemyships.push(new Ship([.25*this.width, -2200 * 1.5 -900], 9, this));
+            this.enemyships.push(new Ship([.1*this.width, -2300 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.3*this.width, -2300 * 1.5 -900], 8, this));
-            this.enemyships.push(new Ship([.6*this.width, -2300 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.5*this.width, -2300 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.7*this.width, -2300 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.9*this.width, -2300 * 1.5 -900], 8, this));
-            this.enemyships.push(new Ship([.5*this.width, -2350 * 1.5 -900], 10, this));
-            this.enemyships.push(new Ship([.15*this.width, -2440 * 1.5 -900], 8, this));
-            this.enemyships.push(new Ship([.45*this.width, -2440 * 1.5 -900], 8, this));
-            this.enemyships.push(new Ship([.75*this.width, -2440 * 1.5 -900], 8, this));
-            this.enemyships.push(new Ship([.64*this.width, -2600 * 1.5 -900], 9, this));
+            this.enemyships.push(new Ship([.35*this.width, -2520 * 1.5 -900], 0, this));
+            this.enemyships.push(new Ship([.65*this.width, -2450 * 1.5 -900], 5, this));
 
+            this.enemyships.push(new Ship([0*this.width, -2600 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.2*this.width, -2600 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.4*this.width, -2600 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.6*this.width, -2600 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.8*this.width, -2600 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.3*this.width, -2700 * 1.5 -900], 2, this));
+            this.enemyships.push(new Ship([.5*this.width, -2700 * 1.5 -900], 1, this));
+            this.enemyships.push(new Ship([.3*this.width, -2700 * 1.5 -900], 4, this));
+
+            this.enemyships.push(new Ship([.33*this.width, -2825 * 1.5 -900], 9, this));
+            this.enemyships.push(new Ship([.66*this.width, -2950 * 1.5 -900], 3, this));
+            this.enemyships.push(new Ship([.52*this.width, -3034 * 1.5 -900], 10, this));
+            this.enemyships.push(new Ship([.22*this.width, -3090 * 1.5 -900], 3, this));
+            this.enemyships.push(new Ship([.75*this.width, -3150 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.64*this.width, -3240 * 1.5 -900], 2, this));
+            this.enemyships.push(new Ship([.44*this.width, -3333 * 1.5 -900], 4, this));
+            this.enemyships.push(new Ship([.44*this.width, -3400 * 1.5 -900], 8, this));
+            this.enemyships.push(new Ship([.44*this.width, -3456 * 1.5 -900], 1, this));
+
+
+            let newShip = new Ship([.3* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.2* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.1* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.15* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.25* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.05* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([0, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.05* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.65* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.7* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.75* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.8* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.85* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.9* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.95* this.width, -300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            //
+
+            newShip = new Ship([.3* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.2* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.1* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.15* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.25* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+
+            newShip = new Ship([.05* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([0, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.05* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.65* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.7* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.75* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.8* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.85* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.9* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.95* this.width, -325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            //
+
+            newShip = new Ship([.3* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.2* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.1* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.15* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.25* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.05* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([0, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.05* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.65* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.7* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.75* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.8* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.85* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.9* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.95* this.width, -350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            //
+
+            newShip = new Ship([.6* this.width, -375*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -375*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -400*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -400*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -425*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -425*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -450*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -450*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -475*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -475*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -500*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -500*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -525*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -525*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -550*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -550*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -575*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -575*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -600*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -600*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -625*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -625*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -650*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -650*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -675*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -675*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -700*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -700*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+
+            newShip = new Ship([.6* this.width, -725*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -725*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -750*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -750*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -775*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -775*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -800*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -800*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            this.enemyships.push(new Ship([.45*this.width, -400 * 1.5 - 5700], 0, this)); 
+
+            this.enemyships.push(new Ship([.44*this.width, -650 * 1.5 - 5700], 2, this)); 
+
+            this.enemyships.push(new Ship([.365*this.width, -875 * 1.5 - 5700], 9, this)); 
+
+            newShip = new Ship([.6* this.width, -825*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -825*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -850*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -850*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -875*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -875*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -900*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -900*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -925*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -925*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -950*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -950*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            //zig-zag
+
+            newShip = new Ship([.575* this.width, -975*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.275* this.width, -975*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.55* this.width, -1000*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.25* this.width, -1000*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.525* this.width, -1025*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.225* this.width, -1025*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.5* this.width, -1050*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.2* this.width, -1050*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.475* this.width, -1075*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.175* this.width, -1075*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.45* this.width, -1100*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.15* this.width, -1100*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.425* this.width, -1125*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.125* this.width, -1125*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.4* this.width, -1150*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.1* this.width, -1150*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.425* this.width, -1175*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.125* this.width, -1175*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.45* this.width, -1200*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.15* this.width, -1200*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.475* this.width, -1225*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.175* this.width, -1225*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.5* this.width, -1250*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.2* this.width, -1250*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.525* this.width, -1275*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.225* this.width, -1275*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.55* this.width, -1300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.25* this.width, -1300*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.575* this.width, -1325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.275* this.width, -1325*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -1350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3 * this.width, -1350*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.625 * this.width, -1375*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.325 * this.width, -1375*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.65* this.width, -1400*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.35* this.width, -1400*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.675* this.width, -1425*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.375* this.width, -1425*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.7* this.width, -1450*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.4* this.width, -1450*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.725* this.width, -1475*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.425* this.width, -1475*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.75* this.width, -1500*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.45* this.width, -1500*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.775* this.width, -1525*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.475* this.width, -1525*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.75* this.width, -1550*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.45* this.width, -1550*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.725* this.width, -1575*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.425* this.width, -1575*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.7* this.width, -1600*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.4* this.width, -1600*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.675* this.width, -1625*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.375* this.width, -1625*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.65* this.width, -1650*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.35* this.width, -1650*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.625* this.width, -1675*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.325* this.width, -1675*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -1700*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -1700*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.6* this.width, -1725*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -1725 * 1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+            
+            newShip = new Ship([.6* this.width, -1750*1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
+
+            newShip = new Ship([.3* this.width, -1750 * 1.5 - 5700], 8, this);
+            
+            newShip.velY = 1.5;
+            newShip.health = 351
+            this.enemyships.push(newShip);
 
             
         }
@@ -492,12 +1494,16 @@ export default class Background{
                 this.player.velX = n[0] * 13;
                 this.player.velY = n[1] * 13;
 
-                if(!this.enemyships[i].boss)
+                if(!this.enemyships[i].boss & this.enemyships[i].type !== 8)
                 {
                     this.enemyships[i].health -= 25;
                     this.enemyships[i].collided = 13;
                     this.enemyships[i].velX = n[0] * -13;
                     this.enemyships[i].velY = n[1] * -13;   
+                }
+                if(this.enemyships[i].type === 8)
+                {
+                    this.enemyships[i].health -= 150;  
                 }
 
                 if(this.enemyships[i].health <= 0)
@@ -521,14 +1527,14 @@ export default class Background{
                 switch(this.drops[i].type)
                 {
                     case 0: //health pack
-                        this.player.health = Math.min(this.player.health -900, this.player.basehealth, this.player.health + this.player.basehealth / 2);
+                        this.player.health = Math.min(this.player.health + 500, this.player.basehealth, this.player.health + this.player.basehealth / 2);
                         break;
                     case 1: //double fire
                         this.player.projectileType = 2;
                         this.player.shotsLeft = 50;
                         break;
                     case 2: //money
-                        this.gold += Math.floor(Math.random()* 6) * 1000 -9000;
+                        this.gold += Math.floor(Math.random()* 6) * 1000 + 5000;
                         break;
                     case 3: //gamma ray
                         this.player.projectileType = 3;

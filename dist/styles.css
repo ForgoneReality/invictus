@@ -311,7 +311,7 @@ body
 }
 
 a:hover {
-    cursor:pointer;
+    cursor:default;
 }
 
 #priced-ship{
