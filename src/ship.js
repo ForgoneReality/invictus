@@ -107,7 +107,7 @@ const TYPES = [
 
         velocity: [0, 0.5],
         endvelocity: [0, 0],
-        health: 80,
+        health: 8000,
         damage: 80, //variable!
         img: 'images/boss1.png',
         color: "red",
@@ -141,7 +141,7 @@ const TYPES = [
         velocity: [0, 0.75],
         endvelocity: [0, 0.75],
         health: 175,
-        damage: 100, 
+        damage: 60, 
         img: 'images/enemyship7.png',
         color: "blue",
         blur: 0,
@@ -170,18 +170,38 @@ const TYPES = [
     {
         velocity: [0,1],
         endvelocity: [0,1],
-        health: 333,
+        health: 350,
         damage: 140,
         img: "images/enemyship9.png",
         color: "green",
         blur: 0,
         rotatable: false,
         scale: 0.08,
-        shootTimerInit: 77,
+        shootTimerInit: 65,
         gold: 3500,
         value: 1.15,
         shotsLeft: 40
+    },
+    {
+        velocity: [0, 1],
+        endvelocity: [0, 0],
+        health: 11000,
+        damage: 80, //variable!
+        img: 'images/orion.png',
+        color: "#0009DF",
+        blur: 0,
+        rotatable: true,
+        scale: .18, 
+        shootTimerInit: 50, //straight down the middle laser cannon
+        shootTimerInit2: 500,  //spread attack
+        shootTimerInit3: 250, //orbs
+        gold: 20000,
+        value: 0,
+        shotsLeft: 25,
+        shotsLeft2: 12, //spread attack
+        shotsLeft3: 4
     }
+        
 ];
 
 const LEVEL_MODIFIER = {
@@ -235,6 +255,8 @@ export default class Ship {
         {
             this.shootTimer2 = TYPES[type].shootTimerInit2;
             this.shootTimer3 = TYPES[type].shootTimerInit3;
+            this.shotsLeft2 = TYPES[type].shotsLeft2;
+            this.shotsLeft3 = TYPES[type].shotsLeft3;
         }
         this.gold = TYPES[type].gold;
         this.value = TYPES[type].value;
@@ -480,6 +502,60 @@ export default class Ship {
             }
             this.posY += this.velY;
         }
+        else if (this.type === 11)
+        {
+            this.posX += this.velX;
+            this.posY += this.velY;
+
+            if(this.realX() > this.background.player.realX() + 30)
+            {
+                if(this.realX() <= this.background.width * .3)
+                    this.velX = 0;
+                else
+                    this.velX = -1;
+            }
+            else if( this.realX() + 30 < this.background.player.realX())
+            {
+                if(this.realX() >= this.background.width * .7)
+                    this.velX = 0;
+                else
+                    this.velX = 1;
+            }
+            else if (this.realX() > this.background.player.realX())
+            {
+                this.velX -= 0.002;
+            }
+            else if (this.realX() < this.background.player.realX())
+            {
+                this.velX += 0.002;
+            }
+
+            if(this.velY > 1)
+            {
+                this.velY = this.velY * 0.85;
+            }
+            else if(this.velY > .15)
+            {
+                this.velY = this.velY * 0.98;
+            }
+            else
+            {
+                this.velY = 0;
+            }
+
+            // this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
+            //make above have cooldown and much larger influence!
+
+            //idk about centering issue
+            if(this.velX > 1)
+            {
+                this.velX = 0.4;
+            }
+            if(this.velX < -1)
+            {
+                this.velX = -0.4;
+            }
+        }
     }
 
     // shootProjectile(target_x = this.realX(), target_y = this.canvasBottom)
@@ -665,8 +741,6 @@ export default class Ship {
             case 6: //red ball center
                 speed = 5.5;
                 cooldown = 100;
-
-
                 
                 if(this.shootTimer <= 0)
                 {
@@ -809,7 +883,7 @@ export default class Ship {
                 break;
             case 10:
                 speed = 4.3;
-                cooldown = 155;
+                cooldown = 130;
                 
                 if(this.shootTimer <= 0)
                 {
@@ -829,18 +903,59 @@ export default class Ship {
                 else{
                     this.shootTimer -= 1;
                 }
-            break;
+                break;
+            case 11:
+                
+                speed = 3.9;
+                cooldown = 4;
+                console.log("shots left:", this.shotsLeft2);
+                console.log("shotTimer:", this.shootTimer2)
+                if (this.shotsLeft2 <= 0) 
+                {
+                    this.shootTimer2 = 500;
+                    this.shotsLeft2 = 12;
+                    return undefined;
+                }
+                if(this.shootTimer2 <= 0)
+                {
+                    let my_degrees1 = this.customAngleAndNormalizedVector(-262, 117)[0];
+                    let my_degrees2 = this.customAngleAndNormalizedVector(262, 117)[0];
 
 
+                    audio.laser2.play();
+                    this.shootTimer2 = cooldown;
+                    let scatter_deg1 = Math.random() * 60 - my_degrees1 - 120;
+                    let scatter_x1 = Math.cos(scatter_deg1 * Math.PI / 180);
+                    let scatter_y1 = -1 * Math.sin(scatter_deg1 * Math.PI / 180);
+
+                    let scatter_deg2 = Math.random() * 60 - my_degrees2 - 120;
+                    let scatter_x2 = Math.cos(scatter_deg2 * Math.PI / 180);
+                    let scatter_y2 = -1 * Math.sin(scatter_deg2 * Math.PI / 180);
+
+                    //BELOW NEEDS OFFSETS
+                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x1, speed * scatter_y1], 4, 2, 7, 30, 18);
+                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x2, speed * scatter_y2], 4, 2, 7, 30, 18);
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft2 -= 1;
+                }
+                else
+                {
+                    this.shootTimer2 -= 1;
+                }
+    
+                break;
+    
             default:
                 console.error("unknown projectile type");
         }
     }
 
 
-    //NOT SURE IF THIS WORKS
     updateAngleAndNormalizedVector()
     {
+       
+
         let target_x = this.background.player.realX();
         let target_y = this.background.player.realY();
         let distX = target_x - this.realX();
@@ -880,6 +995,62 @@ export default class Ship {
         length = Math.sqrt(distX * distX + distY * distY);
         // this.normalVector = [Math.abs(distX) / length, Math.abs(distY) / length];
         this.normalVector = [distX / length, distY / length];
+    }
+
+    customAngleAndNormalizedVector(x, y)
+    {
+        if(!x)
+        {
+            x = 0;
+        }
+        if(!y)
+        {
+            y = 0;
+        }
+        let realrealX = this.realX() + x;
+        let realrealY = this.realY() + y;
+        let target_x = this.background.player.realX();
+        let target_y = this.background.player.realY();
+        let distX = target_x - realrealX;
+        let distY = target_y - realrealY;
+        let ans_deg;
+        let ans_normal_vector;
+        if(distX === 0)
+        {
+            if(target_y > realrealY)
+            {
+                ans_deg = 180;
+            }
+            else
+                ans_deg = 0;
+        }
+        else if (distY === 0)
+        {
+            if(distX < 0)
+            {
+                ans_deg = 90;
+            }
+            else
+            {
+                ans_deg = 270;
+            }
+        }
+        else
+        {//beware y is on top not bototm
+            if(distX < 0)
+            {
+                ans_deg = 90 + ((Math.atan(distY / distX)) * 180.0 / Math.PI);
+            }
+            else
+            {
+                ans_deg = 270 + ((Math.atan(distY / distX)) * 180.0 / Math.PI);
+            }
+        }
+
+        length = Math.sqrt(distX * distX + distY * distY);
+        // this.normalVector = [Math.abs(distX) / length, Math.abs(distY) / length];
+        ans_normal_vector = [distX / length, distY / length];
+        return([ans_deg, ans_normal_vector]);
     }
 
     realX(){ //INCOMPLETE - NEEDS TO FACTOR IN ANGLE!! ... or does it? center doesn't change when angle changes

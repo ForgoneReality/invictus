@@ -71,6 +71,12 @@ export default class CircleDamageProjectile extends Projectile{
             gradient_a = "#0019FF";
             gradient_b = "#1121B7";
         }
+        else if (this.type === 7)
+        {
+            color = "blue";
+            gradient_a = "white";
+            gradient_b = "#1121B7";
+        }
 
    
         context.save();

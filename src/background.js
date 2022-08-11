@@ -124,7 +124,7 @@ export default class Background{
             // this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             // this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            this.enemyships.push(new Ship([.12*this.width, -48*1.25], 6, this, true)); 
+            this.enemyships.push(new Ship([.12*this.width, -150*1.25], 11, this, true)); 
         }
       
         if (level === 2)
@@ -183,7 +183,6 @@ export default class Background{
             this.enemyships.push(new Ship([.8*this.width, -2600 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.3*this.width, -2700 * 1.5 -900], 2, this));
             this.enemyships.push(new Ship([.5*this.width, -2700 * 1.5 -900], 1, this));
-            this.enemyships.push(new Ship([.3*this.width, -2700 * 1.5 -900], 4, this));
 
             this.enemyships.push(new Ship([.33*this.width, -2825 * 1.5 -900], 9, this));
             this.enemyships.push(new Ship([.66*this.width, -2950 * 1.5 -900], 3, this));
@@ -978,6 +977,10 @@ export default class Background{
             newShip.health = 351
             this.enemyships.push(newShip);
 
+            newShip = new Ship([.45 * this.width, -1350*1.5 - 5700], 1, this);
+            newShip.velY = 1.5;
+            this.enemyships.push(newShip);
+
             newShip = new Ship([.625 * this.width, -1375*1.5 - 5700], 8, this);
             
             newShip.velY = 1.5;
@@ -1098,6 +1101,10 @@ export default class Background{
             newShip.health = 351
             this.enemyships.push(newShip);
 
+            newShip = new Ship([.55 * this.width, -1600*1.5 - 5700], 1, this);
+            newShip.velY = 1.5;
+            this.enemyships.push(newShip);
+
             newShip = new Ship([.675* this.width, -1625*1.5 - 5700], 8, this);
             
             newShip.velY = 1.5;
@@ -1169,6 +1176,13 @@ export default class Background{
             newShip.velY = 1.5;
             newShip.health = 351
             this.enemyships.push(newShip);
+
+            this.enemyships.push(new Ship([.34*this.width, -5750 * 1.5], 10, this));
+            this.enemyships.push(new Ship([.62 * this.width, -5750 * 1.5], 10, this));
+            this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
+            this.enemyships.push(new Ship([.2*this.width, -5975 * 1.5], 4, this));
+            this.enemyships.push(new Ship([.76*this.width, -5975 * 1.5], 3, this));
+
 
             
         }
@@ -1482,10 +1496,19 @@ export default class Background{
         {
             if(this.collidesWith(this.player, this.enemyships[i]))
             {
-                this.player.dealDamage(Math.max(this.enemyships[i].damage, 50)); //fix this
+                if(this.enemyships[i].type === 8)
+                {
+                    this.player.dealDamage(20);
+                }
+                else
+                {
+                    this.player.dealDamage(50);
+                }
+
                 if(this.player.health <= 0)
                 {
                     this.bgsong.stop();
+                    //HANDLE THIS CASE!!!!!!!!!!!!!!!!! SHIP SHOULD BE DEAD
                 }
                 
                 

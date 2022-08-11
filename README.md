@@ -107,6 +107,8 @@ LATER:
 - Level ? Theme: Reconfig - Shortwire
 - Charles Patterson for "LOADING"
 
+All music has been confirmed free for non-commercial usage.
+
 _Based on Kidzgames's Enigmata_
 
 
