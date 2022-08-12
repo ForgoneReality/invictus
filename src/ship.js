@@ -5,6 +5,7 @@ import LaserDamageProjectile from "./laserDamageProjectile";
 import EllipseDamageProjectile from "./ellipseDamageProjectile";
 import LaserBeam from "./laserbeam";
 import LensFlare from "./lensflare"
+import OrbDamageProjectile from "./orbDamageProjectile";
 
 const TYPES = [
     { 
@@ -183,23 +184,23 @@ const TYPES = [
         shotsLeft: 40
     },
     {
-        velocity: [0, 1],
+        velocity: [0, 0.86],
         endvelocity: [0, 0],
         health: 11000,
         damage: 80, //variable!
-        img: 'images/orion.png',
+        img: 'images/orios.png',
         color: "#0009DF",
         blur: 0,
         rotatable: true,
-        scale: .18, 
-        shootTimerInit: 50, //straight down the middle laser cannon
+        scale: .23, 
+        shootTimerInit: 100, //straight down the middle laser cannon
         shootTimerInit2: 500,  //spread attack
         shootTimerInit3: 250, //orbs
         gold: 20000,
         value: 0,
-        shotsLeft: 25,
-        shotsLeft2: 12, //spread attack
-        shotsLeft3: 4
+        shotsLeft: 27,
+        shotsLeft2: 15, //spread attack
+        shotsLeft3: 5
     }
         
 ];
@@ -290,6 +291,18 @@ export default class Ship {
         {
             if (this.rotatable) this.updateAngleAndNormalizedVector();
             context.save();
+
+            if(this.type === 11) //QoL
+            {
+                if(this.degrees > 60 && this.degrees < 180)
+                {
+                    this.degrees = 60;
+                }
+                if(this.degrees >= 180 && this.degrees < 300)
+                {
+                    this.degrees = 300;
+                }
+            }
             context.shadowColor = this.color;
             context.shadowBlur = this.blur;
             context.translate(this.posX+this.width/2, this.posY+this.height/2);
@@ -507,14 +520,14 @@ export default class Ship {
             this.posX += this.velX;
             this.posY += this.velY;
 
-            if(this.realX() > this.background.player.realX() + 30)
+            if(this.realX() > this.background.player.realX() + 80)
             {
                 if(this.realX() <= this.background.width * .3)
                     this.velX = 0;
                 else
                     this.velX = -1;
             }
-            else if( this.realX() + 30 < this.background.player.realX())
+            else if( this.realX() + 80 < this.background.player.realX())
             {
                 if(this.realX() >= this.background.width * .7)
                     this.velX = 0;
@@ -523,11 +536,11 @@ export default class Ship {
             }
             else if (this.realX() > this.background.player.realX())
             {
-                this.velX -= 0.002;
+                this.velX -= 0.001;
             }
             else if (this.realX() < this.background.player.realX())
             {
-                this.velX += 0.002;
+                this.velX += 0.001;
             }
 
             if(this.velY > 1)
@@ -566,10 +579,8 @@ export default class Ship {
 
         let speed;
         let cooldown;
-        let speed2;
-        let speed3;
-        let cooldown2;
-        let cooldown3;
+        let damage;
+
         switch(this.type)
         {
             
@@ -905,26 +916,99 @@ export default class Ship {
                 }
                 break;
             case 11:
+                speed = 3;
+                cooldown = 35;
+                damage = 100;
+
+                if (this.shotsLeft3 <= 0) 
+                {
+                    this.shootTimer3 = 333;
+                    this.shotsLeft3 = 5;
+                }
+
+                 if(this.shootTimer3 <= 0)
+                {
+                    audio.laser2.play();
+                    this.shootTimer3 = cooldown;
+                    
+                    let offset_x = -333;
+
+                    let offset_y = 178;
+
+                    let scatter_deg = (Math.random() * 90 + 45);//beware y negative
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(-1 * offset_x, offset_y);
+
+                    let proj = new OrbDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [Math.cos(scatter_deg * Math.PI / 180) * speed, Math.sin(scatter_deg * Math.PI / 180) * speed], 18, 0, damage, 25);
+                    let proj2 = new OrbDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [Math.cos(scatter_deg * Math.PI / 180) * speed, Math.sin(scatter_deg * Math.PI / 180) * speed], 18, 0, damage, 25);
+                    
+                    
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft3 -= 1;
+                }
+                else
+                {
+                    this.shootTimer3 -= 1;
+                }
+    
+
+
                 
+                speed = 8;
+                cooldown = 2.4;
+                damage = 17.5;
+               
+                if (this.shotsLeft <= 0) 
+                {
+                    this.shootTimer = 777;
+                    this.shotsLeft = 27;
+                }
+                if(this.shootTimer <= 0)
+                {
+                    audio.laser2.play();
+                    this.shootTimer = cooldown;
+                    
+                    let offset_x = -10;
+                    let offset_x2 = 0;
+
+                    let offset_y = 120;
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(offset_x2, offset_y);
+
+                    let proj = new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [this.normalVector[0] * speed, this.normalVector[1] * speed], this.degrees + 180, 30, 2, 5, damage, 15, 2.3)
+                    let proj2 = new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [this.normalVector[0] * speed, this.normalVector[1] * speed], this.degrees + 180, 30, 2, 5, damage, 15, 2.3)
+                    
+                    this.background.enemyprojectiles.push(proj);
+                    this.background.enemyprojectiles.push(proj2);
+                    this.shotsLeft -= 1;
+                }
+                else
+                {
+                    this.shootTimer -= 1;
+                }
+    
+
                 speed = 3.9;
                 cooldown = 4;
-                console.log("shots left:", this.shotsLeft2);
-                console.log("shotTimer:", this.shootTimer2)
+                damage = 35; 
                 if (this.shotsLeft2 <= 0) 
                 {
-                    this.shootTimer2 = 500;
-                    this.shotsLeft2 = 12;
-                    return undefined;
+                    this.shootTimer2 = 400;
+                    this.shotsLeft2 = 15;
                 }
                 if(this.shootTimer2 <= 0)
                 {
-                    let my_degrees1 = this.customAngleAndNormalizedVector(-262, 117)[0];
-                    let my_degrees2 = this.customAngleAndNormalizedVector(262, 117)[0];
-
+                    let offset_x = -165;
+                    let offset_y = 215;
+                    let my_degrees1 = this.customAngleAndNormalizedVector(offset_x, offset_y)[0];
+                    let my_degrees2 = this.customAngleAndNormalizedVector(-1 * offset_x, offset_y)[0];
 
                     audio.laser2.play();
                     this.shootTimer2 = cooldown;
-                    let scatter_deg1 = Math.random() * 60 - my_degrees1 - 120;
+                    let scatter_deg1 = Math.random() * 60 - my_degrees1 - 120; //-90 and 30 more for spread /2, degrees is negative because one is clockwise, other CC
                     let scatter_x1 = Math.cos(scatter_deg1 * Math.PI / 180);
                     let scatter_y1 = -1 * Math.sin(scatter_deg1 * Math.PI / 180);
 
@@ -932,9 +1016,15 @@ export default class Ship {
                     let scatter_x2 = Math.cos(scatter_deg2 * Math.PI / 180);
                     let scatter_y2 = -1 * Math.sin(scatter_deg2 * Math.PI / 180);
 
+                    // let offset_x = -262;
+                    // let offset_y = 117;
+
+                    let rotate_scaler = this.offset(offset_x, offset_y);
+                    let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+
                     //BELOW NEEDS OFFSETS
-                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x1, speed * scatter_y1], 4, 2, 7, 30, 18);
-                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x2, speed * scatter_y2], 4, 2, 7, 30, 18);
+                    let proj = new CircleDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * scatter_x1, speed * scatter_y1], 4, 2, 7, damage, 18);
+                    let proj2 = new CircleDamageProjectile([this.realX()+ rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed * scatter_x2, speed * scatter_y2], 4, 2, 7, damage, 18);
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
                     this.shotsLeft2 -= 1;

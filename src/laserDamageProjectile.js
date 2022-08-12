@@ -61,6 +61,10 @@ export default class LaserDamageProjectile extends Projectile{
         {
             color = "Green";
         }
+        else if (this.type === 5)
+        {
+            color = "blue";
+        }
     
         context.save();
         context.shadowColor = color;

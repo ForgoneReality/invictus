@@ -50,13 +50,6 @@ export default class Background{
         if (level === 1)
         {
             //
-            
-                    
-            
-            
-
-            
-            
 
             // this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             // this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
@@ -124,7 +117,7 @@ export default class Background{
             // this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             // this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            this.enemyships.push(new Ship([.12*this.width, -150*1.25], 11, this, true)); 
+            this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
       
         if (level === 2)
@@ -1182,8 +1175,62 @@ export default class Background{
             this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
             this.enemyships.push(new Ship([.2*this.width, -5975 * 1.5], 4, this));
             this.enemyships.push(new Ship([.76*this.width, -5975 * 1.5], 3, this));
+            this.enemyships.push(new Ship([.14*this.width, -6300 * 1.5], 11, this));
 
+            //this can be refactored to not be hardcoded, but idc
+            let pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -6500 * 1.5], 11, this));
 
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -7000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -7500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -8000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -8500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -9000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -9500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -10000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -10500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -11000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -11500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -12000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -12500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -13000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -13500 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -14000 * 1.5], 11, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -14500 * 1.5], 11, this));
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -15000 * 1.5], 11, this));
+            
             
         }
     }

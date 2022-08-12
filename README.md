@@ -5,7 +5,6 @@
 
 ## How To Play
 
-Under Construction...
 - __WASD:__ Move spaceship
 - Mouse Move: Change aiming location
 - Mouse Click or SPACE: Shoot
@@ -21,10 +20,12 @@ Under Construction...
 | P | Pause Game |
 | C | Open command-line to enter cheats |
 
+For best experience, use a mouse and enter full-screen view mode
+
 
 ## Features
 
-lol I barely have anything don't play it yet...
+pew pew
 
 ## Future Features
 
@@ -41,58 +42,42 @@ These are the core features of the game. I'll try to make the game as visually a
 
 The core of the game will be built using Javascript, HTML, and CANVAS. I used keymaster to help with deficiencies in response time of built-in EventListeners, which make the game clunky to play. There is a wait-time when holding down a key for the event listener to transition between a "tapped" key and a "held-down" key, which makes the game very clunky to play. At the moment, no other additional libraries are used aside from webpack to help set-up the project i.e. module dependencies
 
-
-## WireFrame
-
-Under Construction...
-
-
 ## Production Timeline
 
-Week 9
-- Thursday: Project Setup, Create canvas, stars, spaceship movement, shooting projectiles
-- Friday: Finish shooting projectiles, offset, basic enemies, collisions (bouncing?), damage, healthbars
-- Saturday: Finish First Level. Add power-ups, more enemies, maybe boss? 
-- Sunday: Create shop, be able to level-up and add powerups. 
-
-Week 10
-- Monday: Catchup...Finish non-completed
-- Tuesday: Add more levels
-- Wendesday: UI (Start-game, end-game, saving/loading, options like turning off volumes, pause)
-- Thursday: More graphics improvements/cleanup, additional difficult bosses and AI, background upgrade (Scrollable?), achievments, complex/multi-faceted hitboxes, and other bonuses
-- Friday: Continue working
-- Saturday: Continue Working
-- Sunday: Finish-up!
-
+Under Reconstruction...
 
 ## To-Do
 
 Under Construction...
 
 SOON:
+- Level 2
+- Tutorial
+- Skills
 - Fix Yellow Ship... Looks out-of-place. Darken and edit
 - Recolor some ships
 - RESOLUTION CHANGE - MAP SHIFT
 - Make resolution adjustable: RIGHT NOW ONLY LARGER SCREENS CAN PLAY IT
 
 LATER: 
-- Loading...
-- Upgrade background: planets, nebulas, etc.
+- Upgrade background: planets, nebulas, etc. -> MORE IMPORTANT THAN IT SEEMS
 - Drawing off-screen ships (slightly off atm)
+- Settings
+- Load Game
+- More Levels, Ships, Bosses, and Skills
+- Replay Level, Level Select
+- Achievements
 - Consistent graphics -> change drop images, UI, etc.
 
 ## Known Bugs
 
-- Sometimes on page refresh, mousemove event not working as intended (maybe DOMload?)
-- Random shadow blurring unintended
-- Make drops intervally shadow blur
-- LAG: WHEN UPGRADING SHIP, CREATING DROP (load image?)
+- Make drops intervally shadow blur (minor)
 - RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
-- Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding
-- Fix Boss -> Should be able to move off-screen
+- Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding (minor)
+- Fix Bosses -> Should be able to move off-screen
 - Instructions not centered
-- SHOP NEEDS COMPLETE REFACTORING - Not Full Images for everyshop screen, just add the necessary stuff
-- SHOP is currently hard-coded and does not have implemented backwards functionality (or scalability)
+- BOSS HURTBOX AND COLLISION BOX INACCURATE WHEN ROTATING -> Normal ships probably also inaccurate -> Very noticable with Orios
+- ships tend to teleport in (minor)
 
 
 ### Special Thanks
