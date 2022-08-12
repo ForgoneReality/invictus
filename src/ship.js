@@ -1202,4 +1202,14 @@ export default class Ship {
         return this.posY + this.height;
 
     }
+
+    corners()
+    {
+        let topleft_corner = this.offset(this.leftX(), this.upY());
+        let topright_corner = this.offset(this.rightX(), this.upY());
+        let bottomleft_corner = this.offset(this.leftX(), this.downY());
+        let bottomright_corner = this.offset(this.rightX(), this.downY());
+
+        return[[this.realX() + topleft_corner[0], this.realY() + topleft_corner[1]], [this.realX() + topright_corner[0], this.realY() + topright_corner[1]], [this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]], [this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]] ];
+    }
 }

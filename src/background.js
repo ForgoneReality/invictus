@@ -117,7 +117,7 @@ export default class Background{
             // this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             // this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
+            this.enemyships.push(new Ship([.12*this.width, -300*1.25], 11, this, true)); 
         }
       
         if (level === 2)
@@ -1623,21 +1623,38 @@ export default class Background{
         }
     }
 
-    collidesWith(a, b)
+    collidesWith(a, b, type="normal")
     {
-        if ((a.leftX() >= b.leftX() && a.leftX() <= b.rightX()) || (a.rightX() >= b.leftX() && a.rightX() <= b.rightX()))
+        if(type === "normal")
         {
-            if ((a.upY() >= b.upY() && a.upY() <= b.downY()) || (a.downY() >= b.upY() && a.downY() <= b.downY()))
+            if ((a.leftX() >= b.leftX() && a.leftX() <= b.rightX()) || (a.rightX() >= b.leftX() && a.rightX() <= b.rightX()))
             {
-                return true;
+                if ((a.upY() >= b.upY() && a.upY() <= b.downY()) || (a.downY() >= b.upY() && a.downY() <= b.downY()))
+                {
+                    return true;
+                }
+            }
+            if ((b.leftX() >= a.leftX() && b.leftX() <= a.rightX()) || (b.rightX() >= a.leftX() && b.rightX() <= a.rightX()))
+            {
+                if ((b.upY() >= a.upY() && b.upY() <= a.downY()) || (b.downY() >= a.upY() && b.downY() <= a.downY()))
+                {
+                    return true;
+                }
             }
         }
-        if ((b.leftX() >= a.leftX() && b.leftX() <= a.rightX()) || (b.rightX() >= a.leftX() && b.rightX() <= a.rightX()))
+        else if(type === "corner")
         {
-            if ((b.upY() >= a.upY() && b.upY() <= a.downY()) || (b.downY() >= a.upY() && b.downY() <= a.downY()))
-            {
-                return true;
-            }
+            //player is a, boss ship is b
+            //is the original use of corner, although other variations can arise
+            //assumes that an overlap will require a corner of A overlapping with some part of B
+            let cornersA = a.corners();
+            let cornersB = b.corners();
+
+            cornersA.forEach((corn) => {
+                
+            })
+
+
         }
         return false;
     }
