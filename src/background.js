@@ -7,7 +7,7 @@ import Drop from "./drop";
 import CircleDamageProjectile  from "./circleDamageProjectile";
 
 export default class Background{
-    constructor(width, height, level_id, context, bgsong, gold, ship_level, parent)
+    constructor(width, height, level_id, context, bgsong, gold, ship_level, parent, difficulty)
     {
         this.width = width;
         this.height = height;
@@ -21,6 +21,8 @@ export default class Background{
         this.lasers = [];
         this.extras = [];
         this.ship_level = ship_level;
+        this.difficulty = difficulty;
+        console.log("diff", this.difficulty);
         this.createLevel(level_id);
         this.initializeStars(context);
 
@@ -30,6 +32,7 @@ export default class Background{
         this.gold = gold;
         this.timer = 0;
         this.parent = parent;
+        
         this.continue = true;
     };
 
@@ -51,73 +54,73 @@ export default class Background{
         {
             //
 
-            // this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
-            // this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
-            // this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
-            // this.enemyships.push(new Ship([.24 * this.width, -700*1.25], 1, this)); //type 2
-            // this.enemyships.push(new Ship([.5 * this.width, -600*1.25], 2, this)); //type 3
-            // this.enemyships.push(new Ship([.32 * this.width, -510*1.25], 3, this)); //type 4
-            // this.enemyships.push(new Ship([.6*this.width, -780*1.25], 3, this)); //type 1
-            // this.enemyships.push(new Ship([.35 * this.width, -840*1.25], 2, this)); //type 3
-            // this.enemyships.push(new Ship([.24 * this.width, -985*1.25], 0, this)); //type 2
-            // this.enemyships.push(new Ship([.1 * this.width, -1050*1.25], 1, this)); //type 2
+            this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
+            this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
+            this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
+            this.enemyships.push(new Ship([.24 * this.width, -700*1.25], 1, this)); //type 2
+            this.enemyships.push(new Ship([.5 * this.width, -600*1.25], 2, this)); //type 3
+            this.enemyships.push(new Ship([.32 * this.width, -510*1.25], 3, this)); //type 4
+            this.enemyships.push(new Ship([.6*this.width, -780*1.25], 3, this)); //type 1
+            this.enemyships.push(new Ship([.35 * this.width, -840*1.25], 2, this)); //type 3
+            this.enemyships.push(new Ship([.24 * this.width, -985*1.25], 0, this)); //type 2
+            this.enemyships.push(new Ship([.1 * this.width, -1050*1.25], 1, this)); //type 2
             
-            // this.enemyships.push(new Ship([.8*this.width, -1090*1.25], 4, this)); 
-            // this.enemyships.push(new Ship([.75*this.width, -333*1.25], 4, this)); 
-            // this.enemyships.push(new Ship([.68*this.width, -1150*1.25], 1, this)); 
-            // this.enemyships.push(new Ship([.13*this.width, -1200*1.25], 1, this)); 
-            // this.enemyships.push(new Ship([.27*this.width, -1300*1.25], 3, this)); 
-            // this.enemyships.push(new Ship([.43*this.width, -1400*1.25], 2, this)); 
-            // this.enemyships.push(new Ship([.53*this.width, -1500*1.25], 2, this)); 
-            // this.enemyships.push(new Ship([.63*this.width, -1640*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.77*this.width, -1523*1.25], 4, this)); 
+            this.enemyships.push(new Ship([.8*this.width, -1090*1.25], 4, this)); 
+            this.enemyships.push(new Ship([.75*this.width, -333*1.25], 4, this)); 
+            this.enemyships.push(new Ship([.68*this.width, -1150*1.25], 1, this)); 
+            this.enemyships.push(new Ship([.13*this.width, -1200*1.25], 1, this)); 
+            this.enemyships.push(new Ship([.27*this.width, -1300*1.25], 3, this)); 
+            this.enemyships.push(new Ship([.43*this.width, -1400*1.25], 2, this)); 
+            this.enemyships.push(new Ship([.53*this.width, -1500*1.25], 2, this)); 
+            this.enemyships.push(new Ship([.63*this.width, -1640*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.77*this.width, -1523*1.25], 4, this)); 
 
-            // this.enemyships.push(new Ship([.23*this.width, -1776*1.25], 3, this)); 
-            // this.enemyships.push(new Ship([.56*this.width, -1840*1.25], 3, this)); 
-            // this.enemyships.push(new Ship([.4*this.width, -1890*1.25], 3, this)); 
-            // this.enemyships.push(new Ship([.5*this.width, -1992*1.25], 4, this)); 
-            // this.enemyships.push(new Ship([.1*this.width, -2040*1.25], 2, this)); 
-            // this.enemyships.push(new Ship([.6*this.width, -2100*1.25], 4, this)); 
-            // this.enemyships.push(new Ship([.25*this.width, -2150*1.25], 1, this)); 
-            // this.enemyships.push(new Ship([.53*this.width, -2160*1.25], 1, this)); 
-            // this.enemyships.push(new Ship([.17*this.width, -2245*1.25], 3, this)); 
-            // this.enemyships.push(new Ship([.48*this.width, -2324*1.25], 2, this));
+            this.enemyships.push(new Ship([.23*this.width, -1776*1.25], 3, this)); 
+            this.enemyships.push(new Ship([.56*this.width, -1840*1.25], 3, this)); 
+            this.enemyships.push(new Ship([.4*this.width, -1890*1.25], 3, this)); 
+            this.enemyships.push(new Ship([.5*this.width, -1992*1.25], 4, this)); 
+            this.enemyships.push(new Ship([.1*this.width, -2040*1.25], 2, this)); 
+            this.enemyships.push(new Ship([.6*this.width, -2100*1.25], 4, this)); 
+            this.enemyships.push(new Ship([.25*this.width, -2150*1.25], 1, this)); 
+            this.enemyships.push(new Ship([.53*this.width, -2160*1.25], 1, this)); 
+            this.enemyships.push(new Ship([.17*this.width, -2245*1.25], 3, this)); 
+            this.enemyships.push(new Ship([.48*this.width, -2324*1.25], 2, this));
 
-            // this.enemyships.push(new Ship([.5*this.width, -2500*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.38*this.width, -2570*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.62*this.width, -2570*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.26*this.width, -2640*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.74*this.width, -2640*1.25], 0, this));
-            // this.enemyships.push(new Ship([.14*this.width, -2710*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.87*this.width, -2710*1.25], 0, this));  
+            this.enemyships.push(new Ship([.5*this.width, -2500*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.38*this.width, -2570*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.62*this.width, -2570*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.26*this.width, -2640*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.74*this.width, -2640*1.25], 0, this));
+            this.enemyships.push(new Ship([.14*this.width, -2710*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.87*this.width, -2710*1.25], 0, this));  
 
-            // this.enemyships.push(new Ship([.47*this.width, -2930*1.25], 3, this));  
-            // this.enemyships.push(new Ship([.2*this.width, -2970*1.25], 2, this));  
-            // this.enemyships.push(new Ship([.45*this.width, -3050*1.25], 5, this));    
-            // this.enemyships.push(new Ship([.7*this.width, -3150*1.25], 1, this));  
-            // this.enemyships.push(new Ship([.35*this.width, -3150*1.25], 1, this));
-            // this.enemyships.push(new Ship([.5*this.width, -3270*1.25], 4, this));  
-            // this.enemyships.push(new Ship([.2*this.width, -3310*1.25], 3, this));
-            // this.enemyships.push(new Ship([.66*this.width, -3400*1.25], 5, this));
-            // this.enemyships.push(new Ship([.4*this.width, -3400*1.25], 5, this));
+            this.enemyships.push(new Ship([.47*this.width, -2930*1.25], 3, this));  
+            this.enemyships.push(new Ship([.2*this.width, -2970*1.25], 2, this));  
+            this.enemyships.push(new Ship([.45*this.width, -3050*1.25], 5, this));    
+            this.enemyships.push(new Ship([.7*this.width, -3150*1.25], 1, this));  
+            this.enemyships.push(new Ship([.35*this.width, -3150*1.25], 1, this));
+            this.enemyships.push(new Ship([.5*this.width, -3270*1.25], 4, this));  
+            this.enemyships.push(new Ship([.2*this.width, -3310*1.25], 3, this));
+            this.enemyships.push(new Ship([.66*this.width, -3400*1.25], 5, this));
+            this.enemyships.push(new Ship([.4*this.width, -3400*1.25], 5, this));
 
 
-            // this.enemyships.push(new Ship([.43*this.width, -3480*1.25], 1, this));
-            // this.enemyships.push(new Ship([.2*this.width, -3480*1.25], 2, this));
-            // this.enemyships.push(new Ship([.72*this.width, -3550*1.25], 5, this));
-            // this.enemyships.push(new Ship([.34*this.width, -3550*1.25], 5, this));
-            // this.enemyships.push(new Ship([.15*this.width, -3630*1.25], 3, this));
-            // this.enemyships.push(new Ship([.61*this.width, -3630*1.25], 3, this));
+            this.enemyships.push(new Ship([.43*this.width, -3480*1.25], 1, this));
+            this.enemyships.push(new Ship([.2*this.width, -3480*1.25], 2, this));
+            this.enemyships.push(new Ship([.72*this.width, -3550*1.25], 5, this));
+            this.enemyships.push(new Ship([.34*this.width, -3550*1.25], 5, this));
+            this.enemyships.push(new Ship([.15*this.width, -3630*1.25], 3, this));
+            this.enemyships.push(new Ship([.61*this.width, -3630*1.25], 3, this));
 
-            // this.enemyships.push(new Ship([.5*this.width, -4100*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.38*this.width, -4000*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.62*this.width, -4000*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.26*this.width, -3900*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.74*this.width, -3900*1.25], 0, this));
-            // this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
-            // this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
+            this.enemyships.push(new Ship([.5*this.width, -4100*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.38*this.width, -4000*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.62*this.width, -4000*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.26*this.width, -3900*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.74*this.width, -3900*1.25], 0, this));
+            this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
+            this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            this.enemyships.push(new Ship([.12*this.width, -300*1.25], 11, this, true)); 
+            this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
       
         if (level === 2)
@@ -1173,65 +1176,73 @@ export default class Background{
             this.enemyships.push(new Ship([.34*this.width, -5750 * 1.5], 10, this));
             this.enemyships.push(new Ship([.62 * this.width, -5750 * 1.5], 10, this));
             this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
-            this.enemyships.push(new Ship([.2*this.width, -5975 * 1.5], 4, this));
-            this.enemyships.push(new Ship([.76*this.width, -5975 * 1.5], 3, this));
-            this.enemyships.push(new Ship([.14*this.width, -6300 * 1.5], 11, this));
+            this.enemyships.push(new Ship([.2*this.width, -5875 * 1.5], 4, this));
+            this.enemyships.push(new Ship([.76*this.width, -5875 * 1.5], 3, this));
+            this.enemyships.push(new Ship([.14*this.width, -6666 * 1.5], 11, this, true));
 
             //this can be refactored to not be hardcoded, but idc
             let pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -6500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -6500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -7000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -7000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -7500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -7500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -8000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -8000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -8500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -8500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -9000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -9000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -9500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -9500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -10000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -10000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -10500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -10500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -11000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -11000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -11500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -11500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -12000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -12000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -12500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -12500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -13000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -13000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -13500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -13500 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -14000 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -14000 * 1.5], 8, this));
 
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -14500 * 1.5], 11, this));
+            this.enemyships.push(new Ship([pos*this.width, -14500 * 1.5], 8, this));
             pos = Math.random()*0.9 + 0.05;
-            this.enemyships.push(new Ship([pos*this.width, -15000 * 1.5], 11, this));
-            
-            
+            this.enemyships.push(new Ship([pos*this.width, -15000 * 1.5], 8, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -15500 * 1.5], 8, this));
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -16000 * 1.5], 8, this));
+
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -16500 * 1.5], 8, this));
+            pos = Math.random()*0.9 + 0.05;
+            this.enemyships.push(new Ship([pos*this.width, -17000 * 1.5], 8, this));
         }
     }
 
@@ -1464,7 +1475,7 @@ export default class Background{
         {
             for(let j = this.projectiles.length - 1; j >= 0; j--)
             {
-                if(this.collidesWith(this.enemyships[i], this.projectiles[j]))
+                if(this.collidesWith(this.projectiles[j], this.enemyships[i], "enemyship"))
                 {
                     this.enemyships[i].health -= this.projectiles[j].damage;
                     setTimeout(()=> 
@@ -1539,54 +1550,80 @@ export default class Background{
             }
         }
 
+        //OPTIMIZATION ISSUE LOCATED HERE: CURRENTLY CHECKS ALLLLL SHIPS EVEN SHIPS FAR IN THE BACKGROUND
+     
         for(let i = this.enemyships.length - 1; i >= 0; i--)
         {
-            if(this.collidesWith(this.player, this.enemyships[i]))
-            {
-                if(this.enemyships[i].type === 8)
-                {
-                    this.player.dealDamage(20);
-                }
-                else
-                {
-                    this.player.dealDamage(50);
-                }
+            
+            // if(this.enemyships[i].type === 11)
+            // {
+            //     if(this.collidesWith(this.player, this.enemyships[i], "corner"));
+            //     // if(this.collidesWith(this.player, this.enemyships[i]))
+            //     {
+            //         this.player.dealDamage(1);
 
-                if(this.player.health <= 0)
-                {
-                    this.bgsong.stop();
-                    //HANDLE THIS CASE!!!!!!!!!!!!!!!!! SHIP SHOULD BE DEAD
-                }
-                
-                
-                let n = this.normalizedVector(this.player, this.enemyships[i]);
-                this.player.collided = 20;
-                this.player.velX = n[0] * 13;
-                this.player.velY = n[1] * 13;
+            //         if(this.player.health <= 0)
+            //         {
+            //             this.bgsong.stop();
+            //         }
 
-                if(!this.enemyships[i].boss & this.enemyships[i].type !== 8)
+            //         let n = this.normalizedVector(this.player, this.enemyships[i]);
+            //         this.player.collided = 20;
+            //         this.player.velX = n[0] * 13;
+            //         this.player.velY = n[1] * 13;
+            //     }
+            // }
+            // else
+            // {
+                if(this.collidesWith(this.player, this.enemyships[i], "enemyship"))
                 {
-                    this.enemyships[i].health -= 25;
-                    this.enemyships[i].collided = 13;
-                    this.enemyships[i].velX = n[0] * -13;
-                    this.enemyships[i].velY = n[1] * -13;   
-                }
-                if(this.enemyships[i].type === 8)
-                {
-                    this.enemyships[i].health -= 150;  
-                }
+                    if(this.enemyships[i].type === 8)
+                    {
+                        this.player.dealDamage(20);
+                    }
+                    else
+                    {
+                        this.player.dealDamage(50);
+                    }
 
-                if(this.enemyships[i].health <= 0)
-                {
-                    setTimeout(()=> 
-                        {
-                            this.handleEnemyDefeat(this.enemyships[i]);
+                    if(this.player.health <= 0)
+                    {
+                        this.bgsong.stop();
+                        //HANDLE THIS CASE!!!!!!!!!!!!!!!!! SHIP SHOULD BE DEAD <- maybe? 
+                    }
 
-                            this.enemyships.splice(i, 1);
-                        }, 0);
+                    
+                    
+                    
+                    let n = this.normalizedVector(this.player, this.enemyships[i]);
+                    this.player.collided = 20;
+                    this.player.velX = n[0] * 13;
+                    this.player.velY = n[1] * 13;
+
+                    if(!this.enemyships[i].boss && this.enemyships[i].type !== 8)
+                    {
+                        this.enemyships[i].health -= 25;
+                        this.enemyships[i].collided = 13;
+                        this.enemyships[i].velX = n[0] * -13;
+                        this.enemyships[i].velY = n[1] * -13;   
+                    }
+                    else if(this.enemyships[i].type === 8)
+                    {
+                        this.enemyships[i].health -= 150;  
+                    }
+
+                    if(this.enemyships[i].health <= 0)
+                    {
+                        setTimeout(()=> 
+                            {
+                                this.handleEnemyDefeat(this.enemyships[i]);
+
+                                this.enemyships.splice(i, 1);
+                            }, 0);
+                    }
+            
                 }
-        
-            }
+            // }
         }
 
         for(let i = this.drops.length - 1; i >= 0; i--)
@@ -1625,8 +1662,13 @@ export default class Background{
 
     collidesWith(a, b, type="normal")
     {
-        if(type === "normal")
+        if(type === "normal" || type === "enemyship")
         {
+            if(type === "enemyship" && b.posY + b.height / 2 + 1 < 0)
+            {
+                return false;
+            }
+
             if ((a.leftX() >= b.leftX() && a.leftX() <= b.rightX()) || (a.rightX() >= b.leftX() && a.rightX() <= b.rightX()))
             {
                 if ((a.upY() >= b.upY() && a.upY() <= b.downY()) || (a.downY() >= b.upY() && a.downY() <= b.downY()))
@@ -1641,22 +1683,72 @@ export default class Background{
                     return true;
                 }
             }
+            return false;
         }
         else if(type === "corner")
         {
+            //THE BELOW OPTIMIZATION SHOULD ALSO BE IN NORMAL
+            if(b.posY + b.height / 2 + 1 < 0)
+            {
+                return false;
+            }
             //player is a, boss ship is b
             //is the original use of corner, although other variations can arise
             //assumes that an overlap will require a corner of A overlapping with some part of B
             let cornersA = a.corners();
             let cornersB = b.corners();
 
-            cornersA.forEach((corn) => {
+            let b_area = (b.rightX() - b.leftX()) * (b.upY() - b.downY());//area should be the same as pre-rotation
+
+            //for each corner of the player ship, check if it is inside the rotated rectangle
+            for(let i = 0; i < 4; i++)
+            {
+                let corn = cornersA[i];
+
+                let x_a = corn[0];
+                let y_a = corn[1];
+                let x_b = cornersB[0][0];
+                let y_b = cornersB[0][1];
+                let x_c = cornersB[1][0];
+                let y_c = cornersB[1][1];
+
+                let tri_1 = Math.abs(x_a * y_b + x_b * y_c + x_c * y_a - x_a * y_c - x_c * y_b - x_b * y_a) / 2;
+                // let tri_1 = Math.abs(x_b * y_a + x_c * y_b + y_c * x_a - x_a * y_b - y_c * x_b - x_c * y_a) / 2;
                 
-            })
+
+                x_b = x_c;
+                y_b = y_c;
+                x_c = cornersB[2][0];
+                y_c = cornersB[2][1];
+
+                let tri_2 = Math.abs(x_a * y_b + x_b * y_c + x_c * y_a - x_a * y_c - x_c * y_b - x_b * y_a) / 2;
+                // let tri_2 = Math.abs(x_b * y_a + x_c * y_b + y_c * x_a - x_a * y_b - y_c * x_b - x_c * y_a) / 2;
 
 
+                x_b = x_c;
+                y_b = y_c;
+                x_c = cornersB[3][0];
+                y_c = cornersB[3][1];
+
+                let tri_3 = Math.abs(x_a * y_b + x_b * y_c + x_c * y_a - x_a * y_c - x_c * y_b - x_b * y_a) / 2;
+                // let tri_3 = Math.abs(x_b * y_a + x_c * y_b + y_c * x_a - x_a * y_b - y_c * x_b - x_c * y_a) / 2;
+
+
+                x_b = x_c;
+                y_b = y_c;
+                x_c = cornersB[0][0];
+                y_c = cornersB[0][1];
+
+                let tri_4 = Math.abs(x_a * y_b + x_b * y_c + x_c * y_a - x_a * y_c - x_c * y_b - x_b * y_a) / 2;
+                // let tri_4 = Math.abs(x_b * y_a + x_c * y_b + y_c * x_a - x_a * y_b - y_c * x_b - x_c * y_a) / 2;
+
+                if (tri_1 + tri_2 + tri_3 +tri_4 <= b_area)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-        return false;
     }
 
     normalizedVector(a, b)

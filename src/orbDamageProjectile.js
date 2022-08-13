@@ -17,7 +17,6 @@ export default class OrbDamageProjectile extends Projectile{
         this.posY += this.velY;
         this.timer++;
 
-        console.log("Y", this.posY);
         if(this.stage === -1)
         {
             if(this.posY < 287)

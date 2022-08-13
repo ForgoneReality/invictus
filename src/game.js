@@ -97,7 +97,7 @@ export default class Game
         setTimeout( () => {
             const loading = document.querySelector("#loading");
             const intro = document.querySelector("#intro-text");
-            const recommended = document.querySelector("#recommended");
+                const recommended = document.querySelector("#recommended");
 
             loading.style.display = "none";
             recommended.style.display = "none";
@@ -111,9 +111,47 @@ export default class Game
         }, 6000);   
     }
 
+    initiateStart(difficulty)
+    {
+        this.difficulty = difficulty;
+        audio.beep1.play();   
+       
+
+        if (this.bgsong != null) {
+            this.bgsong.fade(1, 0, 6000);
+        }
+
+        let bgsong2 = audio.dawnutopia;
+
+        setTimeout( () => {
+            bgsong2.play();
+            bgsong2.fade(0,1, 8000); 
+            if(this.bgsong!= null)
+            {
+                this.bgsong.stop();
+            }
+            this.bgsong = bgsong2;
+        }, 8000);
+        
+        
+        this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
+        this.starField = null; //:/ kind of annoying tbh
+
+        setTimeout(()=> 
+            {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+                this.start(this.difficulty);
+            }, 11000);
+    }
+
     loading_screen()
     {
         const loadingscreen = document.querySelectorAll('.mainmenu');
+        const loadingscreenwithoutlogo = document.querySelectorAll('#mainmenu');
+        const difficultyselect = document.querySelector("#difficulty-select");
+        const logo = document.querySelector("#logo");
         const new_game = document.querySelector('#new-game-butt');
         const load_game = document.querySelector('#load-game-butt');
         const howtoplay = document.querySelector('#instructions');
@@ -126,37 +164,42 @@ export default class Game
         new_game.addEventListener("click", () =>
         {
             audio.beep1.play();   
-            loadingscreen.forEach( (thing) =>{
+            loadingscreenwithoutlogo.forEach( (thing) =>{
                 thing.style.display = "none";
             });
 
-            if (this.bgsong != null) {
-                this.bgsong.fade(1, 0, 6000);
-            }
+            difficultyselect.style.display = "block";
 
-            let bgsong2 = audio.dawnutopia;
+            const easy_game = document.querySelector("#easy-butt");
+            const normal_game = document.querySelector("#normal-butt");
+            const hard_game = document.querySelector("#hard-butt");
+            const legendary_game = document.querySelector("#legendary-butt");
 
-            setTimeout( () => {
-                bgsong2.play();
-                bgsong2.fade(0,1, 8000); 
-                if(this.bgsong!= null)
-                {
-                    this.bgsong.stop();
-                }
-                this.bgsong = bgsong2;
-            }, 8000);
+
+            easy_game.addEventListener("click", () => {
+                difficultyselect.style.display = "none";//non-DRY but w/e
+                logo.style.display = "none";
+                this.initiateStart("easy");
+            })
+
+            normal_game.addEventListener("click", () => {
+                difficultyselect.style.display = "none";
+                logo.style.display = "none";
+                this.initiateStart("normal");
+            })
+
+            hard_game.addEventListener("click", () => {
+                difficultyselect.style.display = "none";
+                logo.style.display = "none";
+                this.initiateStart("hard");
+            })
+
+            legendary_game.addEventListener("click", () => {
+                difficultyselect.style.display = "none";
+                logo.style.display = "none";
+                this.initiateStart("legendary");
+            })
             
-            
-            this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
-            this.starField = null; //:/ kind of annoying tbh
-
-            setTimeout(()=> 
-                {
-                    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                    this.canvas.width = this.width;
-                    this.canvas.height = this.height;
-                    this.start();
-                }, 11000);
         });
 
         this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
@@ -188,7 +231,7 @@ export default class Game
     }
     
 
-    start()
+    start(difficulty)
     {
         // let canvas = document.getElementById('game-canvas');
         // let context = canvas.getContext('2d');
@@ -215,7 +258,7 @@ export default class Game
         }
 
         this.context = this.canvas.getContext('2d');
-        this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this);
+        this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this, difficulty);
         this.state = "fighting";
         this.background.animate();
         
@@ -473,7 +516,7 @@ export default class Game
                 }
 
                 this.displayed_atm_container = [];
-                this.start();
+                this.start(this.difficulty);
             }
             , {once: true});
             this.displayed_atm_id = this.ship_level;

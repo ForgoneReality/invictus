@@ -70,6 +70,10 @@ body
     display: none;
 }
 
+#difficulty-select{
+    display: none;
+}
+
 #loading{
     position: absolute;
     top: 50%;
@@ -98,7 +102,7 @@ body
   }
 
 
-#mainmenu
+#mainmenu, #difficulty-select
 {
     position: absolute;
     background-color:none;
@@ -112,7 +116,7 @@ body
     border-radius: 5px;
 }
 
-#mainmenu > button
+#mainmenu > button, #difficulty-select > button
 {   
     font-family: "Xolonium", "Planer", Verdana; 
     font-size: 20px;
@@ -131,7 +135,7 @@ body
     width: 30%;
 }
 
-#mainmenu > button:hover
+#mainmenu > button:hover, #difficulty-select > button:hover
 {   
     font-family: "Xolonium", "Planer", Verdana; 
     font-size: 20px;

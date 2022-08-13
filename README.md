@@ -51,22 +51,29 @@ Under Reconstruction...
 Under Construction...
 
 SOON:
-- Level 2
+- Level 2 Boss Finish
+- Level 2 Intro Cutdown
 - Tutorial
 - Skills
 - Fix Yellow Ship... Looks out-of-place. Darken and edit
 - Recolor some ships
-- RESOLUTION CHANGE - MAP SHIFT
-- Make resolution adjustable: RIGHT NOW ONLY LARGER SCREENS CAN PLAY IT
+- Shop should show current balance
+- Shop Skills and Skill Customization
+- Game Over Screen
+- Settings
+
 
 LATER: 
 - Upgrade background: planets, nebulas, etc. -> MORE IMPORTANT THAN IT SEEMS
 - Drawing off-screen ships (slightly off atm)
-- Settings
+- Shop should have upgrade-ship option
+- Shop should have back button
 - Load Game
 - More Levels, Ships, Bosses, and Skills
 - Replay Level, Level Select
 - Achievements
+- RESOLUTION CHANGE - MAP SHIFT
+- Make resolution adjustable: RIGHT NOW ONLY LARGER SCREENS CAN PLAY IT
 - Consistent graphics -> change drop images, UI, etc.
 
 ## Known Bugs

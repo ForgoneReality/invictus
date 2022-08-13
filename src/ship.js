@@ -200,7 +200,7 @@ const TYPES = [
         value: 0,
         shotsLeft: 27,
         shotsLeft2: 15, //spread attack
-        shotsLeft3: 5
+        shotsLeft3: 6
     }
         
 ];
@@ -209,6 +209,13 @@ const LEVEL_MODIFIER = {
     //health, damage, 
     1: [1, 1],
     2: [1, 1]
+}
+
+const DIFFICULTY_MODIFIER = {
+    "easy": [.7, .5],
+    "normal": [1, .75],
+    "hard": [1.2, 1],
+    "legendary": [1.5, 2]
 }
 
 export default class Ship {
@@ -241,8 +248,8 @@ export default class Ship {
 
         this.velX = TYPES[type].velocity[0];
         this.velY = TYPES[type].velocity[1];
-        this.health = TYPES[type].health * LEVEL_MODIFIER[this.background.level_id][0]; 
-        this.damage = TYPES[type].damage * LEVEL_MODIFIER[this.background.level_id][1];
+        this.health = TYPES[type].health * LEVEL_MODIFIER[this.background.level_id][0] * DIFFICULTY_MODIFIER[this.background.difficulty][0]; 
+        this.damage = TYPES[type].damage * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1];
 
         this.degrees = 0;
 
@@ -923,7 +930,7 @@ export default class Ship {
                 if (this.shotsLeft3 <= 0) 
                 {
                     this.shootTimer3 = 333;
-                    this.shotsLeft3 = 5;
+                    this.shotsLeft3 = 6;
                 }
 
                  if(this.shootTimer3 <= 0)
@@ -1159,8 +1166,10 @@ export default class Ship {
     //#offset returns the new (x,y) relative to center after rotating to this.degrees
     offset(x, y) //x,y relative to center, which should be realX() and real(Y), prior to rotation
     {
-        if(this.degrees === undefined && this.rotatable) //shouldn't need this but jic
+        //new stuff below
+        if((this.degrees === undefined || this.degrees === null || Number.isNaN(this.degrees))&& this.rotatable) //shouldn't need this but jic
         {
+            alert("?");
             this.updateAngleAndNormalizedVector();
         }
         
@@ -1170,6 +1179,7 @@ export default class Ship {
         //to apply rotational transformation by changing basis vectors 
 
         let degrees = this.degrees; //setup
+        console.log("deg", degrees);
         //usually -90 but because y is going positive going down, don't have to
 
         let c = Math.cos(degrees * Math.PI / 180.0);
@@ -1205,10 +1215,14 @@ export default class Ship {
 
     corners()
     {
-        let topleft_corner = this.offset(this.leftX(), this.upY());
-        let topright_corner = this.offset(this.rightX(), this.upY());
-        let bottomleft_corner = this.offset(this.leftX(), this.downY());
-        let bottomright_corner = this.offset(this.rightX(), this.downY());
+        let topleft_corner = this.offset(this.leftX() - this.realX(), this.upY() - this.realY());
+        console.log(this.leftX());
+        console.log("??", this.upY());
+        console.log("tl", topleft_corner);
+        
+        let topright_corner = this.offset(this.rightX() - this.realX(), this.upY() - this.realY());
+        let bottomleft_corner = this.offset(this.leftX() - this.realX(), this.downY() - this.realY());
+        let bottomright_corner = this.offset(this.rightX() - this.realX(), this.downY() - this.realY());
 
         return[[this.realX() + topleft_corner[0], this.realY() + topleft_corner[1]], [this.realX() + topright_corner[0], this.realY() + topright_corner[1]], [this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]], [this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]] ];
     }
