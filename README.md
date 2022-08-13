@@ -54,11 +54,11 @@ SOON:
 - Level 2 Boss Finish
 - Level 2 Intro Cutdown
 - Tutorial
+- Shop should show current balance
+- Fix Preloading Screen Description Color
 - Skills
 - Fix Yellow Ship... Looks out-of-place. Darken and edit
 - Recolor some ships
-- Shop should show current balance
-- Shop Skills and Skill Customization
 - Game Over Screen
 - Settings
 
@@ -85,6 +85,8 @@ LATER:
 - Instructions not centered
 - BOSS HURTBOX AND COLLISION BOX INACCURATE WHEN ROTATING -> Normal ships probably also inaccurate -> Very noticable with Orios
 - ships tend to teleport in (minor)
+- If you destroy the boss simultaneously as it destroys you, unexpected things occur
+- Picking up a shield/HP as you die may cause the game to continue (and invincibility)
 
 
 ### Special Thanks

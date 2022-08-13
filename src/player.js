@@ -538,12 +538,11 @@ export default class Player {
             {
                 if(this.dead)
                     {
-                    
-                    audio.gameover.play();
-                    alert("YOU LOSE!");
-                    alert("Didn't implement real lose screen yet :/");
-                    alert("So you're stuck with these");
-                    exit();
+                        audio.gameover.play();
+                        alert("YOU LOSE!");
+                        alert("Didn't implement real lose screen yet :/");
+                        alert("So you're stuck with these");
+                        exit();
                 }
                 else
                 {

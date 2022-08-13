@@ -28,8 +28,9 @@ export default class Background{
 
         this.bgsong = bgsong;
         //stats
-        this.enemiesdefeated = 0;
+        this.enemiesdefeated = 0; //for achievement purposes in the future
         this.gold = gold;
+        this.initial_gold = gold;
         this.timer = 0;
         this.parent = parent;
         
@@ -1281,9 +1282,8 @@ export default class Background{
             {
             this.createStars(context);
 
-           
             this.timer += 1;
-            if(this.level_id === 1 && this.timer === 5400) //NEEDS REFACTORING FOR DIFFERENT LEVELS
+            if(this.level_id === 1 && this.timer === 5400) //NEEDS REFACTORING FOR DIFFERENT LEVELS... BOSS THEME
             {
                 this.bgsong.fade(0.15, 0, 1500)
             } 
@@ -1546,6 +1546,17 @@ export default class Background{
                 if(this.player.health <= 0)
                 {
                     this.bgsong.stop();
+                    // this.player = "dead";
+                    // setTimeout(()=> 
+                    // {
+                    //     this.enemyprojectiles = [];
+                    //     this.enemiesdefeated = 0;
+                    //     this.gold = this.initial_gold;
+                    //     this.enemyships = [];
+                    //     this.projectiles = [];
+                    //     this.extras = [];
+                    //     this.lasers = [];
+                    // }, 7000);
                 }
             }
         }

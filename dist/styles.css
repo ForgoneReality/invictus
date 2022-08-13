@@ -74,6 +74,27 @@ body
     display: none;
 }
 
+#black-screen{
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    z-index: 7;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.fader
+{
+    animation: fadeIn 6s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
 #loading{
     position: absolute;
     top: 50%;

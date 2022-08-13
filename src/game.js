@@ -155,12 +155,18 @@ export default class Game
         const new_game = document.querySelector('#new-game-butt');
         const load_game = document.querySelector('#load-game-butt');
         const howtoplay = document.querySelector('#instructions');
+        //below temp
+        // const black_screen = document.querySelector("#black-screen");
         
         loadingscreen.forEach( (thing) =>{
             thing.style.display = "block";
         });
         // const canvaser = document.querySelector('#game-canvas');
         
+        // load_game.addEventListener("click", ()=> {
+        //     black_screen.style.display = "block";
+        // })
+
         new_game.addEventListener("click", () =>
         {
             audio.beep1.play();   
