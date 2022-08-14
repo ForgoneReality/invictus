@@ -12,7 +12,8 @@ const TYPES2 = [
         baseshield: 300,
         img: 'images/playership1.png',
         scale: .022, 
-        defaultprojType: 0
+        defaultprojType: 0,
+        regen: 0.1
     },
     {
             //Level 2 Ship
@@ -21,7 +22,8 @@ const TYPES2 = [
             baseshield: 500,
             img: 'images/playership2.png',
             scale: .022, 
-            defaultprojType: 0
+            defaultprojType: 0, 
+            regen: 0.2
     },
     {
             //Level 3 Ship
@@ -29,8 +31,9 @@ const TYPES2 = [
             basedamage: 50,
             baseshield: 750,
             img: 'images/playership3.png',
-            scale: .022, 
-            defaultprojType: 1
+            scale: .02, 
+            defaultprojType: 1, 
+            regen: 0.3
     }
 
 ]
@@ -59,7 +62,7 @@ export default class Player {
         this.baseshield = TYPES2[this.ship_level].baseshield;
         this.shield = this.baseshield;
         this.basedamage = TYPES2[this.ship_level].basedamage;
-        this.regen = 0.1;
+        this.regen = TYPES2[this.ship_level].regen;
 
         this.movedX = 0;
         this.movedY = 0;
@@ -79,7 +82,7 @@ export default class Player {
 
     draw(context, mouse_x, mouse_y)
     {
-        if (this.image)
+        if (!this.dead && this.image)
         {
         this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
 
@@ -536,18 +539,12 @@ export default class Player {
             this.health -= dmg;
             if(this.health <= 0)
             {
-                if(this.dead)
-                    {
-                        audio.gameover.play();
-                        alert("YOU LOSE!");
-                        alert("Didn't implement real lose screen yet :/");
-                        alert("So you're stuck with these");
-                        exit();
-                }
-                else
+                if(!this.dead) //dead code most likely
                 {
+                    // audio.gameover.play();
                     this.dead = true;
                 }
+
             }
         }
        

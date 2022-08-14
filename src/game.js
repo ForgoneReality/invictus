@@ -12,7 +12,7 @@ export default class Game
         this.canvas.width = innerWidth;
         this.canvas.height = innerHeight;
         this.context = this.canvas.getContext('2d');
-        this.state = "new-game";
+        this.state = "new-game"; //likely dead code
         this.level = 1;
         this.bgsong = null;
         this.ship_level = 1;

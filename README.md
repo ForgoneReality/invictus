@@ -87,7 +87,7 @@ LATER:
 - ships tend to teleport in (minor)
 - If you destroy the boss simultaneously as it destroys you, unexpected things occur
 - Picking up a shield/HP as you die may cause the game to continue (and invincibility)
-
+- Newer player ships shots are misaligned
 
 ### Special Thanks
 

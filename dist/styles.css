@@ -90,10 +90,23 @@ body
     animation: fadeIn 6s;
 }
 
+.faderFromBelowFast
+{
+    animation: fadeInFromBelow 3s;
+}
+
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
+
+@keyframes fadeInFromBelow {
+0% { opacity: 0;
+    transform: translateY(20px); }
+100% { opacity: 1; 
+    transform: translateY(0);}
+}
+
 
 #loading{
     position: absolute;
@@ -123,7 +136,7 @@ body
   }
 
 
-#mainmenu, #difficulty-select
+#mainmenu, #difficulty-select, #gameovermenu
 {
     position: absolute;
     background-color:none;
@@ -135,6 +148,13 @@ body
     width: 100%;
     text-align: center;
     border-radius: 5px;
+}
+
+#gameovermenu{
+    display: none;
+    justify-content: center;
+    gap: 80px;
+    z-index: 8;
 }
 
 #mainmenu > button, #difficulty-select > button
@@ -156,6 +176,8 @@ body
     width: 30%;
 }
 
+
+
 #mainmenu > button:hover, #difficulty-select > button:hover
 {   
     font-family: "Xolonium", "Planer", Verdana; 
@@ -173,6 +195,32 @@ body
     margin-right: 21%;
     margin-top: 8px;
     width: 30%;
+}
+
+#gameovermenu > button
+{
+    font-family: "Xolonium", "Planer", Verdana; 
+    font-size: 22px;
+    font-weight: bold;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 10px;
+    color: red;
+    opacity: 0.8;
+    padding: 18px;
+    z-index: 8;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+
+#gameovermenu > button:hover
+{
+    background-color: red;
+    border-color: #7E0000;
+    border-radius: 10px;
+    color: #7E0000;
+    z-index: 8;
 }
 
 #shop
@@ -489,3 +537,27 @@ a:hover {
     left: 50.2%;
     filter: drop-shadow(0 0 1.15rem red);
 }
+
+#explosion{
+    display: none;
+    position: absolute;
+    height: 160px;
+    width: auto;
+}
+
+#gameover{
+    display: none;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50vw;
+    top: 22.5vh;
+    width: 50%;
+    height: auto;
+    z-index: 8;
+}
+
+.faderfast
+{
+    animation: fadeIn 2.5s;
+}
+

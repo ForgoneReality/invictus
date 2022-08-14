@@ -33,6 +33,7 @@ export default class Background{
         this.initial_gold = gold;
         this.timer = 0;
         this.parent = parent;
+        this.death = false; //might be extraneous because of this.continue
         
         this.continue = true;
     };
@@ -1278,7 +1279,7 @@ export default class Background{
         context.fillStyle = "black";
         context.fillRect(0, 0, this.width, this.height);
 
-        if(this.continue)
+        if(this.continue) //probably can combine these two variables
             {
             this.createStars(context);
 
@@ -1331,9 +1332,12 @@ export default class Background{
 
             requestAnimationFrame(this.animate.bind(this));
         }   
-        else
+        else if (!this.death)
         {
             this.parent.endLevel();
+        }
+        else{
+            //do nothing... let player press buttons to choose
         }
     }
 
@@ -1453,6 +1457,87 @@ export default class Background{
         }
     }
 
+    handlePlayerDefeat()
+    {
+        this.bgsong.stop();
+        audio.loudboom.play();
+        this.death = true;
+        const explosion = document.querySelector("#explosion");
+        const black_screen = document.querySelector("#black-screen");
+        const gameover = document.querySelector("#gameover");
+        const gameovermenu = document.querySelector("#gameovermenu");
+        const replay_butt = document.querySelector("#replay-game-butt");
+        
+        explosion.style.top = this.player.upY().toString() + "px";
+        explosion.style.left = this.player.leftX().toString() + "px";
+        explosion.style.display = "block";
+        setTimeout(() =>
+        {
+            black_screen.style.display = "block";
+
+        }, 5500);
+        setTimeout(()=> 
+        {
+            explosion.style.display = "none";
+        }, 4720);
+        setTimeout(()=> 
+        {
+            this.bgsong = audio.gameover;
+            this.bgsong.play();
+            this.enemyprojectiles = [];
+            this.enemiesdefeated = 0;
+            this.gold = this.initial_gold;
+            this.enemyships = [];
+            this.projectiles = [];
+            this.extras = [];
+            this.lasers = [];
+            gameover.style.display = "block";
+            this.continue = false;
+
+        }, 10500);
+        setTimeout(()=> 
+        {
+            gameovermenu.style.display = "inline-block";
+            replay_butt.addEventListener("click", () => {
+                let bgsong2;
+
+                if(this.level_id === 1)
+                {
+                    bgsong2 = audio.dawnutopia;   
+                }
+                else if(this.level_id === 2)
+                {
+                    bgsong2 = audio.orbit;
+                }
+
+                setTimeout( () => {
+                    bgsong2.play();
+                    if(this.bgsong!= null)
+                    {
+                        this.bgsong.stop();
+                    }
+                    this.bgsong = bgsong2;
+                }, 100);
+
+                black_screen.style.display = "none";
+                gameover.style.display = "none";
+                gameovermenu.style.display = "none";
+                let timeme;
+                if (this.level_id === 1)
+                {
+                    timeme = 2000;//for better music sync
+                }
+                else{
+                    timeme = 10;
+                }
+                setTimeout(() => {
+                    this.parent.start(this.difficulty);
+                }, timeme);
+            })
+        }, 12500);
+
+    }
+
     updateSomething(context, something){
       
         for(let i = something.length - 1; i >= 0; i--)
@@ -1529,7 +1614,7 @@ export default class Background{
                 audio.hit.play();
                 if(this.player.health <= 0)
                 {
-                    this.bgsong.stop();
+                    this.handlePlayerDefeat();
                 }
                 setTimeout(()=> 
                     {
@@ -1545,18 +1630,7 @@ export default class Background{
                 this.player.dealDamage(this.lasers[j].damage);
                 if(this.player.health <= 0)
                 {
-                    this.bgsong.stop();
-                    // this.player = "dead";
-                    // setTimeout(()=> 
-                    // {
-                    //     this.enemyprojectiles = [];
-                    //     this.enemiesdefeated = 0;
-                    //     this.gold = this.initial_gold;
-                    //     this.enemyships = [];
-                    //     this.projectiles = [];
-                    //     this.extras = [];
-                    //     this.lasers = [];
-                    // }, 7000);
+                    this.handlePlayerDefeat();
                 }
             }
         }
@@ -1597,9 +1671,10 @@ export default class Background{
                         this.player.dealDamage(50);
                     }
 
-                    if(this.player.health <= 0)
+                    if(this.player.health <= 0) //NON-DRY: Optimization is to take this out and put it as another class method to be called
                     {
-                        this.bgsong.stop();
+                        this.handlePlayerDefeat();
+                        
                         //HANDLE THIS CASE!!!!!!!!!!!!!!!!! SHIP SHOULD BE DEAD <- maybe? 
                     }
 
@@ -1673,6 +1748,10 @@ export default class Background{
 
     collidesWith(a, b, type="normal")
     {
+        if(this.death === true)
+        {
+            return false;
+        }
         if(type === "normal" || type === "enemyship")
         {
             if(type === "enemyship" && b.posY + b.height / 2 + 1 < 0)
@@ -1780,7 +1859,7 @@ export default class Background{
         ctx.strokeStyle = "black"
         ctx.textBaseline = 'top';
         ctx.font = '10pt Verdana';
-        let healthtext = `Health: ${Math.floor(this.player.health)} / ${Math.floor(this.player.basehealth)}`;
+        let healthtext = `Health: ${Math.max(Math.floor(this.player.health), 0)} / ${Math.floor(this.player.basehealth)}`;
         ctx.textAlign = 'left';
         // const t_width = ctx.measureText(text).width;
         // const t_height = ctx.measureText(text).height;
