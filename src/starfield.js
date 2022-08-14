@@ -103,7 +103,8 @@ export default class StarField
                 }
             }
 
-            if(this.instructionsOn)
+            if(this.instructionsOn) //why in god's name the instructions is inside here, I do not know. It should be refactored into the HTML
+            //and displayed on when clicked, instead of being hardcoded as part of starfield (where it can't even be reached via CSS    )
             {   
                 
                 // c.canvas.width = 1280;
