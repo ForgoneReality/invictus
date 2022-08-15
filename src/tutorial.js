@@ -15,8 +15,7 @@ export default class Tutorial{
         this.enemyships = [];
         this.drops = [];
         this.ship_level = 0;
-        this.createLevel();
-        this.initializeStars(context);
+        
 
         this.bgsong = bgsong; //prob not needed
         //stats
@@ -34,7 +33,11 @@ export default class Tutorial{
         //stage 6: shop buy new 
         //stage 7: play!
 
-        this.popup = false;
+        this.popup_number = 0;
+
+        this.popup = true;
+        this.createLevel();
+        this.initializeStars(context);
     };
 
     createLevel()
@@ -49,9 +52,32 @@ export default class Tutorial{
           
         //note: as explained in Player#animate, movement and other spontaneous events cannot be added here
         document.addEventListener('mousemove', handleMousemove);
-        document.addEventListener('keypress', () => {
-            this.parent.endLevel();
+        
+        document.body.addEventListener('keypress', function(e) {
+            if (e.key === "Escape") {
+                this.parent.initiateStart();
+            }
         });
+        this.textpopup(this.popup_number);
+    }
+
+    textpopup(num)
+    {
+        const popups = document.querySelector("#popups");
+        const textbox = document.querySelector("#textbox");
+        const mel_idle = document.querySelector("#mel-idle");
+        const mel_talking = document.querySelector("#mel-talking");
+
+        if(num === 0)
+        {
+            textbox.style.display = "block";
+            mel_talking.style.display = "block";
+
+            setTimeout(() => {
+                mel_talking.style.display = "none";
+                mel_idle.style.display = "block";
+            }, 4000); //change number once we test out the text
+        }
     }
 
     initializeStars(context)
@@ -424,7 +450,7 @@ export default class Tutorial{
         //if/when we get there
     }
 
-
+    
 
 }
 

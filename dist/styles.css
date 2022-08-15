@@ -277,6 +277,49 @@ body
     z-index: 4;
 }
 
+/* #popups{
+    display: none;
+} */
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+  }
+
+.modal-child{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+}
+
+#popups{
+    width: 800px;
+    height: 300px;
+    margin: 0px;
+}
+
+#textbox{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.mel{
+    position: absolute;
+    left: 23%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 130px;
+    width: auto;
+}
+
 #shipselect
 { 
     display: none;
