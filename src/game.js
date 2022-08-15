@@ -18,6 +18,8 @@ export default class Game
         this.ship_level = 1;
         this.gold = 0;
 
+        this.difficulty = "easy"; //REMOVE THIS FOR DEBUGGING PURPOSES ONLY WHILE MAKING TUTORIAL
+
         this.ships_owned = []; 
         this.all_ships = [
             {
@@ -111,9 +113,13 @@ export default class Game
         }, 6000);   
     }
 
-    initiateStart(difficulty)
+    tutorial()
     {
-        this.difficulty = difficulty;
+
+    }
+
+    initiateStart()
+    {
         audio.beep1.play();   
        
 
@@ -185,28 +191,36 @@ export default class Game
             easy_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";//non-DRY but w/e
                 logo.style.display = "none";
-                this.initiateStart("easy");
+                this.difficulty = "easy";
+                this.initiateStart();
             })
 
             normal_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
-                this.initiateStart("normal");
+                this.difficulty = "normal";
+                this.initiateStart();
             })
 
             hard_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
-                this.initiateStart("hard");
+                this.difficulty = "hard";
+                this.initiateStart();
             })
 
             legendary_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
-                this.initiateStart("legendary");
+                this.difficulty = "legendary";
+                this.initiateStart();
             })
             
         });
+
+        load_game.addEventListener("click", () => {
+            this.tutorial();
+        })
 
         this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
         howtoplay.addEventListener("click", () =>

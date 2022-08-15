@@ -19,7 +19,6 @@
 | Mouse Click | Fire default Weapon |
 | Numbers [1-5] | Use special weapons (or change weapon?)|
 | P | Pause Game |
-| C | Open command-line to enter cheats |
 
 For best experience, use a mouse and enter full-screen view mode
 
@@ -56,17 +55,17 @@ SOON:
 - Level 2 Intro Cutdown
 - Tutorial
 - Shop should show current balance
-- Fix Preloading Screen Description Color
+- Fix Preloading Screen Description Size
 - Skills
-- Fix Yellow Ship... Looks out-of-place. Darken and edit
-- Recolor some ships
-- Game Over Screen
 - Settings
+- Pause Game
 
 
 LATER: 
 - Upgrade background: planets, nebulas, etc. -> MORE IMPORTANT THAN IT SEEMS
-- Drawing off-screen ships (slightly off atm)
+- Fix Yellow Ship... Looks out-of-place. Darken and edit
+- Recolor some ships
+- Drawing off-screen ships (slightly off atm) (boss should be able to shoot off-screen)
 - Shop should have upgrade-ship option
 - Shop should have back button
 - Load Game
@@ -97,11 +96,14 @@ LATER:
 - Kidzgames for inspiration and sprites
 - Planer, Xolonium, Skirmisher, Neuropol fonts
 - Intro: Road 96 - Mountain Peak
+- Tutorial: Hello Meteor - Breeze Bay
 - Level 1 Theme: DEFRAG - The Dawn of Utopia
 - Level 1 Boss: Greg Dombrowski - Devour
 - Level 2 Theme: Downtown Binary & Zane Alexander - Orbit
 - Level ? Theme: Reconfig - Shortwire
 - Charles Patterson for "LOADING"
+
+Note: HYPERDRIVE - Premium Music HQ for later levels?
 
 All music has been confirmed free for non-commercial usage.
 

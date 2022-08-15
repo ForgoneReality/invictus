@@ -41,6 +41,7 @@ body
     align-items: center;
     position: relative;
     background-color: black;
+    overflow: hidden; /*hide scrollbars */
 }
 
 #logo

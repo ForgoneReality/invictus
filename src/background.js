@@ -22,7 +22,6 @@ export default class Background{
         this.extras = [];
         this.ship_level = ship_level;
         this.difficulty = difficulty;
-        console.log("diff", this.difficulty);
         this.createLevel(level_id);
         this.initializeStars(context);
 
@@ -1935,6 +1934,7 @@ export default class Background{
 
         let num = Math.floor(Math.random()*100 * v);
         //these numbers will change
+        //MAJOR REFACTORING IS NEEDED!!! SCRAP VALUE, HARDCODE DROP %'s BY LEVEL
 
         // if(num > 140)//ultimate drop
         // {

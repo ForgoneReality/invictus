@@ -103,5 +103,10 @@ const audio = {
         src: "sounds/orbit.mp3",
         html5: true,
         volume: 0.2
+    }),
+    tutorial: new Howl({
+        src: "sounds/tutorial.mp3",
+        html5: true,
+        volume: 0.1
     })
 }
