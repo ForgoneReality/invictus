@@ -1,5 +1,6 @@
 # Invictus
  _A spaceship based game built on Javascript, HTML, and Canvas_
+ REMEMBER TO CANCEL ADOBE STOCK TRIAL!!
 
 [//]: # (Logo here if have time lol)
 
@@ -88,6 +89,7 @@ LATER:
 - If you destroy the boss simultaneously as it destroys you, unexpected things occur
 - Picking up a shield/HP as you die may cause the game to continue (and invincibility)
 - Newer player ships shots are misaligned
+- Explosions slightly mispositioned (and a little too slow)
 
 ### Special Thanks
 
