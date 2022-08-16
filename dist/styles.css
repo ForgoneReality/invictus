@@ -282,6 +282,7 @@ body
 } */
 
 .modal-background {
+    display: none;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -300,6 +301,7 @@ body
 }
 
 #popups{
+    display: none;
     width: 800px;
     height: 300px;
     margin: 0px;
@@ -312,12 +314,23 @@ body
 }
 
 .mel{
+    display: none;
     position: absolute;
     left: 23%;
     top: 50%;
     transform: translate(-50%, -50%);
     height: 130px;
     width: auto;
+}
+
+#typedtext{
+    font-family: "Planer";
+    font-size: 16px;
+    color: white; 
+    text-shadow: rgb(0, 234, 255) 0px -1px 3px, rgb(0, 234, 255) 0px 2px 3px, rgb(0, 234, 255) 2px 0px 3px, rgb(0, 234, 255) -2px 0px 3px;  
+    position: absolute;
+    left: 30%;
+    top: 40%;    
 }
 
 #shipselect

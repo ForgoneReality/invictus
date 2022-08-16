@@ -34,8 +34,9 @@ export default class Tutorial{
         //stage 7: play!
 
         this.popup_number = 0;
-
         this.popup = true;
+
+
         this.createLevel();
         this.initializeStars(context);
     };
@@ -61,22 +62,61 @@ export default class Tutorial{
         this.textpopup(this.popup_number);
     }
 
+    // set up text to print, each item in array is new line
+    
+     
+    typewriter(aText, iIndex, sContents, iTextPos)
+    {
+        let iSpeed = 20;
+        let iScrollAt = 20; // start scrolling up at this many lines
+
+        sContents =  ' ';
+        let iRow = Math.max(0, iIndex-iScrollAt);
+        const destination = document.getElementById("typedtext");
+        console.log("?");
+        while ( iRow < iIndex ) {
+        sContents += aText[iRow++] + '<br />';
+        }
+        console.log("sContents", sContents);
+        destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos);
+        //  destination.innerHTML = "testing";
+        if ( iTextPos++ == aText[iIndex].length ) {
+        iTextPos = 0;
+        iIndex++;
+        if ( iIndex != aText.length ) {
+        setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), 200);
+        }
+        } else {
+        setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), iSpeed);
+        }
+    }
+    
     textpopup(num)
     {
         const popups = document.querySelector("#popups");
         const textbox = document.querySelector("#textbox");
         const mel_idle = document.querySelector("#mel-idle");
         const mel_talking = document.querySelector("#mel-talking");
+        const typedtext = document.querySelector("#typedtext");
+        const fade = document.querySelector(".modal-background");
 
         if(num === 0)
         {
+            popups.style.display = "block";
             textbox.style.display = "block";
             mel_talking.style.display = "block";
+            typedtext.style.display = "block";
+            fade.style.display = "block";
 
             setTimeout(() => {
                 mel_talking.style.display = "none";
                 mel_idle.style.display = "block";
-            }, 4000); //change number once we test out the text
+            }, 3000); //change number once we test out the text
+            let aText = new Array(
+                "This is currently a test! This textbox will be used",
+                "to implement a tutorial in the future."
+            );
+            this.typewriter(aText, 0, 0, " ", 0);
         }
     }
 

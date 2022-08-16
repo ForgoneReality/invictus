@@ -1,6 +1,7 @@
 // //game.js
 import Background from "./background"
 import StarField from "./starfield"
+import Tutorial from "./tutorial";
 
 
 export default class Game
@@ -115,7 +116,7 @@ export default class Game
 
     tutorial()
     {
-
+        let tut = new Tutorial(this.width, this.height, this.context, this.bgsong, this);
     }
 
     initiateStart()
