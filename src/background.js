@@ -1467,8 +1467,9 @@ export default class Background{
         const gameovermenu = document.querySelector("#gameovermenu");
         const replay_butt = document.querySelector("#replay-game-butt");
         
-        explosion.style.top = this.player.upY().toString() + "px";
-        explosion.style.left = this.player.leftX().toString() + "px";
+
+        explosion.style.top = (this.player.realY()-70).toString() + "px";
+        explosion.style.left = (this.player.realX()).toString() + "px";
         explosion.style.display = "block";
         setTimeout(() =>
         {

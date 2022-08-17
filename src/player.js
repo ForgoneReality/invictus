@@ -84,25 +84,25 @@ export default class Player {
     {
         if (!this.dead && this.image)
         {
-        this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
+            this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
 
 
-        context.save();
-        context.shadowColor = "red";
-        if(this.shield >0 )
-        {
-            context.shadowBlur = 15;
-        }
-        else
-        {
-            context.shadowBlur = 5;
-        }
-        context.translate(this.posX+this.width/2, this.posY+this.height/2);
-        context.rotate(this.degrees*Math.PI/180.0);
-        context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
-        context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
-        context.restore();
-        context.shadowBlur = 0;
+            context.save();
+            context.shadowColor = "red";
+            if(this.shield >0 )
+            {
+                context.shadowBlur = 15;
+            }
+            else
+            {
+                context.shadowBlur = 5;
+            }
+            context.translate(this.posX+this.width/2, this.posY+this.height/2);
+            context.rotate(this.degrees*Math.PI/180.0);
+            context.translate(-this.posX-this.width/2, -this.posY-this.height/2);
+            context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+            context.restore();
+            context.shadowBlur = 0;
         }
 
 
@@ -591,7 +591,7 @@ export default class Player {
         this.normalVector = [distX / length, distY / length];
     }
 
-    realX(){ //INCOMPLETE - NEEDS TO FACTOR IN ANGLE!! ... or does it? center doesn't change when angle changes
+    realX(){ 
         return this.posX + this.width / 2 + 1;
     }
 

@@ -42,6 +42,10 @@ These are the core features of the game. I'll try to make the game as visually a
 
 The core of the game will be built using Javascript, HTML, and CANVAS. I used keymaster to help with deficiencies in response time of built-in EventListeners, which make the game clunky to play. There is a wait-time when holding down a key for the event listener to transition between a "tapped" key and a "held-down" key, which makes the game very clunky to play. At the moment, no other additional libraries are used aside from webpack to help set-up the project i.e. module dependencies
 
+Images edited/created via GIMP and Adobe Illustrator
+
+Audio sometimes edited via Audacity
+
 ## Production Timeline
 
 Under Reconstruction...
@@ -88,7 +92,7 @@ LATER:
 - If you destroy the boss simultaneously as it destroys you, unexpected things occur
 - Picking up a shield/HP as you die may cause the game to continue (and invincibility)
 - Newer player ships shots are misaligned
-- Explosions slightly mispositioned (and a little too slow)
+- Replay level twice music broken
 
 ### Special Thanks
 
