@@ -71,7 +71,7 @@ body
     display: none;
 }
 
-#difficulty-select{
+#difficulty-select, #socials-select{
     display: none;
 }
 
@@ -137,7 +137,7 @@ body
   }
 
 
-#mainmenu, #difficulty-select, #gameovermenu
+#mainmenu, #difficulty-select, #gameovermenu, #socials-select
 {
     position: absolute;
     background-color:none;
@@ -158,7 +158,7 @@ body
     z-index: 8;
 }
 
-#mainmenu > button, #difficulty-select > button
+#mainmenu > button, #difficulty-select > button, #socials-select > button
 {   
     font-family: "Xolonium", "Planer", Verdana; 
     font-size: 20px;
@@ -178,8 +178,7 @@ body
 }
 
 
-
-#mainmenu > button:hover, #difficulty-select > button:hover
+#mainmenu > button:hover, #difficulty-select > button:hover, #socials-select > button:hover
 {   
     font-family: "Xolonium", "Planer", Verdana; 
     font-size: 20px;

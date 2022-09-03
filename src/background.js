@@ -53,8 +53,6 @@ export default class Background{
 
         if (level === 1)
         {
-            //
-
             this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -123,10 +121,8 @@ export default class Background{
 
             this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
-      
         if (level === 2)
         {
-         
             this.enemyships.push(new Ship([.5*this.width, -100 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.7*this.width, -200 * 1.5 -900], 3, this));
             this.enemyships.push(new Ship([.23*this.width, -300 * 1.5 -900], 8, this));
@@ -1367,8 +1363,7 @@ export default class Background{
             this.stars.push(mystar);
             context.shadowBlur = 0;
             // context.filter = "none";
-        }
-        
+        }   
     }
 
     updateAll(context)
@@ -1640,26 +1635,27 @@ export default class Background{
         for(let i = this.enemyships.length - 1; i >= 0; i--)
         {
             
-            // if(this.enemyships[i].type === 11)
-            // {
-            //     if(this.collidesWith(this.player, this.enemyships[i], "corner"));
-            //     // if(this.collidesWith(this.player, this.enemyships[i]))
-            //     {
-            //         this.player.dealDamage(1);
+            if(this.enemyships[i].type === 11)
+            {
+                if(this.collidesWith(this.player, this.enemyships[i], "corner"))
+                // if(this.collidesWith(this.player, this.enemyships[i]))
+                {
+                    // alert("??!?");
+                    this.player.dealDamage(1);
 
-            //         if(this.player.health <= 0)
-            //         {
-            //             this.bgsong.stop();
-            //         }
+                    if(this.player.health <= 0)
+                    {
+                        this.bgsong.stop();
+                    }
 
-            //         let n = this.normalizedVector(this.player, this.enemyships[i]);
-            //         this.player.collided = 20;
-            //         this.player.velX = n[0] * 13;
-            //         this.player.velY = n[1] * 13;
-            //     }
-            // }
-            // else
-            // {
+                    let n = this.normalizedVector(this.player, this.enemyships[i]);
+                    this.player.collided = 20;
+                    this.player.velX = n[0] * 13;
+                    this.player.velY = n[1] * 13;
+                }
+            }
+            else
+            {
                 if(this.collidesWith(this.player, this.enemyships[i], "enemyship"))
                 {
                     if(this.enemyships[i].type === 8)
@@ -1709,7 +1705,7 @@ export default class Background{
                     }
             
                 }
-            // }
+            }
         }
 
         for(let i = this.drops.length - 1; i >= 0; i--)
@@ -1778,7 +1774,11 @@ export default class Background{
         else if(type === "corner")
         {
             //THE BELOW OPTIMIZATION SHOULD ALSO BE IN NORMAL
-            if(b.posY + b.height / 2 + 1 < 0)
+            console.log("colliding");
+            console.log(b.posY + b.height / 2 + 1);
+            console.log(b.posY, b.height)
+
+            if(b.height === undefined || b.posY + b.height / 2 + 1 < 0)
             {
                 return false;
             }
@@ -1788,7 +1788,7 @@ export default class Background{
             let cornersA = a.corners();
             let cornersB = b.corners();
 
-            let b_area = (b.rightX() - b.leftX()) * (b.upY() - b.downY());//area should be the same as pre-rotation
+            let b_area = (b.width) * (b.height);//area should be the same as pre-rotation
 
             //for each corner of the player ship, check if it is inside the rotated rectangle
             for(let i = 0; i < 4; i++)

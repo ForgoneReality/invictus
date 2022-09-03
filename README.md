@@ -1,6 +1,5 @@
 # Invictus
  _A spaceship based game built on Javascript, HTML, and Canvas_
- REMEMBER TO CANCEL ADOBE STOCK TRIAL!!
 
 [//]: # (Logo here if have time lol)
 

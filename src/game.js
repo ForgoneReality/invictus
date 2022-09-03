@@ -19,7 +19,7 @@ export default class Game
         this.ship_level = 1;
         this.gold = 0;
 
-        this.difficulty = "easy"; //REMOVE THIS FOR DEBUGGING PURPOSES ONLY WHILE MAKING TUTORIAL
+        this.difficulty = "easy"; //REMOVE THIS FOR DEBUGNG PURPOSES ONLY WHILE MAKING TUTORIAL
 
         this.ships_owned = []; 
         this.all_ships = [
@@ -100,7 +100,7 @@ export default class Game
         setTimeout( () => {
             const loading = document.querySelector("#loading");
             const intro = document.querySelector("#intro-text");
-                const recommended = document.querySelector("#recommended");
+            const recommended = document.querySelector("#recommended");
 
             loading.style.display = "none";
             recommended.style.display = "none";
@@ -162,6 +162,8 @@ export default class Game
         const new_game = document.querySelector('#new-game-butt');
         const load_game = document.querySelector('#load-game-butt');
         const howtoplay = document.querySelector('#instructions');
+        const settings = document.querySelector("#settings"); //THIS IS A TEMPORARY THING
+        const socials = document.querySelector("#socials-select")
         //below temp
         // const black_screen = document.querySelector("#black-screen");
         
@@ -223,7 +225,27 @@ export default class Game
             this.tutorial();
         })
 
-        this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
+        settings.addEventListener("click", () => {
+            audio.beep1.play();
+
+            loadingscreenwithoutlogo.forEach( (thing) =>{
+                thing.style.display = "none";
+            });
+
+            socials.style.display = "block";
+            //below does not work
+            // socials.forEach( (thing) =>{
+            //     thing.addEventListener("click", () => {
+            //         socials.style.display = "none";
+            //         this.loading_screen();
+            //         alert("!");
+            //     }, {once: true})
+            // });
+        })
+
+        if(!this.starField) 
+            this.starField = new StarField(this.canvas, this.canvas.width, this.canvas.height);
+
         howtoplay.addEventListener("click", () =>
         {
             audio.beep1.play();

@@ -114,7 +114,8 @@ export default class Player {
         //It creates a lag between whether it determines a key is being tapped or held (~1 second)
         //which makes movement very, very slow and clunky
         //so have to do it this way instead. Neither keymaster.js's bind nor built-in events work
-        // console.log(this.posX, this.posY);
+
+        console.log("PLAYERPOS", this.posX, this.posY);
         if(this.health < this.basehealth)
         {
             this.health += this.regen;

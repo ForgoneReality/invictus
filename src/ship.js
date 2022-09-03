@@ -184,7 +184,7 @@ const TYPES = [
         shotsLeft: 40
     },
     {
-        velocity: [0, 0.86],
+        velocity: [0, 15],
         endvelocity: [0, 0],
         health: 11000,
         damage: 80, //variable!
@@ -524,31 +524,31 @@ export default class Ship {
         }
         else if (this.type === 11)
         {
-            this.posX += this.velX;
-            this.posY += this.velY;
+            // this.posX += this.velX;
+            // this.posY += this.velY;
 
-            if(this.realX() > this.background.player.realX() + 80)
-            {
-                if(this.realX() <= this.background.width * .3)
-                    this.velX = 0;
-                else
-                    this.velX = -1;
-            }
-            else if( this.realX() + 80 < this.background.player.realX())
-            {
-                if(this.realX() >= this.background.width * .7)
-                    this.velX = 0;
-                else
-                    this.velX = 1;
-            }
-            else if (this.realX() > this.background.player.realX())
-            {
-                this.velX -= 0.001;
-            }
-            else if (this.realX() < this.background.player.realX())
-            {
-                this.velX += 0.001;
-            }
+            // if(this.realX() > this.background.player.realX() + 80)
+            // {
+            //     if(this.realX() <= this.background.width * .3)
+            //         this.velX = 0;
+            //     else
+            //         this.velX = -1;
+            // }
+            // else if( this.realX() + 80 < this.background.player.realX())
+            // {
+            //     if(this.realX() >= this.background.width * .7)
+            //         this.velX = 0;
+            //     else
+            //         this.velX = 1;
+            // }
+            // else if (this.realX() > this.background.player.realX())
+            // {
+            //     this.velX -= 0.001;
+            // }
+            // else if (this.realX() < this.background.player.realX())
+            // {
+            //     this.velX += 0.001;
+            // }
 
             if(this.velY > 1)
             {
@@ -567,14 +567,14 @@ export default class Ship {
             //make above have cooldown and much larger influence!
 
             //idk about centering issue
-            if(this.velX > 1)
-            {
-                this.velX = 0.4;
-            }
-            if(this.velX < -1)
-            {
-                this.velX = -0.4;
-            }
+            // if(this.velX > 1)
+            // {
+            //     this.velX = 0.4;
+            // }
+            // if(this.velX < -1)
+            // {
+            //     this.velX = -0.4;
+            // }
         }
     }
 
@@ -1167,9 +1167,8 @@ export default class Ship {
     offset(x, y) //x,y relative to center, which should be realX() and real(Y), prior to rotation
     {
         //new stuff below
-        if((this.degrees === undefined || this.degrees === null || Number.isNaN(this.degrees))&& this.rotatable) //shouldn't need this but jic
+        if((this.degrees === undefined || this.degrees === null || Number.isNaN(this.degrees)) && this.rotatable) //shouldn't need this but jic
         {
-            alert("?");
             this.updateAngleAndNormalizedVector();
         }
         
@@ -1216,13 +1215,12 @@ export default class Ship {
     corners()
     {
         let topleft_corner = this.offset(this.leftX() - this.realX(), this.upY() - this.realY());
-        console.log(this.leftX());
-        console.log("??", this.upY());
-        console.log("tl", topleft_corner);
         
         let topright_corner = this.offset(this.rightX() - this.realX(), this.upY() - this.realY());
         let bottomleft_corner = this.offset(this.leftX() - this.realX(), this.downY() - this.realY());
         let bottomright_corner = this.offset(this.rightX() - this.realX(), this.downY() - this.realY());
+        console.log("bottomleft_corner", this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]);
+        console.log("bottomrightcorner", this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]);
 
         return[[this.realX() + topleft_corner[0], this.realY() + topleft_corner[1]], [this.realX() + topright_corner[0], this.realY() + topright_corner[1]], [this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]], [this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]] ];
     }
