@@ -1283,7 +1283,7 @@ export default class Background{
             {
                 this.bgsong.fade(0.15, 0, 1500)
             } 
-            if(this.level_id === 1 && this.timer === 5550) //NEEDS REFACTORING
+            else if(this.level_id === 1 && this.timer === 5550) //NEEDS REFACTORING
             {
                 let bgsong2 = audio.devour;
 
@@ -1295,7 +1295,24 @@ export default class Background{
                     }
                     this.bgsong = bgsong2;
                 }, 100);
-            } 
+            }
+            else if(this.level_id === 2 && this.timer === 9350)
+            {
+                this.bgsong.fade(0.15, 0, 1500)
+            }
+            else if(this.level_id === 2 && this.timer === 9500)
+            {
+                let bgsong2 = audio.devour;
+
+                setTimeout( () => {
+                    bgsong2.play();
+                    if(this.bgsong!= null)
+                    {
+                        this.bgsong.stop();
+                    }
+                    this.bgsong = bgsong2;
+                }, 100);
+            }
             
             if(key.isPressed(" ") )
             {

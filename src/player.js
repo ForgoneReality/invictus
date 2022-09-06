@@ -11,7 +11,7 @@ const TYPES2 = [
         basedamage: 30,
         baseshield: 300,
         img: 'images/playership1.png',
-        scale: .022, 
+        scale: .02, 
         defaultprojType: 0,
         regen: 0.1
     },
@@ -21,7 +21,7 @@ const TYPES2 = [
             basedamage: 40,
             baseshield: 500,
             img: 'images/playership2.png',
-            scale: .022, 
+            scale: .02, 
             defaultprojType: 0, 
             regen: 0.2
     },
@@ -31,7 +31,7 @@ const TYPES2 = [
             basedamage: 50,
             baseshield: 750,
             img: 'images/playership3.png',
-            scale: .02, 
+            scale: .0185, 
             defaultprojType: 1, 
             regen: 0.3
     }
