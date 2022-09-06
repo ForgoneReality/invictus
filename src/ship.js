@@ -1204,7 +1204,7 @@ export default class Ship {
 
     downY()
     {
-        if(this.type === 6)
+        if(this.type === 6 || this.type === 11)
         {
             return this.posY + this.height * .8;
         }

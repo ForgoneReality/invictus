@@ -17,7 +17,8 @@ const audio = {
     devour: new Howl({
         src: "sounds/devour.mp3",
         html5: true,
-        volume: 0.23
+        volume: 0.23,
+        loop: true
     }),
     laser1: new Howl({
         src: "sounds/laser1.mp3",
@@ -108,5 +109,11 @@ const audio = {
         src: "sounds/tutorial.mp3",
         html5: true,
         volume: 0.1
+    }),
+    ground: new Howl({
+        src: "sounds/ground.mp3",
+        html5: true,
+        volume: 0.2,
+        loop: true
     })
 }

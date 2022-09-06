@@ -11,7 +11,7 @@ const TYPES2 = [
         basedamage: 30,
         baseshield: 300,
         img: 'images/playership1.png',
-        scale: .02, 
+        scale: .0185, 
         defaultprojType: 0,
         regen: 0.1
     },
@@ -21,7 +21,7 @@ const TYPES2 = [
             basedamage: 40,
             baseshield: 500,
             img: 'images/playership2.png',
-            scale: .02, 
+            scale: .0185, 
             defaultprojType: 0, 
             regen: 0.2
     },
@@ -31,7 +31,7 @@ const TYPES2 = [
             basedamage: 50,
             baseshield: 750,
             img: 'images/playership3.png',
-            scale: .0185, 
+            scale: .017, 
             defaultprojType: 1, 
             regen: 0.3
     }
@@ -53,7 +53,7 @@ export default class Player {
         image.src  = TYPES2[this.ship_level].img;
         image.onload = () => {
             this.image = image;
-            const SCALE = 0.02;
+            const SCALE = TYPES2[this.ship_level].scale;
             this.width = image.width * SCALE;
             this.height = image.height * SCALE;
         }
