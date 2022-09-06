@@ -108,7 +108,7 @@ const TYPES = [
 
         velocity: [0, 0.5],
         endvelocity: [0, 0],
-        health: 8000,
+        health: 80,
         damage: 80, //variable!
         img: 'images/boss1.png',
         color: "red",
@@ -868,7 +868,7 @@ export default class Ship {
             break;
 
             case 9: 
-                speed = 10.5;
+                speed = 13;
                 cooldown = 50;
 
                 if (this.shotsLeft <= 0) 

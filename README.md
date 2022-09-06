@@ -59,10 +59,11 @@ SOON:
 - Tutorial
 - Shop should show current balance
 - Fix Preloading Screen Description Size
+- Fix Major Bugs
 - Skills
 - Settings
 - Pause Game
-
+- Shop Buttons
 
 LATER: 
 - Upgrade background: planets, nebulas, etc. -> MORE IMPORTANT THAN IT SEEMS
@@ -81,6 +82,9 @@ LATER:
 
 ## Known Bugs
 
+- Rotational bug!!
+- Replay level twice music broken
+- Gamma ray now off the mark 
 - Make drops intervally shadow blur (minor)
 - RESOLUTION CHANGE - MAP SHIFT - WHY IS IT OFF THE SCREEN ?
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding (minor)
@@ -91,7 +95,7 @@ LATER:
 - If you destroy the boss simultaneously as it destroys you, unexpected things occur
 - Picking up a shield/HP as you die may cause the game to continue (and invincibility)
 - Newer player ships shots are misaligned
-- Replay level twice music broken
+
 
 ### Special Thanks
 
