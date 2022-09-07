@@ -107,7 +107,11 @@ LATER:
 - Level 1 Theme: DEFRAG - The Dawn of Utopia
 - Level 1 Boss: Greg Dombrowski - Devour
 - Level 2 Theme: Downtown Binary & Zane Alexander - Orbit
-- Level ? Theme: Reconfig - Shortwire
+- Level 2 Boss: We are Magonia - Ground is the Limit
+- Level 3 Theme: ?
+- Level 3 Boss: ?
+- Level 4 Theme: Reconfig - Shortwire
+- Level 4 Boss: MALO - Vendetta
 - Charles Patterson for "LOADING"
 
 Note: HYPERDRIVE - Premium Music HQ for later levels?

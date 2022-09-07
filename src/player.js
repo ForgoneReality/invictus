@@ -472,7 +472,7 @@ export default class Player {
                     let projs = [];
                     this.shootTimer = cooldown;
                     let offset_x = 0;
-                    let offset_y = -40;// defaults for level === 1
+                    let offset_y = -17;// defaults for level === 1
 
                     let rotate_scaler = this.offset(offset_x, offset_y);
 

@@ -29,7 +29,7 @@ export default class LaserDamageProjectile extends Projectile{
             image.onload = () => {
                 this.image = image;
                 this.width = image.width * scale;
-                this.height = image.height * scale;
+                this.size = image.height * scale;
                 
             }
         }       
@@ -70,17 +70,22 @@ export default class LaserDamageProjectile extends Projectile{
         context.shadowColor = color;
         setShadow(context, color, 0, 0, this.blur);
         context.fillStyle = color;
-        context.translate(this.posX+this.width/2, this.posY+this.size/2);
-        context.rotate(this.degrees*Math.PI/180.0);
-        context.translate(-this.posX-this.width/2, -this.posY-this.size/2);
+
         if(!this.isImage)
         {
+            context.translate(this.posX+this.width/2, this.posY+this.size/2);
+            context.rotate(this.degrees*Math.PI/180.0);
+            context.translate(-this.posX-this.width/2, -this.posY-this.size/2);
             context.fillRect(this.posX, this.posY, this.width, this.size);
         }
         else
         {
             if (this.image)
-                context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+            {
+                context.translate(this.posX, this.posY);
+                context.rotate(this.degrees*Math.PI/180.0);
+                context.drawImage(this.image, - this.width / 2, - this.size / 2, this.width, this.size);
+            }
         }
         context.restore();
 
@@ -109,7 +114,7 @@ export default class LaserDamageProjectile extends Projectile{
     {
         if(this.type === 3)
         {
-            return this.posY + this.height * .2
+            return this.posY + this.size * .2
         } 
         return this.posY
     }
@@ -118,9 +123,9 @@ export default class LaserDamageProjectile extends Projectile{
     {
         if(this.type === 3)
         {
-            return this.posY + this.height * .8
+            return this.posY + this.size * .8
         } 
-        return this.posY + this.height;
+        return this.posY + this.size;
     }
     
 }
