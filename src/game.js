@@ -291,6 +291,11 @@ export default class Game
         my_shop.style.display = "none";
         next_level.style.display = "none";
 
+        if(this.background)//trying to fix double sound issue... thus far not working and not sure why
+        {
+            delete this.background;
+        }
+
         if(this.level === 2)
         {
             this.playSound(audio.orbit);
