@@ -53,7 +53,7 @@ export default class Background{
 
         if (level === 1)
         {
-            // this.drops.push(new Drop([.5*this.width, -300], 3));
+
             this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -187,6 +187,8 @@ export default class Background{
             this.enemyships.push(new Ship([.44*this.width, -3333 * 1.5 -900], 4, this));
             this.enemyships.push(new Ship([.44*this.width, -3400 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.44*this.width, -3456 * 1.5 -900], 1, this));
+
+            this.drops.push(new Drop([.44*this.width, -5600], 4));
 
 
             let newShip = new Ship([.3* this.width, -300*1.5 - 5700], 8, this);
@@ -1176,7 +1178,7 @@ export default class Background{
             this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
             this.enemyships.push(new Ship([.2*this.width, -5875 * 1.5], 4, this));
             this.enemyships.push(new Ship([.76*this.width, -5875 * 1.5], 3, this));
-            this.enemyships.push(new Ship([.14*this.width, -7150 * 1.5], 11, this, true));
+            this.enemyships.push(new Ship([.14*this.width, -7200 * 1.5], 11, this, true));
 
             //this can be refactored to not be hardcoded, but idc
             let pos = Math.random()*0.9 + 0.05;

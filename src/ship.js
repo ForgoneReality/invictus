@@ -193,7 +193,7 @@ const TYPES = [
         blur: 0,
         rotatable: true,
         scale: .23, 
-        shootTimerInit: 100, //straight down the middle laser cannon
+        shootTimerInit: 15, //straight down the middle laser cannon
         shootTimerInit2: 500,  //spread attack
         shootTimerInit3: 250, //orbs
         gold: 20000,
@@ -524,31 +524,31 @@ export default class Ship {
         }
         else if (this.type === 11)
         {
-            // this.posX += this.velX;
-            // this.posY += this.velY;
+            this.posX += this.velX;
+            this.posY += this.velY;
 
-            // if(this.realX() > this.background.player.realX() + 80)
-            // {
-            //     if(this.realX() <= this.background.width * .3)
-            //         this.velX = 0;
-            //     else
-            //         this.velX = -1;
-            // }
-            // else if( this.realX() + 80 < this.background.player.realX())
-            // {
-            //     if(this.realX() >= this.background.width * .7)
-            //         this.velX = 0;
-            //     else
-            //         this.velX = 1;
-            // }
-            // else if (this.realX() > this.background.player.realX())
-            // {
-            //     this.velX -= 0.001;
-            // }
-            // else if (this.realX() < this.background.player.realX())
-            // {
-            //     this.velX += 0.001;
-            // }
+            if(this.realX() > this.background.player.realX() + 80)
+            {
+                if(this.realX() <= this.background.width * .3)
+                    this.velX = 0;
+                else
+                    this.velX = -1;
+            }
+            else if( this.realX() + 80 < this.background.player.realX())
+            {
+                if(this.realX() >= this.background.width * .7)
+                    this.velX = 0;
+                else
+                    this.velX = 1;
+            }
+            else if (this.realX() > this.background.player.realX())
+            {
+                this.velX -= 0.001;
+            }
+            else if (this.realX() < this.background.player.realX())
+            {
+                this.velX += 0.001;
+            }
 
             if(this.velY > 1)
             {
@@ -563,18 +563,18 @@ export default class Ship {
                 this.velY = 0;
             }
 
-            // this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
-            //make above have cooldown and much larger influence!
+            this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
+            // make above have cooldown and much larger influence!
 
-            //idk about centering issue
-            // if(this.velX > 1)
-            // {
-            //     this.velX = 0.4;
-            // }
-            // if(this.velX < -1)
-            // {
-            //     this.velX = -0.4;
-            // }
+            // idk about centering issue
+            if(this.velX > 1)
+            {
+                this.velX = 0.4;
+            }
+            if(this.velX < -1)
+            {
+                this.velX = -0.4;
+            }
         }
     }
 

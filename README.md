@@ -71,6 +71,7 @@ LATER:
 - Recolor some ships
 - Drawing off-screen ships (slightly off atm) (boss should be able to shoot off-screen)
 - Shop should have upgrade-ship option
+- better healthbar/shield bar and energy bar
 - Shop should have back button
 - Load Game
 - More Levels, Ships, Bosses, and Skills
