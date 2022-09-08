@@ -108,7 +108,7 @@ const TYPES = [
 
         velocity: [0, 0.5],
         endvelocity: [0, 0],
-        health: 80,
+        health: 8000,
         damage: 80, //variable!
         img: 'images/boss1.png',
         color: "red",
