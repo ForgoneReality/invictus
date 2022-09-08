@@ -112,7 +112,7 @@ export default class StarField
 ### Smooth Movement and Rotation
 - Created fluid spaceship movement using velocity and acceleration
 - Spaceship rotates responsively to mouse movement by manipulating trignometric identities
-- Utilizes DRY code in the form of a helper functions to rotate X/Y offsets via rotational matrix transformations
+- Utilizes DRY code in the form of helper functions to rotate X/Y offsets via rotational matrix transformations
 
 ![rotate1final](https://user-images.githubusercontent.com/46094706/189086539-a4cfe111-aa0a-4da3-b9a1-e9c5e9d234cd.gif)
 
