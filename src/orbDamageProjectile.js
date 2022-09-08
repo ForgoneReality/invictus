@@ -81,7 +81,7 @@ export default class OrbDamageProjectile extends Projectile{
         {
             this.stage = 3;
             this.velX = 0;
-            this.velY = 7;
+            this.velY = 10;
         }
     }
 

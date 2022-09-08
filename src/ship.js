@@ -764,8 +764,8 @@ export default class Ship {
                 {
                     audio.laser2.play();
                     this.shootTimer = cooldown;
-                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
-                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90, 25, 3);
+                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1], 25, 3);
+                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1], 25, 3);
             
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
@@ -782,7 +782,7 @@ export default class Ship {
                 {
                     audio.laserbeam.play();
                     this.shootTimer2 = cooldown;
-                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5, 0, 150);
+                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5 * LEVEL_MODIFIER[this.background.level_id][1] , 0, 150);
                     this.background.lasers.push(proj3);
                     this.dependencies.push(proj3);
                     //constructor(position, velocity, length, width, damage, type, angle)
@@ -816,8 +816,8 @@ export default class Ship {
                     let scatter_x = Math.cos(scatter_deg * Math.PI / 180);
                     let scatter_y = -1 * Math.sin(scatter_deg * Math.PI / 180);
 
-                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25, 18);
-                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25, 18);
+                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1], 18);
+                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1], 18);
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
                     this.shotsLeft -= 1;
@@ -925,7 +925,7 @@ export default class Ship {
             case 11:
                 speed = 3;
                 cooldown = 35;
-                damage = 100;
+                damage = 100 * LEVEL_MODIFIER[this.background.level_id][1];
 
                 if (this.shotsLeft3 <= 0) 
                 {
@@ -965,7 +965,7 @@ export default class Ship {
                 
                 speed = 8;
                 cooldown = 2.4;
-                damage = 17.5;
+                damage = 17.5 * LEVEL_MODIFIER[this.background.level_id][1];
                
                 if (this.shotsLeft <= 0) 
                 {
@@ -1000,7 +1000,7 @@ export default class Ship {
 
                 speed = 3.9;
                 cooldown = 4;
-                damage = 35; 
+                damage = 35 * LEVEL_MODIFIER[this.background.level_id][1]; 
                 if (this.shotsLeft2 <= 0) 
                 {
                     this.shootTimer2 = 400;
