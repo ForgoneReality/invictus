@@ -22,12 +22,24 @@
 | Numbers [1-5] | Use special weapons (or change weapon?)|
 | P | Pause Game |
 
-For best experience, use a mouse and enter full-screen view mode
+For best experience, use a mouse, wear headphones, and enter full-screen mode
 
 
 ## Features
 
-pew pew
+### Immersive Star Background Main Menu
+- Simulated 3-D starfield with the illusion of fast space-travel
+- Implemented using 3-D trignometry
+
+![video-convert-1662629708606_Trim (2)](https://user-images.githubusercontent.com/46094706/189095662-f1bbe49f-deb6-4bcf-80da-487c90eb1ff8.gif)
+
+
+### Smooth Movement and Rotation
+- Created fluid spaceship movement using velocity and acceleration
+- Spaceship rotates responsively to mouse movement by manipulating trignometric identities
+- Utilizes DRY code in the form of a helper functions to rotate X/Y offsets via rotational matrix transformations
+
+![rotate1final](https://user-images.githubusercontent.com/46094706/189086539-a4cfe111-aa0a-4da3-b9a1-e9c5e9d234cd.gif)
 
 ## Future Features
 
