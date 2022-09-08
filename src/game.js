@@ -300,7 +300,6 @@ export default class Game
 
         if(this.level === 2)
         {
-            alert("?");
             this.playSound(audio.orbit);
             if(this.bgsong)
             {
