@@ -3,6 +3,9 @@
 
 [//]: # (Logo here if have time lol)
 
+** This Project is under active construction!! Features may be missing or dysfunctional as the project is being continuously changed everyday. **
+
+
 ## How To Play
 
 - __WASD:__ Move spaceship

@@ -87,6 +87,7 @@ export default class Game
     playSound(song) {
         //check if sound is null, if not stop previous sound and unload it
         if (this.bgsong != null) {
+            alert("6")
             this.bgsong.stop();
             this.bgsong.unload();
             this.bgsong = null;
@@ -125,16 +126,17 @@ export default class Game
        
 
         if (this.bgsong != null) {
-            this.bgsong.fade(1, 0, 6000);
+            this.bgsong.fade(0.2, 0, 6000);
         }
 
         let bgsong2 = audio.dawnutopia;
 
         setTimeout( () => {
             bgsong2.play();
-            bgsong2.fade(0,1, 8000); 
+            bgsong2.fade(0,0.2, 8000); 
             if(this.bgsong!= null)
             {
+                alert('7')
                 this.bgsong.stop();
             }
             this.bgsong = bgsong2;
@@ -293,15 +295,16 @@ export default class Game
 
         if(this.background)//trying to fix double sound issue... thus far not working and not sure why
         {
-            delete this.background;
+            
         }
 
         if(this.level === 2)
         {
+            alert("?");
             this.playSound(audio.orbit);
             if(this.bgsong)
             {
-                this.bgsong.fade(0,1, 6000); 
+                this.bgsong.fade(0,0.2, 6000); 
             }
         }
 

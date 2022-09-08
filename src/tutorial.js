@@ -114,7 +114,8 @@ export default class Tutorial{
             }, 3000); //change number once we test out the text
             let aText = new Array(
                 "This is currently a test! This textbox will be used",
-                "to implement a tutorial in the future."
+                "to implement a tutorial in the future. For now,",
+                "please refresh to restart the game"
             );
             this.typewriter(aText, 0, 0, " ", 0);
         }

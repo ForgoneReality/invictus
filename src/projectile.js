@@ -35,7 +35,7 @@ export default class Projectile {
     
     outofBounds(width, height)
     {
-        return (this.posX < 0 || this.posY < 0 || this.posX >= width || this.posY >= height)
+        return ( (this.owner !== 2 && this.posX < 0) || (this.owner === 2 && this.posX < -500) || (this.owner !== 2 && this.posY < 0) || (this.owner === 2 && this.posY < -500) || (this.owner!== 2 && this.posX >= width) || (this.owner === 2 && this.posX >= width + 500) || this.posY >= height)
     }
 
 }
