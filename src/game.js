@@ -87,7 +87,7 @@ export default class Game
     playSound(song) {
         //check if sound is null, if not stop previous sound and unload it
         if (this.bgsong != null) {
-            alert("6")
+            // alert("6")
             this.bgsong.stop();
             this.bgsong.unload();
             this.bgsong = null;
@@ -136,7 +136,7 @@ export default class Game
             bgsong2.fade(0,0.2, 8000); 
             if(this.bgsong!= null)
             {
-                alert('7')
+                // alert('7')
                 this.bgsong.stop();
             }
             this.bgsong = bgsong2;

@@ -54,7 +54,6 @@ export default class Background{
 
         if (level === 1)
         {
-
             this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -1295,7 +1294,7 @@ export default class Background{
                     bgsong2.play();
                     if(this.bgsong!= null)
                     {
-                        alert("1");
+                        // alert("1");
                         this.bgsong.stop();
                     }
                     this.bgsong = bgsong2;
@@ -1314,7 +1313,7 @@ export default class Background{
                     bgsong2.fade(0, 0.18, 2000)
                     if(this.bgsong!= null)
                     {
-                        alert("2");
+                        // alert("2");
                         this.bgsong.stop();
                     }
                     this.bgsong = bgsong2;
@@ -1529,7 +1528,7 @@ export default class Background{
                         bgsong2.play();
                         if(this.bgsong!= null)
                         {
-                            alert("3");
+                            // alert("3");
                             this.bgsong.stop();
                         }
                         this.bgsong = bgsong2;
@@ -1540,7 +1539,7 @@ export default class Background{
                     setTimeout( () => {
                         if(this.bgsong!= null)
                         {
-                            alert("4");
+                            // alert("4");
                             this.bgsong.stop();
                         }
                     }, 5);

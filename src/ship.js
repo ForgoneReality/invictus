@@ -106,7 +106,7 @@ const TYPES = [
     { //BOSS 1
         //laser in middle that flashes first. do it later in the fight when they go there
 
-        velocity: [0, 0.5],
+        velocity: [0, 4.5],
         endvelocity: [0, 0],
         health: 8000,
         damage: 80, //variable!
