@@ -1,6 +1,8 @@
+<br></br>
 <p align="center">
   <img src="https://github.com/ForgoneReality/invictus/blob/master/images/logo3.png" />
 </p>
+<br></br>
 
 ## Introduction
 
