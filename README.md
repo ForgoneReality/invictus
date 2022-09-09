@@ -1,9 +1,10 @@
-# Invictus
- _A spaceship based game built on Javascript, HTML, and Canvas_
+<p align="center">
+  <img src="https://github.com/ForgoneReality/invictus/blob/master/images/logo3.png" />
+</p>
 
-[//]: # (Logo here if have time lol)
+## Introduction
 
-##### This Project is under active construction!! Features may be missing or dysfunctional as the project is being continuously changed everyday.
+A spaceship shooting game built with Javascript, HTML, and CSS
 
 ## How To Play
 
@@ -27,94 +28,6 @@ For best experience, use a mouse, wear headphones, and enter full-screen mode
 
 
 ## Features
-
-
-### Levels, Enemies, and Power-Ups
-- Variety of enemies with distinct behaviors and a chance to drop power-ups or other bonuses
-- Levels get progressively more difficult as new, stronger enemies are introduced and earlier, basic ones are phased out
-
-![](https://github.com/ForgoneReality/gif_dump/blob/master/fighting.gif)
-
-### Immersive Star Background Main Menu
-- Simulated 3-D starfield with the illusion of fast space-travel
-- Implemented using 3-D trignometry
-
-![video-convert-1662629708606_Trim (2)](https://user-images.githubusercontent.com/46094706/189095662-f1bbe49f-deb6-4bcf-80da-487c90eb1ff8.gif)
-
-```javascript
-import Star3 from "./star3"
-export default class StarField
-{
-    constructor(canvas, width, height){
-        this.canvas = canvas;
-        this.context = canvas.getContext('2d');
-        this.innerWidth = width - 10;
-        this.innerHeight = height- 10;
-        this.radius = 1;
-        this.starsIndex = 0;
-        this.stars = [];
-        this.centerX = width/2;
-        this.centerY = height/2;
-        this.focalLength = 100;
-        this.starRadius = null;
-        this.starX = null;
-        this.starY = null;
-        this.numStars = 500;
-        this.mouse = {};
-        this.starX_dir = 0;
-        this.starY_dir = 0;
-        this.continue = true;
-        this.initiateEnd = false;
-        //...
-        
-        canvas.width = this.innerWidth;
-        canvas.height = this.innerHeight;
-
-        this.start();
-    }
-
-    start()
-    {
-        //initialize 500 stars in random position, size dependent on position
-        for(let s = 0; s < this.numStars; s++){
-            let x = Math.random() * this.innerWidth;
-            let y = Math.random() * this.innerHeight;
-            let z = Math.random() * this.innerWidth;
-            this.starsIndex++;
-            let my_star = new Star3(x,y,z, this.radius, this.starsIndex, this.centerX, this.centerY, this.focalLength, this.starX_dir, this.starY_dir, this.innerWidth);
-            
-            this.stars[this.starsIndex] = my_star;
-        }
-        this.animate();
-    }
-
-    // Function for animate canvas objects
-    animate(){
-        if(this.continue){
-            let c = this.context;
-            requestAnimationFrame(this.animate.bind(this));
-            c.fillStyle = "black";
-            c.fillRect(0,0,this.innerWidth,this.innerHeight);
-
-            for(let i = 1; i < 500; i++){
-                this.stars[i].focalLength = this.focalLength;
-                this.stars[i].update(c);
-                if(this.initiateEnd && this.focalLength > 500)
-                {
-                    this.stars[i].r -= 1;
-                    this.stars[i].g -= 1;
-                    this.stars[i].b -= 1;
-                }
-            }
-            
-            if (this.initiateEnd) //Below code is for the zooming/fading in effect when a player initiates a new game
-                this.focalLength < 1200 ? this.focalLength = this.focalLength + 2 : this.continue = false;
-        }
-        else
-            this.stars = null;
-    }
-};
-```
 
 ### Smooth Movement and Rotation
 - Created fluid spaceship movement using velocity and acceleration
@@ -211,6 +124,107 @@ export default class StarField
        ...
     }
 ```
+
+### Levels, Enemies, and Power-Ups
+- Variety of enemies with distinct behaviors and a chance to drop power-ups or other bonuses
+- Levels get progressively more difficult as new, stronger enemies are introduced and earlier, basic ones are phased out
+
+![](https://github.com/ForgoneReality/gif_dump/blob/master/fighting.gif)
+
+### Unique Bosses 
+- Multifaceted bosses with unique styles and different boss themes
+
+![](https://github.com/ForgoneReality/gif_dump/blob/master/bossfight.gif)
+
+### Immersive Star Background Main Menu
+- Simulated 3-D starfield with the illusion of fast space-travel
+- Implemented using 3-D trignometry
+
+![video-convert-1662629708606_Trim (2)](https://user-images.githubusercontent.com/46094706/189095662-f1bbe49f-deb6-4bcf-80da-487c90eb1ff8.gif)
+
+```javascript
+import Star3 from "./star3"
+export default class StarField
+{
+    constructor(canvas, width, height){
+        this.canvas = canvas;
+        this.context = canvas.getContext('2d');
+        this.innerWidth = width - 10;
+        this.innerHeight = height- 10;
+        this.radius = 1;
+        this.starsIndex = 0;
+        this.stars = [];
+        this.centerX = width/2;
+        this.centerY = height/2;
+        this.focalLength = 100;
+        this.starRadius = null;
+        this.starX = null;
+        this.starY = null;
+        this.numStars = 500;
+        this.mouse = {};
+        this.starX_dir = 0;
+        this.starY_dir = 0;
+        this.continue = true;
+        this.initiateEnd = false;
+        //...
+        
+        canvas.width = this.innerWidth;
+        canvas.height = this.innerHeight;
+
+        this.start();
+    }
+
+    start()
+    {
+        //initialize 500 stars in random position, size dependent on position
+        for(let s = 0; s < this.numStars; s++){
+            let x = Math.random() * this.innerWidth;
+            let y = Math.random() * this.innerHeight;
+            let z = Math.random() * this.innerWidth;
+            this.starsIndex++;
+            let my_star = new Star3(x,y,z, this.radius, this.starsIndex, this.centerX, this.centerY, this.focalLength, this.starX_dir, this.starY_dir, this.innerWidth);
+            
+            this.stars[this.starsIndex] = my_star;
+        }
+        this.animate();
+    }
+
+    // Function for animate canvas objects
+    animate(){
+        if(this.continue){
+            let c = this.context;
+            requestAnimationFrame(this.animate.bind(this));
+            c.fillStyle = "black";
+            c.fillRect(0,0,this.innerWidth,this.innerHeight);
+
+            for(let i = 1; i < 500; i++){
+                this.stars[i].focalLength = this.focalLength;
+                this.stars[i].update(c);
+                if(this.initiateEnd && this.focalLength > 500)
+                {
+                    this.stars[i].r -= 1;
+                    this.stars[i].g -= 1;
+                    this.stars[i].b -= 1;
+                }
+            }
+            
+            if (this.initiateEnd) //Below code is for the zooming/fading in effect when a player initiates a new game
+                this.focalLength < 1200 ? this.focalLength = this.focalLength + 2 : this.continue = false;
+        }
+        else
+            this.stars = null;
+    }
+};
+```
+### End-of-Level Shop
+- Shop to spend gold accumulated through the levels, with better upgrades being unlocked in later levels
+- Players can buy or upgrade ships, and can also buy active and passive skills for use 
+
+![](https://github.com/ForgoneReality/gif_dump/blob/master/shop.gif)
+
+### Rotational Collision Detection
+- To be implemented...
+
 
 ## Technologies, Libraries, APIs
 
