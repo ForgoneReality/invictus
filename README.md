@@ -4,6 +4,20 @@
 </p>
 <br></br>
 
+## Table of Contents
+- [Introduction](#introduction)
+- [How To Play](#how-to-play)
+- [Features](#features)
+  * [Smooth Movement and Rotation](#smooth-movement-and-rotation)
+  * [Levels and Enemies](#levels-and-enemies)
+  * [Unique Bosses](#unique-bosses)
+  * [Immersive Star Background Main Menu](#immersive-star-background-main-menu)
+  * [End-of-Level Shop](#end-of-level-shop)
+- [Technologies and Libraries](#technologies-and-libraries)
+- [To-Do](#to-do)
+- [Known Bugs](#known-bugs)
+- [Special Thanks](#special-thanks)
+
 ## Introduction
 
 A spaceship shooting game built with Javascript, HTML, and CSS
@@ -127,7 +141,7 @@ For best experience, use a mouse, wear headphones, and enter full-screen mode
     }
 ```
 
-### Levels, Enemies, and Power-Ups
+### Levels and Enemies
 - Variety of enemies with distinct behaviors and a chance to drop power-ups or other bonuses
 - Levels get progressively more difficult as new, stronger enemies are introduced and earlier, basic ones are phased out
 
@@ -228,7 +242,7 @@ export default class StarField
 - To be implemented...
 
 
-## Technologies, Libraries, APIs
+## Technologies and Libraries
 
 The core of the game will be built using Javascript, HTML, and CANVAS. I used keymaster to help with deficiencies in response time of built-in EventListeners, which make the game clunky to play. There is a wait-time when holding down a key for the event listener to transition between a "tapped" key and a "held-down" key, which makes the game very clunky to play. At the moment, no other additional libraries are used aside from webpack to help set-up the project i.e. module dependencies, and Howler to play sounds.
 
@@ -274,7 +288,7 @@ LATER:
 - Newer player ships shots are slightly misaligned
 
 
-### Special Thanks
+## Special Thanks
 
 - MIT for README formatting
 - Kidzgames for inspiration and sprites
