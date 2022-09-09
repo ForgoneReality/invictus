@@ -28,6 +28,13 @@ For best experience, use a mouse, wear headphones, and enter full-screen mode
 
 ## Features
 
+
+### Levels, Enemies, and Power-Ups
+- Variety of enemies with distinct behaviors and a chance to drop power-ups or other bonuses
+- Levels get progressively more difficult as new, stronger enemies are introduced and earlier, basic ones are phased out
+
+![](https://github.com/ForgoneReality/gif_dump/blob/master/fighting.gif)
+
 ### Immersive Star Background Main Menu
 - Simulated 3-D starfield with the illusion of fast space-travel
 - Implemented using 3-D trignometry
@@ -115,6 +122,95 @@ export default class StarField
 - Utilizes DRY code in the form of helper functions to rotate X/Y offsets via rotational matrix transformations
 
 ![rotate1final](https://user-images.githubusercontent.com/46094706/189086539-a4cfe111-aa0a-4da3-b9a1-e9c5e9d234cd.gif)
+
+```javascript
+//src/background.js
+    constructor(...)
+    {
+       ...
+       this.mouse_x = this.width / 2;
+       this.mouse_y = 0;
+       let handleMousemove = (event) => {
+           this.mouse_x = event.offsetX;
+           this.mouse_y = event.offsetY;
+       };
+       document.addEventListener('mousemove', handleMousemove);
+       ...
+    }
+```
+
+```javascript
+//src/player.js
+    updateAngleAndNormalizedVector(mouse_x, mouse_y)
+    {
+        let distX = mouse_x - this.realX();
+        let distY = mouse_y - this.realY();
+        if(distX === 0)
+            this.realY() > mouse_y ? this.degrees = 180; : this.degrees = 0;
+        else if (distY === 0)
+            distX > 0 ? this.degrees = 90; : this.degrees = 270;
+        else //NOTE: y increasing goes from top to bottom, not bottom to top!!
+        {
+            distX > 0 ? this.degrees = 90 + ((Math.atan(distY / distX)) * 180.0 / Math.PI); : this.degrees = 270 + ((Math.atan(distY / distX)) * 180.0 / Math.PI);
+        }
+        
+        length = Math.sqrt(distX * distX + distY * distY); //basic distance calculation d = sqrt((x1 - x2)^2 + (y1 - y2)^2)
+        // this.normalVector = [Math.abs(distX) / length, Math.abs(distY) / length]; <- seems like absolute values dont matter
+        this.normalVector = [distX / length, distY / length]; //calculate normal vector for use (scaled via speed constant to get x-velocity and y-velocity
+    }
+    
+    //#offset returns the new (x,y) relative to center after rotating to this.degrees
+    offset(x, y, deg = 0) //x,y relative to center, which should be realX() and real(Y), prior to rotation
+    {
+        //apply matrix transformation of form 
+        //R = |cos θ  - sin θ |
+        //    | sin θ   cos θ |
+        //to apply rotational transformation by changing basis vectors 
+
+        let degrees = this.degrees + deg; //setup
+        //usually -90 but because y is going positive going down, don't have to
+
+        let c = Math.cos(degrees * Math.PI / 180.0);
+        let s = Math.sin(degrees * Math.PI / 180.0);
+
+        return [x * c - y * s, x * s + y * c];
+    }
+    
+    //Now putting all these helper functions together, we integrate them to get accurate projectile shooting. Example code for basic double lasers
+    //which is the default weapon of the Level 1 ship
+    shootProjectile(mouse_x, mouse_y)
+    {
+    
+       this.updateAngleAndNormalizedVector(mouse_x, mouse_y);
+
+       switch(this.projectileType)
+       {
+       ...
+          case 1: //basic lasers double  
+             speed = 12;
+             cooldown = 12;
+             if(this.shootTimer <= 0)
+             {
+                 let projs = [];
+                 this.shootTimer = cooldown;
+                 let offset_x = 17;
+                 let offset_y = -40;// defaults for level === 1
+                 let rotate_scaler = this.offset(offset_x, offset_y);
+                 let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
+                 projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                 projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
+                 return projs;
+             }
+             else
+             {
+                 this.shootTimer -= 1;
+                 return undefined;
+             }
+             break;
+       }
+       ...
+    }
+```
 
 ## Future Features
 
