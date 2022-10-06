@@ -115,15 +115,14 @@ export default class Game
         }, 6000);   
     }
 
-    tutorial()
+    createTutorial()
     {
-        let tut = new Tutorial(this.width, this.height, this.context, this.bgsong, this);
+        this.initiateStart2();
     }
 
     initiateStart()
     {
         audio.beep1.play();   
-       
 
         if (this.bgsong != null) {
             this.bgsong.fade(0.2, 0, 6000);
@@ -154,6 +153,65 @@ export default class Game
                 this.start(this.difficulty);
             }, 11000);
     }
+
+    //THE FOLLOWING 2 NEED TO BE REFACTORED AFTER TUTORIAL IS FULLY IMPLEMENTED!
+    initiateStart2()
+    {
+        audio.beep1.play();   
+
+        if (this.bgsong != null) {
+            this.bgsong.fade(0.2, 0, 6000);
+        }
+
+        let bgsong2 = audio.dawnutopia;
+
+        setTimeout( () => {
+            bgsong2.play();
+            bgsong2.fade(0,0.2, 8000); 
+            if(this.bgsong!= null)
+            {
+                // alert('7')
+                this.bgsong.stop();
+            }
+            this.bgsong = bgsong2;
+        }, 8000);
+        
+        
+        this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
+        this.starField = null; //:/ kind of annoying tbh
+
+        setTimeout(()=> 
+            {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.canvas.width = this.width;
+                this.canvas.height = this.height;
+                this.start2();
+            }, 11000);
+    }
+
+    start2()
+    {
+        // let canvas = document.getElementById('game-canvas');
+        // let context = canvas.getContext('2d');
+
+        const my_shop = document.querySelector("#shop");
+        const ships = document.querySelector("#ships");
+
+        const nextship1 = document.querySelector("#nextship");
+        const nextship2 = document.querySelector("#nextship2");
+        const bought = document.querySelector("#bought");
+
+        const next_level = document.querySelector("#nextlevel");
+        const buy = document.querySelector("#buy");
+        my_shop.style.display = "none";
+        next_level.style.display = "none";
+
+        this.context = this.canvas.getContext('2d');
+        this.tutorial = new Tutorial(this.width, this.height, this.context, this.bgsong, this);
+        this.tutorial.animate();
+        
+    }
+    
 
     loading_screen()
     {
@@ -224,7 +282,13 @@ export default class Game
         });
 
         load_game.addEventListener("click", () => {
-            this.tutorial();
+            difficultyselect.style.display = "none";
+            logo.style.display = "none";
+            // this.difficulty = "legendary";
+                loadingscreenwithoutlogo.forEach( (thing) =>{
+                thing.style.display = "none";
+            });
+            this.createTutorial();
         })
 
         settings.addEventListener("click", () => {
@@ -292,11 +356,6 @@ export default class Game
         const buy = document.querySelector("#buy");
         my_shop.style.display = "none";
         next_level.style.display = "none";
-
-        if(this.background)//trying to fix double sound issue... thus far not working and not sure why
-        {
-            
-        }
 
         if(this.level === 2)
         {

@@ -36,14 +36,22 @@ export default class Tutorial{
         this.popup_number = 0;
         this.popup = true;
 
+        this.popups = document.querySelector("#popups");
+        this.textbox = document.querySelector("#textbox");
+        this.mel_idle = document.querySelector("#mel-idle");
+        this.mel_talking = document.querySelector("#mel-talking");
+        this.typedtext = document.querySelector("#typedtext");
+        this.fade = document.querySelector(".modal-background");
+
 
         this.createLevel();
         this.initializeStars(context);
+          
     };
 
     createLevel()
     {
-        this.player = new Player([this.width / 2, this.height - 50], this.ship_level);
+        this.player = new Player([this.width / 2, this.height - 50], this.ship_level, true);
         this.mouse_x = this.width / 2;
         this.mouse_y = 0;
         let handleMousemove = (event) => {
@@ -60,6 +68,9 @@ export default class Tutorial{
             }
         });
         this.textpopup(this.popup_number);
+        this.animate();
+
+        
     }
 
     // set up text to print, each item in array is new line
@@ -73,11 +84,9 @@ export default class Tutorial{
         sContents =  ' ';
         let iRow = Math.max(0, iIndex-iScrollAt);
         const destination = document.getElementById("typedtext");
-        console.log("?");
         while ( iRow < iIndex ) {
         sContents += aText[iRow++] + '<br />';
         }
-        console.log("sContents", sContents);
         destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos);
         //  destination.innerHTML = "testing";
         if ( iTextPos++ == aText[iIndex].length ) {
@@ -90,28 +99,35 @@ export default class Tutorial{
         setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), iSpeed);
         }
     }
+   
     
     textpopup(num)
     {
-        const popups = document.querySelector("#popups");
-        const textbox = document.querySelector("#textbox");
-        const mel_idle = document.querySelector("#mel-idle");
-        const mel_talking = document.querySelector("#mel-talking");
-        const typedtext = document.querySelector("#typedtext");
-        const fade = document.querySelector(".modal-background");
 
         if(num === 0)
         {
-            popups.style.display = "block";
-            textbox.style.display = "block";
-            mel_talking.style.display = "block";
-            typedtext.style.display = "block";
-            fade.style.display = "block";
+            this.popups.style.display = "block";
+            this.textbox.style.display = "block";
+            this.mel_talking.style.display = "block";
+            this.typedtext.style.display = "block";
+            this.fade.style.display = "block";
 
             setTimeout(() => {
-                mel_talking.style.display = "none";
-                mel_idle.style.display = "block";
+                this.mel_talking.style.display = "none";
+                this.mel_idle.style.display = "block";
             }, 3000); //change number once we test out the text
+
+            setTimeout(() => {
+                $(document).one('click keypress', $.proxy(function(e) {
+                    this.popup = false;
+                    this.popups.style.display = "none";
+                    this.textbox.style.display = "none";
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "none";
+                    this.typedtext.style.display = "none";
+                    this.fade.style.display = "none";
+                }, this));
+            }, 3500)
             let aText = new Array(
                 "This is currently a test! This textbox will be used",
                 "to implement a tutorial in the future. For now,",
@@ -151,7 +167,6 @@ export default class Tutorial{
         
         context.fillStyle = "black";
         context.fillRect(0, 0, this.width, this.height);
-
         if(!this.popup) //probably can combine these two variables
             {
             this.createStars(context);
@@ -183,12 +198,17 @@ export default class Tutorial{
             this.checkCollisions(context);
 
             this.updateUI(context);
-
-            requestAnimationFrame(this.animate.bind(this));
         }   
         else{
-            //do nothing... let player press buttons to choose
+            // console.log("???");
+            // if(key.isPressed(" "))
+            // {
+            //     alert("!");
+               
+            // }
         }
+        requestAnimationFrame(this.animate.bind(this));
+
         
     }
 

@@ -38,12 +38,13 @@ const TYPES2 = [
 
 ]
 export default class Player {
-    constructor(position, ship_level = 0) //more later, type?
+    constructor(position, ship_level = 0, tutorial = false) //more later, type?
     {
         this.posX = position[0];
         this.posY = position[1];
         this.velX = 0;
         this.velY = 0;
+        this.tutorial = tutorial;
 
         this.canvasX = this.posX * 2;
         this.canvasY = this.posY + 50;
@@ -205,18 +206,32 @@ export default class Player {
 
     power(direction)
     {
-        const MAXSPEED = 10;
+        const MAXSPEED = this.tutorial ? 8 : 10;
         const MINSPEED = MAXSPEED * -1; //can also use Math.abs()
         switch(direction)
         {
             case "up":
-                if(this.velY>-4)
+                if(this.tutorial)
                 {
-                    this.velY = -4;
+                    if(this.velY>-2)
+                    {
+                        this.velY = -2;
+                    }
+                    else
+                    {
+                        this.velY -= 0.23;
+                    }
                 }
                 else
                 {
-                this.velY -= 0.45;
+                    if(this.velY>-4)
+                    {
+                        this.velY = -4;
+                    }
+                    else
+                    {
+                        this.velY -= 0.45;
+                    }
                 }
                 if(this.velY < MINSPEED)
                 {
@@ -225,13 +240,27 @@ export default class Player {
                 this.movedY = SAFEFRAMES;
                 break;
             case "down":
-                if(this.velY<4)
+               if(this.tutorial)
                 {
-                    this.velY = 4;
+                    if(this.velY<2)
+                    {
+                        this.velY = 2;
+                    }
+                    else
+                    {
+                        this.velY += 0.23;
+                    }
                 }
                 else
                 {
-                    this.velY += 0.45;
+                    if(this.velY<4)
+                    {
+                        this.velY = 4;
+                    }
+                    else
+                    {
+                        this.velY += 0.45;
+                    }
                 }
                 if(this.velY > MAXSPEED)
                 {
@@ -240,13 +269,27 @@ export default class Player {
                 this.movedY = SAFEFRAMES;
                 break;
             case "right":
-                if(this.velX<4)
+                if(this.tutorial)
                 {
-                    this.velX = 4;
+                    if(this.velX<2)
+                    {
+                        this.velX = 2;
+                    }
+                    else
+                    {
+                        this.velX += 0.23;
+                    }
                 }
                 else
                 {
-                this.velX += 0.45;
+                    if(this.velX<4)
+                    {
+                        this.velX = 4;
+                    }
+                    else
+                    {
+                        this.velX += 0.45;
+                    }
                 }
                 if(this.velX > MAXSPEED)
                 {
@@ -255,13 +298,27 @@ export default class Player {
                 this.movedX = SAFEFRAMES;
                 break;
             case "left":
-                if(this.velX>-4)
+                if(this.tutorial)
                 {
-                    this.velX = -4;
+                    if(this.velX>-2)
+                    {
+                        this.velX = -2;
+                    }
+                    else
+                    {
+                        this.velX -= 0.23;
+                    }
                 }
                 else
                 {
-                this.velX -= 0.45;
+                    if(this.velX>-4)
+                    {
+                        this.velX = -4;
+                    }
+                    else
+                    {
+                        this.velX -= 0.45;
+                    }
                 }
                 if(this.velX < MINSPEED)
                 {
@@ -358,8 +415,16 @@ export default class Player {
                 return undefined;
                 break;
             case 0: //red ball center
-                speed = 12;
-                cooldown = 8;
+                if(this.tutorial)
+                {
+                    speed = 8;
+                    cooldown = 20;
+                }
+                else
+                {
+                    speed = 12;
+                    cooldown = 8;
+                }
                 if(this.shootTimer <= 0)
                 {
                     

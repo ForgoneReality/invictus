@@ -1496,6 +1496,7 @@ export default class Background{
         this.bgsong.stop();
         audio.loudboom.play();
         this.death = true;
+        this.player.projectileType = -1;
         const explosion = document.querySelector("#explosion");
         const black_screen = document.querySelector("#black-screen");
         const gameover = document.querySelector("#gameover");
