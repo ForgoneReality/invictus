@@ -133,14 +133,7 @@ export default class StarField
             }            
             if (this.initiateEnd)
             {
-                if (this.focalLength < 1200)
-                {
-                    this.focalLength = this.focalLength + 2;
-                }
-                else
-                {
-                    this.continue = false;
-                }
+                this.focalLength < 1200 ? this.focalLength = this.focalLength + 2 : this.continue = false;
             }
         }
         else

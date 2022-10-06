@@ -9,6 +9,7 @@ import CircleDamageProjectile  from "./circleDamageProjectile";
 export default class Background{
     constructor(width, height, level_id, context, bgsong, gold, ship_level, parent, difficulty)
     {
+        this.bug = new Date().toString();
         this.width = width;
         this.height = height;
         this.level_id = level_id;
@@ -22,10 +23,20 @@ export default class Background{
         this.extras = [];
         this.ship_level = ship_level;
         this.difficulty = difficulty;
+        this.mouse_x = this.width / 2;
+        this.mouse_y = 0;
+        let handleMousemove = (event) => {
+            this.mouse_x = event.offsetX;
+            this.mouse_y = event.offsetY;
+        };
+
+        document.addEventListener('mousemove', handleMousemove);
+
         this.createLevel(level_id);
         this.initializeStars(context);
 
         this.bgsong = bgsong;
+        this.origbsong = bgsong;
         //stats
         this.enemiesdefeated = 0; //for achievement purposes in the future
         this.gold = gold;
@@ -37,20 +48,24 @@ export default class Background{
         this.continue = true;
     };
 
+    restartLevel()
+    {
+        this.bgsong = this.origbsong;
+        this.death = false;
+        this.continue = true;
+        this.timer = 0;
+        this.createLevel(this.level_id);
+        this.initializeStars(this.context);
+        this.animate();
+        // this.bgsong.play();
+    }
 
     createLevel(level)
     {
         this.player = new Player([this.width / 2, this.height - 50], this.ship_level);
-        this.mouse_x = this.width / 2;
-        this.mouse_y = 0;
-        let handleMousemove = (event) => {
-            this.mouse_x = event.offsetX;
-            this.mouse_y = event.offsetY;
-        };
           
         //note: as explained in Player#animate, movement and other spontaneous events cannot be added here
         //adding multiple eventlisteners for no reason below !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        document.addEventListener('mousemove', handleMousemove);
 
         if (level === 1)
         {
@@ -1507,10 +1522,13 @@ export default class Background{
             this.enemyprojectiles = [];
             this.enemiesdefeated = 0;
             this.gold = this.initial_gold;
+            this.stars = [];
             this.enemyships = [];
             this.projectiles = [];
+            this.enemyprojectiles = [];
             this.extras = [];
             this.lasers = [];
+            this.drops = [];
             gameover.style.display = "block";
             this.continue = false;
 
@@ -1563,9 +1581,9 @@ export default class Background{
                     timeme = 15;
                 }
                 setTimeout(() => {
-                    this.parent.start(this.difficulty);
+                    this.restartLevel();
                 }, timeme);
-            })
+            }, {once: true})
         }, 12500);
 
     }

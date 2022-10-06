@@ -59,6 +59,7 @@ Under Construction...
 SOON:
 - Level 2 Boss Finish
 - Level 2 Intro Cutdown
+- Can't shoot when blown up
 - Tutorial
 - Shop should show current balance
 - Fix Preloading Screen Description Size

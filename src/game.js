@@ -309,7 +309,7 @@ export default class Game
 
         this.context = this.canvas.getContext('2d');
         this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this, difficulty);
-        this.state = "fighting";
+        this.state = "fighting"; //dead code
         this.background.animate();
         
         // for now the game just instantly plays the "level" which is currently misnamed as background

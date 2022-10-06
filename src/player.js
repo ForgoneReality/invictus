@@ -335,7 +335,6 @@ export default class Player {
 
     shootProjectile(mouse_x, mouse_y)
     {
-        let type = this.projectileType;
         let mx;
         let my;
         if(mouse_x === -1 && mouse_y === -1)
@@ -352,7 +351,7 @@ export default class Player {
         let speed;
         let cooldown;
 
-        switch(type)
+        switch(this.projectileType)
         {
             case -1:
                 this.shootTimer -= 1;
@@ -389,23 +388,17 @@ export default class Player {
                     this.shootTimer -= 1;
                     return undefined;
                 }
-            case 1: //basic lasers double
-               
+            case 1: //basic lasers double  
                 speed = 12;
                 cooldown = 12;
                 if(this.shootTimer <= 0)
                 {
-                   
                     let projs = [];
                     this.shootTimer = cooldown;
                     let offset_x = 17;
                     let offset_y = -40;// defaults for level === 1
-
                     let rotate_scaler = this.offset(offset_x, offset_y);
                     let rotate_scaler2 = this.offset(offset_x * -1, offset_y);
-                    
-
-                    
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler[0], this.realY() + rotate_scaler[1]], [speed * this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     projs.push(new LaserDamageProjectile([this.realX() + rotate_scaler2[0], this.realY() + rotate_scaler2[1]], [speed* this.normalVector[0], speed*this.normalVector[1]], this.degrees, 20, 1, 0, this.basedamage, 4));
                     return projs;
@@ -415,7 +408,6 @@ export default class Player {
                     this.shootTimer -= 1;
                     return undefined;
                 }
-                //remember to return an array!
                 break;
             case 2: //double shot
                 speed = 12;
