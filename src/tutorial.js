@@ -119,13 +119,25 @@ export default class Tutorial{
 
             setTimeout(() => {
                 $(document).one('click keypress', $.proxy(function(e) {
-                    this.popup = false;
-                    this.popups.style.display = "none";
-                    this.textbox.style.display = "none";
-                    this.mel_talking.style.display = "none";
-                    this.mel_idle.style.display = "none";
-                    this.typedtext.style.display = "none";
-                    this.fade.style.display = "none";
+                    let newText = new Array(
+                        "If at any time you'd like to skip the tutorial,",
+                        "press the ESC key on your keyboard"
+                    );
+                    
+                    this.typedtext.innerHTML = "";
+                    this.typewriter(newText, 0, 0, " ", 0);
+
+                    setTimeout(() => {
+                        $(document).one('click keypress', $.proxy(function(e) {
+                            this.popup = false;
+                            this.popups.style.display = "none";
+                            this.textbox.style.display = "none";
+                            this.mel_talking.style.display = "none";
+                            this.mel_idle.style.display = "none";
+                            this.typedtext.style.display = "none";
+                            this.fade.style.display = "none";
+                        }, this));
+                    }, 2500)
                 }, this));
             }, 3500)
             let aText = new Array(
