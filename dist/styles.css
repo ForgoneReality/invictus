@@ -332,6 +332,18 @@ body
     top: 40%;    
 }
 
+#typedtextheader
+{
+    font-family: "Planer";
+    font-size: 18px;
+    color: white; 
+    text-shadow: rgb(0, 234, 255) 0px -1px 3px, rgb(0, 234, 255) 0px 2px 3px, rgb(0, 234, 255) 2px 0px 3px, rgb(0, 234, 255) -2px 0px 3px;  
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    font-weight: 700;    
+}
+
 #shipselect
 { 
     display: none;

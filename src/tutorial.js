@@ -78,7 +78,7 @@ export default class Tutorial{
      
     typewriter(aText, iIndex, sContents, iTextPos)
     {
-        let iSpeed = 20;
+        let iSpeed = 15;
         let iScrollAt = 20; // start scrolling up at this many lines
 
         sContents =  ' ';
@@ -129,9 +129,8 @@ export default class Tutorial{
                 }, this));
             }, 3500)
             let aText = new Array(
-                "This is currently a test! This textbox will be used",
-                "to implement a tutorial in the future. For now,",
-                "please refresh to restart the game"
+                "Welcome to Invictus! My name's Mei, and I'll be helping",
+                "you learn the ropes of how to operate your spaceship"
             );
             this.typewriter(aText, 0, 0, " ", 0);
         }
