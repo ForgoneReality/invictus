@@ -44,11 +44,11 @@ const TYPES3 = [
 ];
 
 export default class Drop extends Projectile {
-    constructor(position, type)//color optional
+    constructor(position, type, manual_speed=1.75)//color optional
     {
         //position, velocity, size, collidable, owner, type)
 
-        super(position, [0, 1.75], 0.25, true, 3, type);
+        super(position, [0, manual_speed], 0.25, true, 3, type);
         const image = new Image();
         image.src = TYPES3[type].img;
         image.onload = () => {

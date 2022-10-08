@@ -1,4 +1,4 @@
-let SAFEFRAMES = 5;
+const SAFEFRAMES = 5;
 
 import CircleDamageProjectile from "./circleDamageProjectile";
 import LaserDamageProjectile from "./laserDamageProjectile";
@@ -38,7 +38,7 @@ const TYPES2 = [
 
 ]
 export default class Player {
-    constructor(position, ship_level = 0, tutorial = false) //more later, type?
+    constructor(position, ship_level = 0, tutorial = 0) //more later, type?
     {
         this.posX = position[0];
         this.posY = position[1];
@@ -116,13 +116,12 @@ export default class Player {
         //which makes movement very, very slow and clunky
         //so have to do it this way instead. Neither keymaster.js's bind nor built-in events work
 
-        console.log("PLAYERPOS", this.posX, this.posY);
         if(this.health < this.basehealth)
         {
             this.health += this.regen;
         }
 
-        if(this.collided <= 0)
+        if(this.collided <= 0 && this.tutorial !== 2)
         {
             if(key.isPressed("up") || key.isPressed("w"))
             {
@@ -206,12 +205,12 @@ export default class Player {
 
     power(direction)
     {
-        const MAXSPEED = this.tutorial ? 8 : 10;
+        const MAXSPEED = this.tutorial > 0 ? 8 : 10;
         const MINSPEED = MAXSPEED * -1; //can also use Math.abs()
         switch(direction)
         {
             case "up":
-                if(this.tutorial)
+                if(this.tutorial > 0)
                 {
                     if(this.velY>-2)
                     {
@@ -240,7 +239,7 @@ export default class Player {
                 this.movedY = SAFEFRAMES;
                 break;
             case "down":
-               if(this.tutorial)
+               if(this.tutorial > 0)
                 {
                     if(this.velY<2)
                     {
@@ -269,7 +268,7 @@ export default class Player {
                 this.movedY = SAFEFRAMES;
                 break;
             case "right":
-                if(this.tutorial)
+                if(this.tutorial > 0)
                 {
                     if(this.velX<2)
                     {
@@ -298,7 +297,7 @@ export default class Player {
                 this.movedX = SAFEFRAMES;
                 break;
             case "left":
-                if(this.tutorial)
+                if(this.tutorial > 0)
                 {
                     if(this.velX>-2)
                     {
@@ -415,7 +414,7 @@ export default class Player {
                 return undefined;
                 break;
             case 0: //red ball center
-                if(this.tutorial)
+                if(this.tutorial > 0)
                 {
                     speed = 8;
                     cooldown = 20;

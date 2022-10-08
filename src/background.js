@@ -10,6 +10,7 @@ export default class Background{
     constructor(width, height, level_id, context, bgsong, gold, ship_level, parent, difficulty)
     {
         this.bug = new Date().toString();
+        this.tutorial = false;
         this.width = width;
         this.height = height;
         this.level_id = level_id;

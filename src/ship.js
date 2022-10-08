@@ -201,6 +201,20 @@ const TYPES = [
         shotsLeft: 27,
         shotsLeft2: 15, //spread attack
         shotsLeft3: 6
+    },
+    { //12
+        velocity: [0, 0],
+        endvelocity: [0, 0],
+        health: 300,
+        damage: 0, //variable!
+        img: 'images/crosshair.svg',
+        color: "red",
+        blur: 25,
+        rotatable: false,
+        scale: .4, 
+        gold: 1000,
+        value: 0,
+        shotsLeft: -1
     }
         
 ];
@@ -227,6 +241,7 @@ export default class Ship {
         this.collided = 0;
 
         this.background = background;
+
         this.type = type;
         this.boss = boss;
         this.canvasBottom = document.getElementById('game-canvas').getAttribute('height');
@@ -248,8 +263,16 @@ export default class Ship {
 
         this.velX = TYPES[type].velocity[0];
         this.velY = TYPES[type].velocity[1];
-        this.health = TYPES[type].health * LEVEL_MODIFIER[this.background.level_id][0] * DIFFICULTY_MODIFIER[this.background.difficulty][0]; 
-        this.damage = TYPES[type].damage * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1];
+        if(this.background.tutorial)
+        {
+            this.health = TYPES[type].health;
+            this.damage = TYPES[type].damage;
+        }
+        else
+        {
+            this.health = TYPES[type].health * LEVEL_MODIFIER[this.background.level_id][0] * DIFFICULTY_MODIFIER[this.background.difficulty][0]; 
+            this.damage = TYPES[type].damage * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1];
+        }
 
         this.degrees = 0;
 
@@ -502,7 +525,7 @@ export default class Ship {
                 this.velX = -0.5;
             }
         }
-        else if (this.type === 7)
+        else if (this.type === 7 || this.type === 12)
         {
             //do nothing
         }
@@ -1042,6 +1065,9 @@ export default class Ship {
                 }
     
                 break;
+            case 12:
+
+            break;
     
             default:
                 console.error("unknown projectile type");

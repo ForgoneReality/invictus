@@ -15,6 +15,7 @@ export default class Tutorial{
         this.enemyships = [];
         this.drops = [];
         this.ship_level = 0;
+        this.tutorial = true;
         
 
         this.bgsong = bgsong; //prob not needed
@@ -22,8 +23,8 @@ export default class Tutorial{
         this.gold = 0;
         this.parent = parent;
 
-        this.stage = 0;
         this.stage_helper = 0;//for counting stuff
+        this.times_shot = 0;
         //stage 0: move around
         //stage 1: move into flags
         //stage 2: shoot
@@ -35,6 +36,7 @@ export default class Tutorial{
 
         this.popup_number = 0;
         this.popup = true;
+        this.timeout = true;
 
         this.popups = document.querySelector("#popups");
         this.textbox = document.querySelector("#textbox");
@@ -51,7 +53,7 @@ export default class Tutorial{
 
     createLevel()
     {
-        this.player = new Player([this.width / 2, this.height - 50], this.ship_level, true);
+        this.player = new Player([this.width / 2, this.height - 50], this.ship_level, 1);
         this.mouse_x = this.width / 2;
         this.mouse_y = 0;
         let handleMousemove = (event) => {
@@ -69,13 +71,65 @@ export default class Tutorial{
         });
         this.textpopup(this.popup_number);
         this.animate();
-
-        
     }
 
     // set up text to print, each item in array is new line
     
-     
+    shootingPhase()
+    {
+        this.stage = 1;
+        this.typedtext.innerHTML = "";
+
+        let newText = new Array(
+            "Great work! Next, let's learn how to fire your weapon"
+        );
+
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
+        this.popup = true;
+
+        this.typewriter(newText, 0, 0, " ", 0);
+
+        setTimeout(() => {
+            $(document).one('click', $.proxy(function(e) {
+                this.mel_talking.style.display = "block";
+                this.mel_idle.style.display = "none";
+                
+
+                let newText = new Array(
+                    "Hold the SPACE bar on your keyboard to fire lasers!"
+                );
+                
+                this.typedtext.innerHTML = "";
+                this.typewriter(newText, 0, 0, " ", 0);
+
+                setTimeout(() => {
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "block";
+                    $(document).one('click', $.proxy(function(e) {
+                        this.popup = false;
+                        this.popups.style.display = "none";
+                        this.textbox.style.display = "none";
+                        this.mel_talking.style.display = "none";
+                        this.mel_idle.style.display = "none";
+                        this.typedtext.style.display = "none";
+                        this.fade.style.display = "none";
+                        this.typedtext.innerHTML = "";
+
+                        // setTimeout(() => {
+                        //     this.movePhase();
+                        // }, 1500)
+                    }, this));
+                }, 2000)
+            }, this));
+        }, 2000)
+    
+
+    } 
+
     typewriter(aText, iIndex, sContents, iTextPos)
     {
         let iSpeed = 15;
@@ -103,7 +157,6 @@ export default class Tutorial{
     
     textpopup(num)
     {
-
         if(num === 0)
         {
             this.popups.style.display = "block";
@@ -115,20 +168,31 @@ export default class Tutorial{
             setTimeout(() => {
                 this.mel_talking.style.display = "none";
                 this.mel_idle.style.display = "block";
-            }, 3000); //change number once we test out the text
+            }, 3500); //change number once we test out the text
 
             setTimeout(() => {
-                $(document).one('click keypress', $.proxy(function(e) {
+                $(document).one('click', $.proxy(function(e) {
+                    this.mel_talking.style.display = "block";
+                    this.mel_idle.style.display = "none";
+
+                    setTimeout(() => {
+                        this.mel_talking.style.display = "none";
+                        this.mel_idle.style.display = "block";
+                    }, 3000); //change number once we test out the text
+                    
+
                     let newText = new Array(
-                        "If at any time you'd like to skip the tutorial,",
-                        "press the ESC key on your keyboard"
+                        "If at any time you'd like to skip the tutorial, press",
+                        "the ESC key on your keyboard to advance to Level 1"
                     );
+                    
                     
                     this.typedtext.innerHTML = "";
                     this.typewriter(newText, 0, 0, " ", 0);
 
                     setTimeout(() => {
-                        $(document).one('click keypress', $.proxy(function(e) {
+                        $(document).one('click', $.proxy(function(e) {
+                            console.log("JUST ONCE");
                             this.popup = false;
                             this.popups.style.display = "none";
                             this.textbox.style.display = "none";
@@ -136,16 +200,120 @@ export default class Tutorial{
                             this.mel_idle.style.display = "none";
                             this.typedtext.style.display = "none";
                             this.fade.style.display = "none";
+                            this.typedtext.innerHTML = "";
+
+                            setTimeout(() => {
+                                this.movePhase();
+                            }, 1500)
                         }, this));
-                    }, 2500)
+                    }, 3200)
                 }, this));
-            }, 3500)
+            }, 3300)
             let aText = new Array(
                 "Welcome to Invictus! My name's Mei, and I'll be helping",
-                "you learn the ropes of how to operate your spaceship"
+                "you learn the ropes of how to operate your spaceship.",
+                "Click anywhere to continue!"
             );
             this.typewriter(aText, 0, 0, " ", 0);
         }
+    }
+
+    movePhase()
+    {
+        let newText = new Array(
+            "Use the W, A, S, D keys to move your spaceship",
+            "and collect all the gold drops"
+        );
+
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
+        this.popup = true;
+
+        this.typewriter(newText, 0, 0, " ", 0);
+
+        setTimeout(() => {
+            this.mel_talking.style.display = "none";
+            this.mel_idle.style.display = "block";
+            $(document).one('click', $.proxy(function(e) {
+                this.popup = false;
+                this.popups.style.display = "none";
+                this.textbox.style.display = "none";
+                this.mel_talking.style.display = "none";
+                this.mel_idle.style.display = "none";
+                this.typedtext.style.display = "none";
+                this.fade.style.display = "none";
+                this.typedtext.innerHTML = "";
+
+                this.drops.push(new Drop([0.24*this.width, 0.75*this.height], 2, 0));
+
+                
+            }, this));
+        }, 2700)
+    }
+
+    aimingPhase()
+    {
+        this.typedtext.innerHTML = "";
+
+        let newText = new Array(
+            "Excellent Job! Now let's learn to aim your shots",
+            "Your ship shoots towards where your mouse cursor is located"
+
+        );
+
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
+        this.popup = true;
+
+        this.typewriter(newText, 0, 0, " ", 0);
+
+        setTimeout(() => {
+            $(document).one('click', $.proxy(function(e) {
+                this.mel_talking.style.display = "block";
+                this.mel_idle.style.display = "none";
+                
+                let newText = new Array(
+                    "To aim your shots, move your mouse towards your target!",
+                    "Try practicing by destroying the targets without actually",
+                    "moving your ship"
+                );
+                
+                this.typedtext.innerHTML = "";
+                this.typewriter(newText, 0, 0, " ", 0);
+
+                setTimeout(() => {
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "block";
+                    $(document).one('click', $.proxy(function(e) {
+                        this.popup = false;
+                        this.popups.style.display = "none";
+                        this.textbox.style.display = "none";
+                        this.mel_talking.style.display = "none";
+                        this.mel_idle.style.display = "none";
+                        this.typedtext.style.display = "none";
+                        this.fade.style.display = "none";
+                        this.typedtext.innerHTML = "";
+                        this.player.tutorial = 2;
+                        this.player.posX = this.width * .49;
+                        this.player.posY = this.height * .75;
+
+                        this.enemyships.push(new Ship([.48*this.width, .2*this.height], 12, this));
+
+
+                        // setTimeout(() => {
+                        //     this.movePhase();
+                        // }, 1500)
+                    }, this));
+                }, 3300)
+            }, this));
+        }, 2500)
+
     }
 
     initializeStars(context)
@@ -184,6 +352,15 @@ export default class Tutorial{
             
             if(key.isPressed(" ") )
             {
+                if(this.stage === 1)
+                {
+                    this.times_shot++;
+                    if(this.times_shot>300)
+                    {
+                        this.stage = 2;
+                        this.aimingPhase();
+                    }
+                }
                 let proj = this.player.shootProjectile(this.mouse_x, this.mouse_y, 2);
                 if (proj)
                 {
@@ -211,6 +388,9 @@ export default class Tutorial{
             this.updateUI(context);
         }   
         else{
+            this.createStars(context);
+            this.updateSomething(context, this.stars);
+
             // console.log("???");
             // if(key.isPressed(" "))
             // {
@@ -427,6 +607,43 @@ export default class Tutorial{
                         break;
                     case 2: //money
                         this.gold += Math.floor(Math.random()* 6) * 1000 + 5000;
+                        if(this.timeout)
+                        {
+                            this.timeout = false;
+                            setTimeout(() => {
+                                this.timeout = true;
+                            }, 10);
+                            if(this.stage_helper === 0)
+                            {
+                                this.stage_helper++;
+
+                                setTimeout(() => {
+                                    this.drops.push(new Drop([0.74*this.width, 0.75*this.height], 2, 0));
+                                }, 100);
+                            }
+                            else if (this.stage_helper === 1)
+                            {
+                                this.stage_helper++;
+                                
+                                setTimeout(() => {
+                                this.drops.push(new Drop([0.48*this.width, 0.25*this.height], 2, 0));
+                                }, 100);
+                            }
+                            else if (this.stage_helper === 2)
+                            {
+                                this.stage_helper++;
+
+                                setTimeout(() => {
+                                    this.drops.push(new Drop([0.48*this.width, 0.75*this.height], 2, 0));
+                                }, 100);
+                            }
+                            else if (this.stage_helper === 3)
+                            {
+                                this.stage_helper = 0;
+
+                                this.shootingPhase();
+                            }
+                        }
                         break;
                     case 3: //gamma ray
                         this.player.projectileType = 3;
