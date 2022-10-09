@@ -122,36 +122,28 @@ export default class Game
 
     initiateStart()
     {
-        audio.beep1.play();   
-
         if (this.bgsong != null) {
-            this.bgsong.fade(0.2, 0, 6000);
+            this.bgsong.fade(0.04, 0, 1000);
         }
 
         let bgsong2 = audio.dawnutopia;
 
         setTimeout( () => {
             bgsong2.play();
-            bgsong2.fade(0,0.2, 8000); 
             if(this.bgsong!= null)
             {
-                // alert('7')
+                // alert("3");
                 this.bgsong.stop();
             }
             this.bgsong = bgsong2;
-        }, 8000);
-        
-        
-        this.starField.initiateEnd = true; //necessary for memory and garbage handler issues
-        this.starField = null; //:/ kind of annoying tbh
+        }, 100);
+        setTimeout(() => {
+            this.context = this.canvas.getContext('2d');
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        setTimeout(()=> 
-            {
-                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-                this.start(this.difficulty);
-            }, 11000);
+            this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this, this.difficulty);
+            this.background.animate();
+        }, 2000);
     }
 
     //THE FOLLOWING 2 NEED TO BE REFACTORED AFTER TUTORIAL IS FULLY IMPLEMENTED!
@@ -163,11 +155,11 @@ export default class Game
             this.bgsong.fade(0.2, 0, 6000);
         }
 
-        let bgsong2 = audio.dawnutopia;
+        let bgsong2 = audio.unique;
 
         setTimeout( () => {
             bgsong2.play();
-            bgsong2.fade(0,0.2, 8000); 
+            bgsong2.fade(0,0.03, 8000); 
             if(this.bgsong!= null)
             {
                 // alert('7')
@@ -209,7 +201,6 @@ export default class Game
         this.context = this.canvas.getContext('2d');
         this.tutorial = new Tutorial(this.width, this.height, this.context, this.bgsong, this);
         this.tutorial.animate();
-        
     }
     
 
@@ -255,41 +246,31 @@ export default class Game
                 difficultyselect.style.display = "none";//non-DRY but w/e
                 logo.style.display = "none";
                 this.difficulty = "easy";
-                this.initiateStart();
+                this.initiateStart2();
             })
 
             normal_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
                 this.difficulty = "normal";
-                this.initiateStart();
+                this.initiateStart2();
             })
 
             hard_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
                 this.difficulty = "hard";
-                this.initiateStart();
+                this.initiateStart2();
             })
 
             legendary_game.addEventListener("click", () => {
                 difficultyselect.style.display = "none";
                 logo.style.display = "none";
                 this.difficulty = "legendary";
-                this.initiateStart();
+                this.initiateStart2();
             })
             
         });
-
-        load_game.addEventListener("click", () => {
-            difficultyselect.style.display = "none";
-            logo.style.display = "none";
-            // this.difficulty = "legendary";
-                loadingscreenwithoutlogo.forEach( (thing) =>{
-                thing.style.display = "none";
-            });
-            this.createTutorial();
-        })
 
         settings.addEventListener("click", () => {
             audio.beep1.play();
@@ -340,7 +321,7 @@ export default class Game
     }
     
 
-    start(difficulty)
+    start()
     {
         // let canvas = document.getElementById('game-canvas');
         // let context = canvas.getContext('2d');
@@ -367,7 +348,7 @@ export default class Game
         }
 
         this.context = this.canvas.getContext('2d');
-        this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this, difficulty);
+        this.background = new Background(this.width, this.height, this.level, this.context, this.bgsong, this.gold, this.ship_level, this, this.difficulty);
         this.state = "fighting"; //dead code
         this.background.animate();
         
@@ -625,7 +606,7 @@ export default class Game
                 }
 
                 this.displayed_atm_container = [];
-                this.start(this.difficulty);
+                this.start();
             }
             , {once: true});
             this.displayed_atm_id = this.ship_level;

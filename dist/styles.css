@@ -629,3 +629,14 @@ a:hover {
     animation: fadeIn 2.5s;
 }
 
+#shoot-tutorial{
+    font-family: "Xolonium";
+    display: none;
+    color: white;
+    font-size: 22px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 25%;
+    pointer-events: none;
+}

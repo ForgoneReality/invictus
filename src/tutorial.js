@@ -16,6 +16,7 @@ export default class Tutorial{
         this.drops = [];
         this.ship_level = 0;
         this.tutorial = true;
+        this.complete = false;
         
 
         this.bgsong = bgsong; //prob not needed
@@ -23,18 +24,20 @@ export default class Tutorial{
         this.gold = 0;
         this.parent = parent;
 
+        //the below three can technically be combined to one variable since they're in separate stages
         this.stage_helper = 0;//for counting stuff
         this.times_shot = 0;
+        this.enemiesdefeated = 0;
+
         //stage 0: move around
         //stage 1: move into flags
         //stage 2: shoot
         //stage 3: shoot targets
         //stage 4: power-ups [OPTIONAL]
         //stage 5: use power-ups [OPTIONAL]
-        //stage 6: shop buy new 
+        //stage 6: shop buy new  [optional]
         //stage 7: play!
 
-        this.popup_number = 0;
         this.popup = true;
         this.timeout = true;
 
@@ -44,6 +47,7 @@ export default class Tutorial{
         this.mel_talking = document.querySelector("#mel-talking");
         this.typedtext = document.querySelector("#typedtext");
         this.fade = document.querySelector(".modal-background");
+        this.instructions = document.querySelector("#shoot-tutorial");
 
 
         this.createLevel();
@@ -60,16 +64,29 @@ export default class Tutorial{
             this.mouse_x = event.offsetX;
             this.mouse_y = event.offsetY;
         };
+
+        let handleEscape = (e) => {
+            if (e.key === "Escape") {
+                document.removeEventListener('keydown', handleEscape);
+                this.popups.style.display = "none";
+                this.textbox.style.display = "none";
+                this.mel_idle.style.display = "none";
+                this.mel_talking.style.display = "none";
+                this.typedtext.style.display = "none";
+                this.fade.style.display = "none";
+                this.instructions.display = "none";
+                this.popup = false;
+                this.complete = true;
+                this.parent.gold = 30000;
+                this.parent.initiateStart();
+            }
+        }
           
         //note: as explained in Player#animate, movement and other spontaneous events cannot be added here
         document.addEventListener('mousemove', handleMousemove);
         
-        document.body.addEventListener('keypress', function(e) {
-            if (e.key === "Escape") {
-                this.parent.initiateStart();
-            }
-        });
-        this.textpopup(this.popup_number);
+        document.addEventListener('keydown', handleEscape);
+        this.textpopup();
         this.animate();
     }
 
@@ -79,6 +96,8 @@ export default class Tutorial{
     {
         this.stage = 1;
         this.typedtext.innerHTML = "";
+        this.instructions.style.display = "none";
+
 
         let newText = new Array(
             "Great work! Next, let's learn how to fire your weapon"
@@ -91,19 +110,19 @@ export default class Tutorial{
         this.fade.style.display = "block";
         this.popup = true;
 
+        audio.digital.play();
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
-            $(document).one('click', $.proxy(function(e) {
-                this.mel_talking.style.display = "block";
-                this.mel_idle.style.display = "none";
-                
-
+            this.mel_talking.style.display = "block";
+            this.mel_idle.style.display = "none";
+            $(document).one('click', $.proxy(function(e) {                
                 let newText = new Array(
                     "Hold the SPACE bar on your keyboard to fire lasers!"
                 );
                 
                 this.typedtext.innerHTML = "";
+                audio.digital.play();
                 this.typewriter(newText, 0, 0, " ", 0);
 
                 setTimeout(() => {
@@ -118,6 +137,9 @@ export default class Tutorial{
                         this.typedtext.style.display = "none";
                         this.fade.style.display = "none";
                         this.typedtext.innerHTML = "";
+                        this.instructions.innerHTML = "Hold SPACE to Fire Lasers";
+                        this.instructions.style.display = "block";
+
 
                         // setTimeout(() => {
                         //     this.movePhase();
@@ -149,73 +171,73 @@ export default class Tutorial{
         if ( iIndex != aText.length ) {
         setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), 200);
         }
+        else{
+            audio.digital.stop();
+        }
         } else {
         setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), iSpeed);
         }
     }
-   
     
-    textpopup(num)
+    textpopup()
     {
-        if(num === 0)
-        {
-            this.popups.style.display = "block";
-            this.textbox.style.display = "block";
-            this.mel_talking.style.display = "block";
-            this.typedtext.style.display = "block";
-            this.fade.style.display = "block";
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
 
-            setTimeout(() => {
-                this.mel_talking.style.display = "none";
-                this.mel_idle.style.display = "block";
-            }, 3500); //change number once we test out the text
+        setTimeout(() => {
+            this.mel_talking.style.display = "none";
+            this.mel_idle.style.display = "block";
+        }, 3500); //change number once we test out the text
 
-            setTimeout(() => {
-                $(document).one('click', $.proxy(function(e) {
-                    this.mel_talking.style.display = "block";
-                    this.mel_idle.style.display = "none";
+        setTimeout(() => {
+            $(document).one('click', $.proxy(function(e) {
+                this.mel_talking.style.display = "block";
+                this.mel_idle.style.display = "none";
 
-                    setTimeout(() => {
+                setTimeout(() => {
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "block";
+                }, 3000); //change number once we test out the text
+                
+
+                let newText = new Array(
+                    "If at any time you'd like to skip the tutorial, press",
+                    "the ESC key on your keyboard to advance to Level 1"
+                );
+                
+                
+                this.typedtext.innerHTML = "";
+                audio.digital.play();
+                this.typewriter(newText, 0, 0, " ", 0);
+
+                setTimeout(() => {
+                    $(document).one('click', $.proxy(function(e) {
+                        this.popup = false;
+                        this.popups.style.display = "none";
+                        this.textbox.style.display = "none";
                         this.mel_talking.style.display = "none";
-                        this.mel_idle.style.display = "block";
-                    }, 3000); //change number once we test out the text
-                    
+                        this.mel_idle.style.display = "none";
+                        this.typedtext.style.display = "none";
+                        this.fade.style.display = "none";
+                        this.typedtext.innerHTML = "";
 
-                    let newText = new Array(
-                        "If at any time you'd like to skip the tutorial, press",
-                        "the ESC key on your keyboard to advance to Level 1"
-                    );
-                    
-                    
-                    this.typedtext.innerHTML = "";
-                    this.typewriter(newText, 0, 0, " ", 0);
-
-                    setTimeout(() => {
-                        $(document).one('click', $.proxy(function(e) {
-                            console.log("JUST ONCE");
-                            this.popup = false;
-                            this.popups.style.display = "none";
-                            this.textbox.style.display = "none";
-                            this.mel_talking.style.display = "none";
-                            this.mel_idle.style.display = "none";
-                            this.typedtext.style.display = "none";
-                            this.fade.style.display = "none";
-                            this.typedtext.innerHTML = "";
-
-                            setTimeout(() => {
-                                this.movePhase();
-                            }, 1500)
-                        }, this));
-                    }, 3200)
-                }, this));
-            }, 3300)
-            let aText = new Array(
-                "Welcome to Invictus! My name's Mei, and I'll be helping",
-                "you learn the ropes of how to operate your spaceship.",
-                "Click anywhere to continue!"
-            );
-            this.typewriter(aText, 0, 0, " ", 0);
-        }
+                        setTimeout(() => {
+                            this.movePhase();
+                        }, 1500)
+                    }, this));
+                }, 3200)
+            }, this));
+        }, 3300)
+        let aText = new Array(
+            "Welcome to Invictus! My name's Mei, and I'll be helping",
+            "you learn the ropes of how to operate your spaceship.",
+            "Click anywhere to continue!"
+        );
+        audio.digital.play();
+        this.typewriter(aText, 0, 0, " ", 0);
     }
 
     movePhase()
@@ -232,6 +254,8 @@ export default class Tutorial{
         this.fade.style.display = "block";
         this.popup = true;
 
+
+        audio.digital.play();
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
@@ -246,6 +270,7 @@ export default class Tutorial{
                 this.typedtext.style.display = "none";
                 this.fade.style.display = "none";
                 this.typedtext.innerHTML = "";
+                this.instructions.style.display = "block";
 
                 this.drops.push(new Drop([0.24*this.width, 0.75*this.height], 2, 0));
 
@@ -256,12 +281,12 @@ export default class Tutorial{
 
     aimingPhase()
     {
+        this.instructions.style.display = "none";
         this.typedtext.innerHTML = "";
 
         let newText = new Array(
             "Excellent Job! Now let's learn to aim your shots",
             "Your ship shoots towards where your mouse cursor is located"
-
         );
 
         this.popups.style.display = "block";
@@ -271,6 +296,7 @@ export default class Tutorial{
         this.fade.style.display = "block";
         this.popup = true;
 
+        audio.digital.play();
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
@@ -285,6 +311,72 @@ export default class Tutorial{
                 );
                 
                 this.typedtext.innerHTML = "";
+                audio.digital.play();
+                this.typewriter(newText, 0, 0, " ", 0);
+
+                setTimeout(() => {
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "block";
+                    $(document).one('click', $.proxy(function(e) {
+                        this.popup = false;
+                        this.popups.style.display = "none";
+                        this.textbox.style.display = "none";
+                        this.mel_talking.style.display = "none";
+                        this.mel_idle.style.display = "none";
+                        this.typedtext.style.display = "none";
+                        this.fade.style.display = "none";
+                        this.instructions.innerHTML = "Move your Mouse to Aim at the Targets"
+                        this.instructions.style.display = "block";
+
+                        this.typedtext.innerHTML = "";
+                        this.player.tutorial = 2;
+                        this.player.posX = this.width * .49;
+                        this.player.posY = this.height * .75;
+
+                        this.enemyships.push(new Ship([.48*this.width, .2*this.height], 12, this));
+
+                        // setTimeout(() => {
+                        //     this.movePhase();
+                        // }, 1500)
+                    }, this));
+                }, 3300)
+            }, this));
+        }, 2500)
+    }
+
+    finalPhase()
+    {
+        this.instructions.style.display = "none";
+        this.player.tutorial = 3;
+        this.enemiesdefeated = 0;
+        let newText = new Array(
+            "Perfect, you've got it down! This wraps up pretty much all",
+            "that you need to know for now!"
+        );
+
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
+        this.popup = true;
+
+        audio.digital.play();
+        this.typewriter(newText, 0, 0, " ", 0);
+
+        setTimeout(() => {
+            $(document).one('click', $.proxy(function(e) {
+                this.mel_talking.style.display = "block";
+                this.mel_idle.style.display = "none";
+                
+                let newText = new Array(
+                    "Now let's try bringing it all together and taking out some real",
+                    "enemies. Enemy ships will also shoot back at you, so be careful",
+                    "and try to dodge their attacks!"
+                );
+                
+                this.typedtext.innerHTML = "";
+                audio.digital.play();
                 this.typewriter(newText, 0, 0, " ", 0);
 
                 setTimeout(() => {
@@ -299,12 +391,9 @@ export default class Tutorial{
                         this.typedtext.style.display = "none";
                         this.fade.style.display = "none";
                         this.typedtext.innerHTML = "";
-                        this.player.tutorial = 2;
-                        this.player.posX = this.width * .49;
-                        this.player.posY = this.height * .75;
 
-                        this.enemyships.push(new Ship([.48*this.width, .2*this.height], 12, this));
-
+                        this.enemyships.push(new Ship([.28*this.width, .2*this.height], 0, this));
+                        this.enemyships.push(new Ship([.70*this.width, .2*this.height], 0, this));
 
                         // setTimeout(() => {
                         //     this.movePhase();
@@ -312,8 +401,43 @@ export default class Tutorial{
                     }, this));
                 }, 3300)
             }, this));
-        }, 2500)
+        }, 2600)
+    }
 
+    finish()
+    {
+        let newText = new Array(
+            "Tutorial Completed. I went ahead and upgrade your ship, and",
+            "you can buy new ships yourself from the end-of-level shop.",
+            "Good luck out there!"
+        );
+
+        this.popups.style.display = "block";
+        this.textbox.style.display = "block";
+        this.mel_talking.style.display = "block";
+        this.typedtext.style.display = "block";
+        this.fade.style.display = "block";
+        this.popup = true;
+        audio.digital.play();
+        this.typewriter(newText, 0, 0, " ", 0);
+
+        setTimeout(() => {
+            this.mel_talking.style.display = "block";
+            this.mel_idle.style.display = "none";
+            $(document).one('click', $.proxy(function(e) {
+                this.popups.style.display = "none";
+                this.textbox.style.display = "none";
+                this.mel_idle.style.display = "none";
+                this.mel_talking.style.display = "none";
+                this.typedtext.style.display = "none";
+                this.fade.style.display = "none";
+                this.popup = false;
+                this.complete = true;
+                this.parent.gold = 30000;
+                this.parent.initiateStart();
+            }, this));
+        }, 3300)
+        
     }
 
     initializeStars(context)
@@ -346,60 +470,66 @@ export default class Tutorial{
         
         context.fillStyle = "black";
         context.fillRect(0, 0, this.width, this.height);
-        if(!this.popup) //probably can combine these two variables
-            {
-            this.createStars(context);
-            
-            if(key.isPressed(" ") )
-            {
-                if(this.stage === 1)
-                {
-                    this.times_shot++;
-                    if(this.times_shot>300)
-                    {
-                        this.stage = 2;
-                        this.aimingPhase();
-                    }
-                }
-                let proj = this.player.shootProjectile(this.mouse_x, this.mouse_y, 2);
-                if (proj)
-                {
-                    if(this.player.projectileType === 3)
-                    {
-                        audio.laser3.play();
-                    }
-                    else
-                    {
-                        audio.laser4.play();
-                    }
-
-                    this.projectiles = this.projectiles.concat(proj);
-                }
-            }
-            else
-            {
-                this.player.shootProjectile(null, null, -1);
-            }
-
-            this.updateAll(context);
-            this.player.animate(this.context, this.mouse_x, this.mouse_y);
-            this.checkCollisions(context);
-
-            this.updateUI(context);
-        }   
-        else{
-            this.createStars(context);
-            this.updateSomething(context, this.stars);
-
-            // console.log("???");
-            // if(key.isPressed(" "))
-            // {
-            //     alert("!");
-               
-            // }
+        if(this.complete)
+        {
+            //break
         }
-        requestAnimationFrame(this.animate.bind(this));
+        else
+        {            
+            if(!this.popup) //probably can combine these two variables
+                {
+                this.createStars(context);
+                
+                if(key.isPressed(" ") )
+                {
+                    if(this.stage === 1)
+                    {
+                        this.times_shot++;
+                        if(this.times_shot>300)
+                        {
+                            this.stage = 2;
+                            this.aimingPhase();
+                        }
+                    }
+                    let proj = this.player.shootProjectile(this.mouse_x, this.mouse_y, 2);
+                    if (proj)
+                    {
+                        if(this.player.projectileType === 3)
+                        {
+                            audio.laser3.play();
+                        }
+                        else
+                        {
+                            audio.laser4.play();
+                        }
 
+                        this.projectiles = this.projectiles.concat(proj);
+                    }
+                }
+                else
+                {
+                    this.player.shootProjectile(null, null, -1);
+                }
+
+                this.updateAll(context);
+                this.player.animate(this.context, this.mouse_x, this.mouse_y);
+                this.checkCollisions(context);
+
+                this.updateUI(context);
+            }   
+            else{
+                this.createStars(context);
+                this.updateSomething(context, this.stars);
+
+                // console.log("???");
+                // if(key.isPressed(" "))
+                // {
+                //     alert("!");
+                
+                // }
+            }
+            requestAnimationFrame(this.animate.bind(this));
+        }
         
     }
 
@@ -520,13 +650,7 @@ export default class Tutorial{
                     
                     if(this.enemyships[i].health <= 0)
                     {
-                    
-                        setTimeout(()=> 
-                        {
-                            this.handleEnemyDefeat(this.enemyships[i]);
-                           
-                            this.enemyships.splice(i, 1);
-                        }, 0);
+                        this.handleEnemyDefeat(this.enemyships[i], i);
                        
                         break;
                     }
@@ -606,7 +730,7 @@ export default class Tutorial{
                         this.player.shotsLeft = 50;
                         break;
                     case 2: //money
-                        this.gold += Math.floor(Math.random()* 6) * 1000 + 5000;
+                        this.gold += 7500;
                         if(this.timeout)
                         {
                             this.timeout = false;
@@ -730,11 +854,51 @@ export default class Tutorial{
     }
 
     //need to make sound & explosion
-    handleEnemyDefeat(e_ship)
+    handleEnemyDefeat(e_ship, i)
     {
-        this.enemiesdefeated++;
-        this.gold += e_ship.gold;
-        let v = e_ship.value;
+        if(this.timeout)
+        {
+            this.timeout = false;
+            setTimeout(() => {
+                this.enemyships.splice(i, 1);
+            }, 1);
+            setTimeout(() => {
+                this.timeout = true;
+            }, 10);
+
+            this.enemiesdefeated++;
+            this.gold += e_ship.gold;
+            let v = e_ship.value;
+
+            if(this.player.tutorial === 2)
+            {
+                if(this.enemiesdefeated === 1)
+                {
+                    setTimeout(() => {
+                        this.enemyships.push(new Ship([.24*this.width, .25*this.height], 12, this));
+                    }, 100)
+                }
+                else if(this.enemiesdefeated === 2)
+                {
+                    setTimeout(() => {
+                        this.enemyships.push(new Ship([.74*this.width, .25*this.height], 12, this));
+                    }, 100)
+                }
+                else if(this.enemiesdefeated === 3)
+                {
+                    setTimeout(() => {
+                        this.finalPhase();
+                    }, 100)
+                }
+            }
+            else if(this.player.tutorial > 2 && this.enemiesdefeated === 2)
+            {
+                this.finish();
+            }
+        }
+            
+        
+        
         //use value to indicate the specific ship that is supposed to drop a drop
         //if/when we get there
     }

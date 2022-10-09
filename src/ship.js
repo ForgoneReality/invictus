@@ -205,13 +205,13 @@ const TYPES = [
     { //12
         velocity: [0, 0],
         endvelocity: [0, 0],
-        health: 300,
+        health: 100,
         damage: 0, //variable!
         img: 'images/crosshair.svg',
         color: "red",
         blur: 25,
         rotatable: false,
-        scale: .4, 
+        scale: .5, 
         gold: 1000,
         value: 0,
         shotsLeft: -1
@@ -265,8 +265,8 @@ export default class Ship {
         this.velY = TYPES[type].velocity[1];
         if(this.background.tutorial)
         {
-            this.health = TYPES[type].health;
-            this.damage = TYPES[type].damage;
+            this.health = TYPES[type].health * 2.5;
+            this.damage = 0;
         }
         else
         {
@@ -392,7 +392,10 @@ export default class Ship {
                 this.posX += this.velX;
 
             }
-            this.posY += this.velY;
+            if(!this.background.tutorial)
+            {
+                this.posY += this.velY;
+            }
         }
         else if (this.type === 1 || this.type === 4 || this.type === 8 || this.type === 10)
         {

@@ -115,5 +115,17 @@ const audio = {
         html5: true,
         volume: 0.2,
         loop: true
+    }),
+    unique: new Howl({
+        src: "sounds/unique.mp3",
+        html5: true,
+        volume: 0.03,
+        loop: true
+    }),
+    digital: new Howl({
+        src: "sounds/digital.mp3",
+        html5: true,
+        volume: 0.02,
+        loop: true
     })
 }
