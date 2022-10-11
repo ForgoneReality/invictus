@@ -255,7 +255,7 @@ Audio sometimes edited via Audacity.
 SOON:
 - Level 2 Boss Finish
 - Level 2 Intro Cutdown
-- Tutorial
+- Labels (Lvls, Boss Names)
 - Shop should show current balance
 - Fix Preloading Screen Description Size
 - Skills
@@ -278,7 +278,8 @@ LATER:
 ## Known Bugs
 
 - Rotational bug!!
-- Replay level twice music broken
+- Need confirmation that replay level on Level 2 has synced music
+- Need confirmation that boss 2 appears on time with music
 - Make drops intervally shadow blur (minor)
 - Tapping: Default Weapon (or ones with additional cooldowns) do not respond properly to tapping instead of holding (minor)
 - Instructions not centered
@@ -286,6 +287,7 @@ LATER:
 - If you destroy the boss simultaneously as it destroys you, unexpected things occur
 - Picking up a shield/HP as you die may cause the game to continue (and invincibility)
 - Newer player ships shots are slightly misaligned
+- Needs-Timeout Bug Everywhere
 
 
 ## Special Thanks

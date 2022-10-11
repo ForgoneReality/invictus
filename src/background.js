@@ -1194,7 +1194,7 @@ export default class Background{
             this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
             this.enemyships.push(new Ship([.2*this.width, -5875 * 1.5], 4, this));
             this.enemyships.push(new Ship([.76*this.width, -5875 * 1.5], 3, this));
-            this.enemyships.push(new Ship([.14*this.width, -7200 * 1.5], 11, this, true));
+            this.enemyships.push(new Ship([.14*this.width, -7100 * 1.5], 11, this, true));
 
             //this can be refactored to not be hardcoded, but idc
             let pos = Math.random()*0.9 + 0.05;
@@ -1546,7 +1546,7 @@ export default class Background{
                     bgsong2 = audio.dawnutopia;   
                     setTimeout( () => {
                         bgsong2.play();
-                        if(this.bgsong!= null)
+                        if(this.bgsong!== null)
                         {
                             // alert("3");
                             this.bgsong.stop();
@@ -1554,21 +1554,30 @@ export default class Background{
                         this.bgsong = bgsong2;
                     }, 100);
                 }
+                else if(this.level_id === 2) 
+                {
+                    bgsong2 = audio.orbit;
+                    setTimeout( () => {
+                        bgsong2.play();
+                        if(this.bgsong!== null)
+                        {
+                            // alert("3");
+                            this.bgsong.stop();
+                        }
+                        this.bgsong = bgsong2;
+                    }, 5);
+                }
                 else
                 {
                     setTimeout( () => {
-                        if(this.bgsong!= null)
+                        if(this.bgsong!== null)
                         {
                             // alert("4");
                             this.bgsong.stop();
                         }
                     }, 5);
                 }
-                // else if(this.level_id === 2)
-                // {
-                //     bgsong2 = audio.orbit;
-                // }
-
+               
                 
 
                 black_screen.style.display = "none";

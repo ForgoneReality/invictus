@@ -78,6 +78,7 @@ export default class Tutorial{
                 this.popup = false;
                 this.complete = true;
                 this.parent.gold = 30000;
+                $(document).off();
                 this.parent.initiateStart();
             }
         }
@@ -114,39 +115,45 @@ export default class Tutorial{
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
-            this.mel_talking.style.display = "block";
-            this.mel_idle.style.display = "none";
-            $(document).one('click', $.proxy(function(e) {                
-                let newText = new Array(
-                    "Hold the SPACE bar on your keyboard to fire lasers!"
-                );
-                
-                this.typedtext.innerHTML = "";
-                audio.digital.play();
-                this.typewriter(newText, 0, 0, " ", 0);
+            if(!this.complete)
+            {
+                this.mel_talking.style.display = "block";
+                this.mel_idle.style.display = "none";
+                $(document).one('click', $.proxy(function(e) {                
+                    let newText = new Array(
+                        "Hold the SPACE bar on your keyboard to fire lasers!"
+                    );
+                    
+                    this.typedtext.innerHTML = "";
+                    audio.digital.play();
+                    this.typewriter(newText, 0, 0, " ", 0);
 
-                setTimeout(() => {
-                    this.mel_talking.style.display = "none";
-                    this.mel_idle.style.display = "block";
-                    $(document).one('click', $.proxy(function(e) {
-                        this.popup = false;
-                        this.popups.style.display = "none";
-                        this.textbox.style.display = "none";
-                        this.mel_talking.style.display = "none";
-                        this.mel_idle.style.display = "none";
-                        this.typedtext.style.display = "none";
-                        this.fade.style.display = "none";
-                        this.typedtext.innerHTML = "";
-                        this.instructions.innerHTML = "Hold SPACE to Fire Lasers";
-                        this.instructions.style.display = "block";
+                    setTimeout(() => {
+                        if(!this.complete)
+                        {
+                            this.mel_talking.style.display = "none";
+                            this.mel_idle.style.display = "block";
+                            $(document).one('click', $.proxy(function(e) {
+                                this.popup = false;
+                                this.popups.style.display = "none";
+                                this.textbox.style.display = "none";
+                                this.mel_talking.style.display = "none";
+                                this.mel_idle.style.display = "none";
+                                this.typedtext.style.display = "none";
+                                this.fade.style.display = "none";
+                                this.typedtext.innerHTML = "";
+                                this.instructions.innerHTML = "Hold SPACE to Fire Lasers";
+                                this.instructions.style.display = "block";
 
 
-                        // setTimeout(() => {
-                        //     this.movePhase();
-                        // }, 1500)
-                    }, this));
-                }, 2000)
-            }, this));
+                                // setTimeout(() => {
+                                //     this.movePhase();
+                                // }, 1500)
+                            }, this));
+                        }
+                    }, 2000)
+                }, this));
+            }
         }, 2000)
     
 
@@ -154,28 +161,35 @@ export default class Tutorial{
 
     typewriter(aText, iIndex, sContents, iTextPos)
     {
-        let iSpeed = 15;
-        let iScrollAt = 20; // start scrolling up at this many lines
+        if(!this.complete)
+        {
+            let iSpeed = 15;
+            let iScrollAt = 20; // start scrolling up at this many lines
 
-        sContents =  ' ';
-        let iRow = Math.max(0, iIndex-iScrollAt);
-        const destination = document.getElementById("typedtext");
-        while ( iRow < iIndex ) {
-        sContents += aText[iRow++] + '<br />';
+            sContents =  ' ';
+            let iRow = Math.max(0, iIndex-iScrollAt);
+            const destination = document.getElementById("typedtext");
+            while ( iRow < iIndex ) {
+            sContents += aText[iRow++] + '<br />';
+            }
+            destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos);
+            //  destination.innerHTML = "testing";
+            if ( iTextPos++ == aText[iIndex].length ) {
+            iTextPos = 0;
+            iIndex++;
+            if ( iIndex != aText.length ) {
+            setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), 200);
+            }
+            else{
+                audio.digital.stop();
+            }
+            } else {
+            setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), iSpeed);
+            }
         }
-        destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos);
-        //  destination.innerHTML = "testing";
-        if ( iTextPos++ == aText[iIndex].length ) {
-        iTextPos = 0;
-        iIndex++;
-        if ( iIndex != aText.length ) {
-        setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), 200);
-        }
-        else{
+        else
+        {
             audio.digital.stop();
-        }
-        } else {
-        setTimeout(() => this.typewriter(aText, iIndex, sContents, iTextPos), iSpeed);
         }
     }
     
@@ -188,48 +202,63 @@ export default class Tutorial{
         this.fade.style.display = "block";
 
         setTimeout(() => {
-            this.mel_talking.style.display = "none";
-            this.mel_idle.style.display = "block";
+            if(!this.complete)
+            {
+                this.mel_talking.style.display = "none";
+                this.mel_idle.style.display = "block";
+            }
         }, 3500); //change number once we test out the text
 
         setTimeout(() => {
-            $(document).one('click', $.proxy(function(e) {
-                this.mel_talking.style.display = "block";
-                this.mel_idle.style.display = "none";
+            if(!this.complete)
+            {
+                $(document).one('click', $.proxy(function(e) {
+                    this.mel_talking.style.display = "block";
+                    this.mel_idle.style.display = "none";
 
-                setTimeout(() => {
-                    this.mel_talking.style.display = "none";
-                    this.mel_idle.style.display = "block";
-                }, 3000); //change number once we test out the text
-                
+                    setTimeout(() => {
+                        if(!this.complete)
+                        {
+                            this.mel_talking.style.display = "none";
+                            this.mel_idle.style.display = "block";
+                        }
+                    }, 3000); //change number once we test out the text
+                    
 
-                let newText = new Array(
-                    "If at any time you'd like to skip the tutorial, press",
-                    "the ESC key on your keyboard to advance to Level 1"
-                );
-                
-                
-                this.typedtext.innerHTML = "";
-                audio.digital.play();
-                this.typewriter(newText, 0, 0, " ", 0);
+                    let newText = new Array(
+                        "If at any time you'd like to skip the tutorial, press",
+                        "the ESC key on your keyboard to advance to Level 1"
+                    );
+                    
+                    
+                    this.typedtext.innerHTML = "";
+                    audio.digital.play();
+                    this.typewriter(newText, 0, 0, " ", 0);
 
-                setTimeout(() => {
-                    $(document).one('click', $.proxy(function(e) {
-                        this.popup = false;
-                        this.popups.style.display = "none";
-                        this.textbox.style.display = "none";
-                        this.mel_talking.style.display = "none";
-                        this.mel_idle.style.display = "none";
-                        this.typedtext.style.display = "none";
-                        this.fade.style.display = "none";
-                        this.typedtext.innerHTML = "";
+                    setTimeout(() => {
+                        if(!this.complete)
+                        {
+                            $(document).one('click', $.proxy(function(e) {
+                                this.popup = false;
+                                this.popups.style.display = "none";
+                                this.textbox.style.display = "none";
+                                this.mel_talking.style.display = "none";
+                                this.mel_idle.style.display = "none";
+                                this.typedtext.style.display = "none";
+                                this.fade.style.display = "none";
+                                this.typedtext.innerHTML = "";
 
-                        setTimeout(() => {
-                            this.movePhase();
-                        }, 1500)
-                    }, this));
-                }, 3200)
-            }, this));
+                                setTimeout(() => {
+                                    if(!this.complete)
+                                    {
+                                        this.movePhase();
+                                    }
+                                }, 1500)
+                            }, this));
+                        }
+                    }, 3200)
+                }, this));
+            }
         }, 3300)
         let aText = new Array(
             "Welcome to Invictus! My name's Mei, and I'll be helping",
@@ -259,23 +288,26 @@ export default class Tutorial{
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
-            this.mel_talking.style.display = "none";
-            this.mel_idle.style.display = "block";
-            $(document).one('click', $.proxy(function(e) {
-                this.popup = false;
-                this.popups.style.display = "none";
-                this.textbox.style.display = "none";
+            if(!this.complete)
+            {
                 this.mel_talking.style.display = "none";
-                this.mel_idle.style.display = "none";
-                this.typedtext.style.display = "none";
-                this.fade.style.display = "none";
-                this.typedtext.innerHTML = "";
-                this.instructions.style.display = "block";
+                this.mel_idle.style.display = "block";
+                $(document).one('click', $.proxy(function(e) {
+                    this.popup = false;
+                    this.popups.style.display = "none";
+                    this.textbox.style.display = "none";
+                    this.mel_talking.style.display = "none";
+                    this.mel_idle.style.display = "none";
+                    this.typedtext.style.display = "none";
+                    this.fade.style.display = "none";
+                    this.typedtext.innerHTML = "";
+                    this.instructions.style.display = "block";
 
-                this.drops.push(new Drop([0.24*this.width, 0.75*this.height], 2, 0));
+                    this.drops.push(new Drop([0.24*this.width, 0.75*this.height], 2, 0));
 
-                
-            }, this));
+                    
+                }, this));
+            }
         }, 2700)
     }
 
@@ -300,6 +332,8 @@ export default class Tutorial{
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
+            if(!this.complete)
+            {
             $(document).one('click', $.proxy(function(e) {
                 this.mel_talking.style.display = "block";
                 this.mel_idle.style.display = "none";
@@ -315,33 +349,39 @@ export default class Tutorial{
                 this.typewriter(newText, 0, 0, " ", 0);
 
                 setTimeout(() => {
-                    this.mel_talking.style.display = "none";
-                    this.mel_idle.style.display = "block";
-                    $(document).one('click', $.proxy(function(e) {
-                        this.popup = false;
-                        this.popups.style.display = "none";
-                        this.textbox.style.display = "none";
+                    if(!this.complete)
+                    {
                         this.mel_talking.style.display = "none";
-                        this.mel_idle.style.display = "none";
-                        this.typedtext.style.display = "none";
-                        this.fade.style.display = "none";
-                        this.instructions.innerHTML = "Move your Mouse to Aim at the Targets"
-                        this.instructions.style.display = "block";
+                        this.mel_idle.style.display = "block";
+                        $(document).one('click', $.proxy(function(e) {
+                            this.popup = false;
+                            this.popups.style.display = "none";
+                            this.textbox.style.display = "none";
+                            this.mel_talking.style.display = "none";
+                            this.mel_idle.style.display = "none";
+                            this.typedtext.style.display = "none";
+                            this.fade.style.display = "none";
+                            this.instructions.innerHTML = "Move your Mouse to Aim at the Targets"
+                            this.instructions.style.display = "block";
 
-                        this.typedtext.innerHTML = "";
-                        this.player.tutorial = 2;
-                        this.player.posX = this.width * .49;
-                        this.player.posY = this.height * .75;
+                            this.typedtext.innerHTML = "";
+                            this.player.tutorial = 2;
+                            this.player.posX = this.width * .49;
+                            this.player.posY = this.height * .75;
 
-                        this.enemyships.push(new Ship([.48*this.width, .2*this.height], 12, this));
+                            this.enemyships.push(new Ship([.48*this.width, .2*this.height], 12, this));
 
-                        // setTimeout(() => {
-                        //     this.movePhase();
-                        // }, 1500)
-                    }, this));
+                            // setTimeout(() => {
+                            //     this.movePhase();
+                            // }, 1500)
+                        }, this));
+                    }
                 }, 3300)
+                
             }, this));
+            }
         }, 2500)
+    
     }
 
     finalPhase()
@@ -365,6 +405,8 @@ export default class Tutorial{
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
+            if(!this.complete)
+            {
             $(document).one('click', $.proxy(function(e) {
                 this.mel_talking.style.display = "block";
                 this.mel_idle.style.display = "none";
@@ -380,6 +422,8 @@ export default class Tutorial{
                 this.typewriter(newText, 0, 0, " ", 0);
 
                 setTimeout(() => {
+                    if(!this.complete)
+                    {
                     this.mel_talking.style.display = "none";
                     this.mel_idle.style.display = "block";
                     $(document).one('click', $.proxy(function(e) {
@@ -399,8 +443,10 @@ export default class Tutorial{
                         //     this.movePhase();
                         // }, 1500)
                     }, this));
+                }
                 }, 3300)
             }, this));
+            }
         }, 2600)
     }
 
@@ -422,20 +468,24 @@ export default class Tutorial{
         this.typewriter(newText, 0, 0, " ", 0);
 
         setTimeout(() => {
-            this.mel_talking.style.display = "block";
-            this.mel_idle.style.display = "none";
-            $(document).one('click', $.proxy(function(e) {
-                this.popups.style.display = "none";
-                this.textbox.style.display = "none";
+            if(!this.complete)
+            {
+                this.mel_talking.style.display = "block";
                 this.mel_idle.style.display = "none";
-                this.mel_talking.style.display = "none";
-                this.typedtext.style.display = "none";
-                this.fade.style.display = "none";
-                this.popup = false;
-                this.complete = true;
-                this.parent.gold = 30000;
-                this.parent.initiateStart();
-            }, this));
+                $(document).one('click', $.proxy(function(e) {
+                    this.popups.style.display = "none";
+                    this.textbox.style.display = "none";
+                    this.mel_idle.style.display = "none";
+                    this.mel_talking.style.display = "none";
+                    this.typedtext.style.display = "none";
+                    this.fade.style.display = "none";
+                    this.popup = false;
+                    this.complete = true;
+                    this.parent.gold = 30000;
+                    $(document).off();
+                    this.parent.initiateStart();
+                }, this));
+            }
         }, 3300)
         
     }

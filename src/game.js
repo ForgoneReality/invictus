@@ -126,6 +126,7 @@ export default class Game
             this.bgsong.fade(0.04, 0, 1000);
         }
 
+        this.tutorial = null;
         let bgsong2 = audio.dawnutopia;
 
         setTimeout( () => {
