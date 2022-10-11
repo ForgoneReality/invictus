@@ -226,8 +226,8 @@ const LEVEL_MODIFIER = {
 }
 
 const DIFFICULTY_MODIFIER = {
-    "easy": [.7, .5],
-    "normal": [1, .75],
+    "easy": [.5, .2],
+    "normal": [1, .5],
     "hard": [1.2, 1],
     "legendary": [1.5, 2]
 }
