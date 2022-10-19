@@ -1194,7 +1194,7 @@ export default class Background{
             this.enemyships.push(new Ship([.48*this.width, -5900 * 1.5], 9, this));
             this.enemyships.push(new Ship([.2*this.width, -5875 * 1.5], 4, this));
             this.enemyships.push(new Ship([.76*this.width, -5875 * 1.5], 3, this));
-            this.enemyships.push(new Ship([.14*this.width, -7100 * 1.5], 11, this, true));
+            this.enemyships.push(new Ship([.14*this.width, -7300 * 1.5], 11, this, true));
 
             //this can be refactored to not be hardcoded, but idc
             let pos = Math.random()*0.9 + 0.05;
