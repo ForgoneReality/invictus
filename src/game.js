@@ -78,10 +78,6 @@ export default class Game
         this.displayed_atm_container = [];
         this.displayed_atm_id = -1;
         this.intro_screen();
-
-        // this.loading_screen();
-
-        // this.start();//initially new game every time... loading functionality later
     }
 
     playSound(song) {

@@ -118,7 +118,6 @@ export default class Background{
             this.enemyships.push(new Ship([.5*this.width, -3270*1.25], 4, this));  
             this.enemyships.push(new Ship([.2*this.width, -3310*1.25], 3, this));
             this.enemyships.push(new Ship([.66*this.width, -3400*1.25], 5, this));
-            this.enemyships.push(new Ship([.4*this.width, -3400*1.25], 5, this));
 
 
             this.enemyships.push(new Ship([.43*this.width, -3480*1.25], 1, this));
@@ -1196,6 +1195,7 @@ export default class Background{
             this.enemyships.push(new Ship([.76*this.width, -5875 * 1.5], 3, this));
             this.enemyships.push(new Ship([.14*this.width, -7165 * 1.5], 11, this, true));
 
+
             //this can be refactored to not be hardcoded, but idc
             let pos = Math.random()*0.9 + 0.05;
             this.enemyships.push(new Ship([pos*this.width, -6500 * 1.5], 8, this));
@@ -1707,11 +1707,13 @@ export default class Background{
                 // if(this.collidesWith(this.player, this.enemyships[i]))
                 {
                     // alert("??!?");
-                    this.player.dealDamage(1);
+                    this.player.dealDamage(50);
 
                     if(this.player.health <= 0)
                     {
                         this.bgsong.stop();
+                        this.handlePlayerDefeat();
+
                     }
 
                     let n = this.normalizedVector(this.player, this.enemyships[i]);
@@ -1840,9 +1842,7 @@ export default class Background{
         else if(type === "corner")
         {
             //THE BELOW OPTIMIZATION SHOULD ALSO BE IN NORMAL
-            console.log("colliding");
-            console.log(b.posY + b.height / 2 + 1);
-            console.log(b.posY, b.height)
+            
 
             if(b.height === undefined || b.posY + b.height / 2 + 1 < 0)
             {
@@ -1855,7 +1855,7 @@ export default class Background{
             let cornersB = b.corners();
 
             let b_area = (b.width) * (b.height);//area should be the same as pre-rotation
-
+            console.log("Total Area: ", b_area);
             //for each corner of the player ship, check if it is inside the rotated rectangle
             for(let i = 0; i < 4; i++)
             {
@@ -1898,11 +1898,20 @@ export default class Background{
                 let tri_4 = Math.abs(x_a * y_b + x_b * y_c + x_c * y_a - x_a * y_c - x_c * y_b - x_b * y_a) / 2;
                 // let tri_4 = Math.abs(x_b * y_a + x_c * y_b + y_c * x_a - x_a * y_b - y_c * x_b - x_c * y_a) / 2;
 
+                if(i === 0)
+                {
+                    console.log("corners: ", cornersA);
+                }
+
                 if (tri_1 + tri_2 + tri_3 +tri_4 <= b_area)
                 {
+                    console.log("colliding");
+
                     return true;
                 }
             }
+            console.log("not colliding");
+
             return false;
         }
     }

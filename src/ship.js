@@ -226,9 +226,9 @@ const LEVEL_MODIFIER = {
 }
 
 const DIFFICULTY_MODIFIER = {
-    "easy": [.5, .2],
-    "normal": [1, .5],
-    "hard": [1.2, 1],
+    "easy": [0.5, 0.1],
+    "normal": [1, .4],
+    "hard": [1, 1],
     "legendary": [1.5, 2]
 }
 
@@ -550,31 +550,31 @@ export default class Ship {
         }
         else if (this.type === 11)
         {
-            this.posX += this.velX;
+            // this.posX += this.velX;
             this.posY += this.velY;
 
-            if(this.realX() > this.background.player.realX() + 80)
-            {
-                if(this.realX() <= this.background.width * .3)
-                    this.velX = 0;
-                else
-                    this.velX = -1;
-            }
-            else if( this.realX() + 80 < this.background.player.realX())
-            {
-                if(this.realX() >= this.background.width * .7)
-                    this.velX = 0;
-                else
-                    this.velX = 1;
-            }
-            else if (this.realX() > this.background.player.realX())
-            {
-                this.velX -= 0.001;
-            }
-            else if (this.realX() < this.background.player.realX())
-            {
-                this.velX += 0.001;
-            }
+            // if(this.realX() > this.background.player.realX() + 80)
+            // {
+            //     if(this.realX() <= this.background.width * .3)
+            //         this.velX = 0;
+            //     else
+            //         this.velX = -1;
+            // }
+            // else if( this.realX() + 80 < this.background.player.realX())
+            // {
+            //     if(this.realX() >= this.background.width * .7)
+            //         this.velX = 0;
+            //     else
+            //         this.velX = 1;
+            // }
+            // else if (this.realX() > this.background.player.realX())
+            // {
+            //     this.velX -= 0.001;
+            // }
+            // else if (this.realX() < this.background.player.realX())
+            // {
+            //     this.velX += 0.001;
+            // }
 
             if(this.velY > 1)
             {
@@ -589,18 +589,18 @@ export default class Ship {
                 this.velY = 0;
             }
 
-            this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
-            // make above have cooldown and much larger influence!
+            // this.velX += (Math.random()-Math.random()) * 0.03; //randomly moving influence
+            // // make above have cooldown and much larger influence!
 
-            // idk about centering issue
-            if(this.velX > 1)
-            {
-                this.velX = 0.4;
-            }
-            if(this.velX < -1)
-            {
-                this.velX = -0.4;
-            }
+            // // idk about centering issue
+            // if(this.velX > 1)
+            // {
+            //     this.velX = 0.4;
+            // }
+            // if(this.velX < -1)
+            // {
+            //     this.velX = -0.4;
+            // }
         }
     }
 
@@ -790,8 +790,8 @@ export default class Ship {
                 {
                     audio.laser2.play();
                     this.shootTimer = cooldown;
-                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1], 25, 3);
-                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1], 25, 3);
+                    let proj = new LaserDamageProjectile([this.realX() + 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1], 25, 3);
+                    let proj2 = new LaserDamageProjectile([this.realX() - 122, this.realY()+110], [0, speed], 0, 41, 2, 0, 90 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1], 25, 3);
             
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
@@ -808,7 +808,7 @@ export default class Ship {
                 {
                     audio.laserbeam.play();
                     this.shootTimer2 = cooldown;
-                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5 * LEVEL_MODIFIER[this.background.level_id][1] , 0, 150);
+                    let proj3 = new LaserBeam([this.realX(), this.realY()+65], [0, 0], this.canvasBottom, 70, 7.5 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1], 0, 150);
                     this.background.lasers.push(proj3);
                     this.dependencies.push(proj3);
                     //constructor(position, velocity, length, width, damage, type, angle)
@@ -842,8 +842,8 @@ export default class Ship {
                     let scatter_x = Math.cos(scatter_deg * Math.PI / 180);
                     let scatter_y = -1 * Math.sin(scatter_deg * Math.PI / 180);
 
-                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1], 18);
-                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1], 18);
+                    let proj = new CircleDamageProjectile([this.realX()-262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1], 18);
+                    let proj2 = new CircleDamageProjectile([this.realX()+262, this.realY()+117], [speed * scatter_x, speed * scatter_y], 4, 2, 0, 25 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1], 18);
                     this.background.enemyprojectiles.push(proj);
                     this.background.enemyprojectiles.push(proj2);
                     this.shotsLeft -= 1;
@@ -951,7 +951,7 @@ export default class Ship {
             case 11:
                 speed = 3;
                 cooldown = 35;
-                damage = 100 * LEVEL_MODIFIER[this.background.level_id][1];
+                damage = 100 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1];
 
                 if (this.shotsLeft3 <= 0) 
                 {
@@ -991,7 +991,7 @@ export default class Ship {
                 
                 speed = 8;
                 cooldown = 2.4;
-                damage = 17.5 * LEVEL_MODIFIER[this.background.level_id][1];
+                damage = 17.5 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1];
                
                 if (this.shotsLeft <= 0) 
                 {
@@ -1026,7 +1026,7 @@ export default class Ship {
 
                 speed = 3.9;
                 cooldown = 4;
-                damage = 35 * LEVEL_MODIFIER[this.background.level_id][1]; 
+                damage = 35 * LEVEL_MODIFIER[this.background.level_id][1] * DIFFICULTY_MODIFIER[this.background.difficulty][1]; 
                 if (this.shotsLeft2 <= 0) 
                 {
                     this.shootTimer2 = 400;
@@ -1248,9 +1248,7 @@ export default class Ship {
         let topright_corner = this.offset(this.rightX() - this.realX(), this.upY() - this.realY());
         let bottomleft_corner = this.offset(this.leftX() - this.realX(), this.downY() - this.realY());
         let bottomright_corner = this.offset(this.rightX() - this.realX(), this.downY() - this.realY());
-        console.log("bottomleft_corner", this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]);
-        console.log("bottomrightcorner", this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]);
-
+        
         return[[this.realX() + topleft_corner[0], this.realY() + topleft_corner[1]], [this.realX() + topright_corner[0], this.realY() + topright_corner[1]], [this.realX() + bottomleft_corner[0], this.realY() + bottomleft_corner[1]], [this.realX() + bottomright_corner[0], this.realY() + bottomright_corner[1]] ];
     }
 }
