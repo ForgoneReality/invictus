@@ -136,6 +136,22 @@ body
     }
   }
 
+.blink_me_once {
+    animation: blinker2 5s linear infinite;
+  }
+  
+  @keyframes blinker2 {
+    0% {
+      opacity: 0;
+    }
+    20%, 70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+  }
+
 
 #mainmenu, #difficulty-select, #gameovermenu, #socials-select
 {
@@ -634,6 +650,19 @@ a:hover {
     display: none;
     color: white;
     font-size: 22px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 25%;
+    pointer-events: none;
+}
+
+#subtitle{
+    font-family: "Xolonium";
+    opacity: 1;
+    display: none;
+    color: white;
+    font-size: 26px;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;

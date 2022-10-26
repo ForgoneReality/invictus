@@ -32,6 +32,7 @@ export default class Background{
         };
 
         document.addEventListener('mousemove', handleMousemove);
+        this.subtitles = document.querySelector("#subtitle");
 
         this.createLevel(level_id);
         this.initializeStars(context);
@@ -47,6 +48,9 @@ export default class Background{
         this.death = false; //might be extraneous because of this.continue
         
         this.continue = true;
+
+           
+
     };
 
     restartLevel()
@@ -70,6 +74,11 @@ export default class Background{
 
         if (level === 1)
         {
+            this.subtitles.style.display = "block";
+            setTimeout(() => {
+                this.subtitles.style.display = "none";
+            }, 4999)
+
             this.enemyships.push(new Ship([.15*this.width, -100*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.44 * this.width, -480*1.25], 0, this)); //type 1
             this.enemyships.push(new Ship([.55*this.width, -133*1.25], 1, this)); //type 2
@@ -135,10 +144,19 @@ export default class Background{
             this.enemyships.push(new Ship([.14*this.width, -3810*1.25], 0, this)); 
             this.enemyships.push(new Ship([.87*this.width, -3810*1.25], 0, this));  
 
-            this.enemyships.push(new Ship([.12*this.width, -4800 *1.25], 6, this, true)); 
+            this.enemyships.push(new Ship([.12*this.width, -4800*1.25], 6, this, true)); 
         }
-        if (level === 2)
+        else if (level === 2)
         {
+            this.subtitles.innerHTML = "Level 2";
+            this.subtitles.style.opacity = 1;
+            this.subtitles.style.display = "block";
+
+            setTimeout(() => {
+                this.subtitles.style.display = "none";
+            }, 4999)
+
+            
             this.enemyships.push(new Ship([.5*this.width, -100 * 1.5 -900], 8, this));
             this.enemyships.push(new Ship([.7*this.width, -200 * 1.5 -900], 3, this));
             this.enemyships.push(new Ship([.23*this.width, -300 * 1.5 -900], 8, this));
@@ -1260,6 +1278,17 @@ export default class Background{
             pos = Math.random()*0.9 + 0.05;
             this.enemyships.push(new Ship([pos*this.width, -17000 * 1.5], 8, this));
         }
+        else if(level === 3)
+        {
+            this.subtitles.innerHTML = "Level 3 is not out yet :c";
+            this.subtitles.style.opacity = 1;
+            this.subtitles.style.display = "block";
+
+            setTimeout(() => {
+                this.subtitles.style.display = "none";
+            }, 4999)
+
+        }
     }
 
     initializeStars(context)
@@ -1304,6 +1333,14 @@ export default class Background{
             } 
             else if(this.level_id === 1 && this.timer === 5550) //NEEDS REFACTORING
             {
+                this.subtitles.innerHTML = "Boss: Eterna";
+                this.subtitles.style.opacity = 1;
+                this.subtitles.style.display = "block";
+
+                setTimeout(() => {
+                    this.subtitles.style.display = "none";
+                }, 4999)
+
                 let bgsong2 = audio.devour;
 
                 setTimeout( () => {
@@ -1323,6 +1360,15 @@ export default class Background{
             else if(this.level_id === 2 && this.timer === 9400)
             {
                 let bgsong2 = audio.ground;
+
+                this.subtitles.innerHTML = "Boss: Orion";
+                this.subtitles.style.opacity = 1;
+                this.subtitles.style.display = "block";
+
+                setTimeout(() => {
+                    this.subtitles.style.display = "none";
+                }, 4999)
+                
 
                 setTimeout( () => {
                     bgsong2.play();
