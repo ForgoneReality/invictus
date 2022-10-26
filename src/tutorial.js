@@ -74,7 +74,7 @@ export default class Tutorial{
                 this.mel_talking.style.display = "none";
                 this.typedtext.style.display = "none";
                 this.fade.style.display = "none";
-                this.instructions.display = "none";
+                this.instructions.style.display = "none";
                 this.popup = false;
                 this.complete = true;
                 this.parent.gold = 30000;
