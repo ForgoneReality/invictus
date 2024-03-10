@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <meta property="og:title" content="Invictus" />
-    <meta property="og:image" content="images/screenshot_title.png"/>
+    <meta property="og:image" content="images/screenshot_title.png" />
     <meta
       property="og:description"
       content="Spaceship shooting game made in vanilla Javascript and HTML that consists of distinct levels, multifaceted bosses, customizable ships, and an end-of-level shop"
@@ -13,73 +13,103 @@
       content="https://forgonereality.github.io/invictus/"
     />
 
-
     <title>INVICTUS</title>
-    <link rel="stylesheet" href="dist/styles.css">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="dist/styles.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
     <script type="text/javascript" src="dist/main.js" charset="utf-8"></script>
     <script src="dist/keymaster.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+      integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="dist/audio.js"></script>
     <script src="jquery.min.js"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <header id="logo" class="mainmenu">
-        <img src="images/logo4.png" alt="Logo">
+      <img src="images/logo4.png" alt="Logo" />
     </header>
 
-    <img src="images/recommended.png" id="recommended">
+    <img src="images/recommended.png" id="recommended" />
 
-    <img src="images/loading2.gif" id="loading">
+    <img src="images/loading2.gif" id="loading" />
 
-    <img src="images/intro.png" id="intro-text" class="blink_me">
+    <img src="images/intro.png" id="intro-text" class="blink_me" />
 
-    <img src="images/explosion3.gif" id="explosion">
-''
-    <img src="images/gameover.png" id="gameover" class="faderfast">
+    <img src="images/explosion3.gif" id="explosion" />
+    ''
+    <img src="images/gameover.png" id="gameover" class="faderfast" />
 
     <div id="black-screen" class="fader"></div>
 
     <section id="gameovermenu">
-        <button id="replay-game-butt" class="faderFromBelowFast">Replay Level</button> 
-        <button id="load-game-butt2" class="faderFromBelowFast">Load Game</button>
+      <button id="replay-game-butt" class="faderFromBelowFast">
+        Replay Level
+      </button>
+      <button id="load-game-butt2" class="faderFromBelowFast">Load Game</button>
     </section>
 
-    <div class="blink_me" id="shoot-tutorial">Use W, A, S, D to Move and Collect all the Gold Drops</div>
+    <div class="blink_me" id="shoot-tutorial">
+      Use W, A, S, D to Move and Collect all the Gold Drops
+    </div>
     <div class="blink_me_once" id="subtitle">Level 1</div>
 
-
     <section id="mainmenu" class="mainmenu">
-        <!-- <p style="font-size: 14px; color: red;"> Just Testing </p> -->
-        <button id="new-game-butt">NEW GAME</button> 
-        <button id="load-game-butt">LOAD GAME</button>
-        <button id="instructions">HOW-TO-PLAY</button> 
-        <button id="settings">SETTINGS</button> 
+      <!-- <p style="font-size: 14px; color: red;"> Just Testing </p> -->
+      <button id="new-game-butt">NEW GAME</button>
+      <button id="load-game-butt">LOAD GAME</button>
+      <button id="instructions">HOW-TO-PLAY</button>
+      <button id="settings">SETTINGS</button>
     </section>
 
     <section id="difficulty-select">
-        <button id="easy-butt">EASY</button> 
-        <button id="normal-butt">NORMAL</button>
-        <button id="hard-butt">HARD</button> 
-        <button id="legendary-butt">LEGENDARY</button> 
+      <button id="easy-butt">EASY</button>
+      <button id="normal-butt">NORMAL</button>
+      <button id="hard-butt">HARD</button>
+      <button id="legendary-butt">LEGENDARY</button>
     </section>
 
     <section id="socials-select">
-        <button id="github-butt" onclick=" window.open('https://github.com/ForgoneReality/dissonance', '_blank')" type="button">REPOSITORY</button> 
-        <button id="github-butt2" onclick=" window.open('https://github.com/ForgoneReality/', '_blank')" type="button">GITHUB</button> 
-        <button id="linkedin-butt" onclick=" window.open('https://shorturl.at/cDJW5', '_blank')" type="button">LINKEDIN</button>
-        <button id="angelist-butt" onclick=" window.open('https://shorturl.at/begV9', '_blank')" type="button">ANGELIST</button> 
+      <button
+        id="github-butt"
+        onclick=" window.open('https://github.com/ForgoneReality/dissonance', '_blank')"
+        type="button"
+      >
+        REPOSITORY
+      </button>
+      <button
+        id="github-butt2"
+        onclick=" window.open('https://github.com/ForgoneReality/', '_blank')"
+        type="button"
+      >
+        GITHUB
+      </button>
+      <button
+        id="linkedin-butt"
+        onclick=" window.open('https://www.linkedin.com/in/cxcharlie/', '_blank')"
+        type="button"
+      >
+        LINKEDIN
+      </button>
+      <button
+        id="angelist-butt"
+        onclick=" window.open('https://wellfound.com/u/charlie-xu-4', '_blank')"
+        type="button"
+      >
+        ANGELIST
+      </button>
     </section>
 
     <div class="modal-background">
-        <section id="popups" class="modal-child">
-            <img id="textbox" src="images/textbox1.png">
-            <img id="mel-talking" src="images/mel/meltalk-4.gif" class="mel">
-            <img id="mel-idle" src="images/mel/mel-idle3.gif" class="mel">
-            <div id="typedtextheader">Mei</div>
-            <div id="typedtext"></div>
-        </section>  
+      <section id="popups" class="modal-child">
+        <img id="textbox" src="images/textbox1.png" />
+        <img id="mel-talking" src="images/mel/meltalk-4.gif" class="mel" />
+        <img id="mel-idle" src="images/mel/mel-idle3.gif" class="mel" />
+        <div id="typedtextheader">Mei</div>
+        <div id="typedtext"></div>
+      </section>
     </div>
 
     <!-- <p class=""></p> -->
@@ -94,75 +124,83 @@
     </section> -->
 
     <section id="shop" class="shop">
-        <img id="shopimage" src="images/shop.png" alt="Shop">
-        <div>
-            <img id= "ships" src="images/ships.png" alt="Ships"> 
-            <img id="skills" src="images/skills.png" alt="Skills">
-        </div>
+      <img id="shopimage" src="images/shop.png" alt="Shop" />
+      <div>
+        <img id="ships" src="images/ships.png" alt="Ships" />
+        <img id="skills" src="images/skills.png" alt="Skills" />
+      </div>
+    </section>
+
+    <section id="shopgold" class="shop">
+      Gold: <span id="shopgoldtext">0</span>
     </section>
 
     <section id="shipselect" class="shipselect">
-        <img id="ship-select-outline" src="images/spaceship-select.png" alt="Shop">
+      <img
+        id="ship-select-outline"
+        src="images/spaceship-select.png"
+        alt="Shop"
+      />
     </section>
 
     <section id="hp1" class="hp">
-        <img id="hp1-img" src="images/1of5.png"/>
+      <img id="hp1-img" src="images/1of5.png" />
     </section>
 
     <section id="hp2" class="hp">
-        <img id="hp2-img" src="images/2of5.png"/>
+      <img id="hp2-img" src="images/2of5.png" />
     </section>
 
     <section id="hp3" class="hp">
-        <img id="hp3-img" src="images/3of5.png"/>
+      <img id="hp3-img" src="images/3of5.png" />
     </section>
 
     <section id="hp4" class="hp">
-        <img id="hp4-img" src="images/4of5.png"/>
+      <img id="hp4-img" src="images/4of5.png" />
     </section>
 
     <section id="hp5" class="hp">
-        <img id="hp5-img" src="images/5of5.png"/>
+      <img id="hp5-img" src="images/5of5.png" />
     </section>
 
     <section id="dmg1" class="dmg">
-        <img id="dmg1-img" src="images/1of5.png"/>
+      <img id="dmg1-img" src="images/1of5.png" />
     </section>
 
     <section id="dmg2" class="dmg">
-        <img id="dmg2-img" src="images/2of5.png"/>
+      <img id="dmg2-img" src="images/2of5.png" />
     </section>
 
     <section id="dmg3" class="dmg">
-        <img id="dmg3-img" src="images/3of5.png"/>
+      <img id="dmg3-img" src="images/3of5.png" />
     </section>
 
     <section id="dmg4" class="dmg">
-        <img id="dmg4-img" src="images/4of5.png"/>
+      <img id="dmg4-img" src="images/4of5.png" />
     </section>
 
     <section id="dmg5" class="dmg">
-        <img id="dmg5-img" src="images/5of5.png"/>
+      <img id="dmg5-img" src="images/5of5.png" />
     </section>
 
     <section id="ships-leftside-text">
-        <p>MODEL</p>
-        <p>HEALTH</p>
-        <p>DAMAGE</p>
-        <p>SKILLS</p>
-        <p>PRICE</p>
+      <p>MODEL</p>
+      <p>HEALTH</p>
+      <p>DAMAGE</p>
+      <p>SKILLS</p>
+      <p>PRICE</p>
     </section>
 
     <section id="model-name">
-        <p id="model-name-text" class="ships-rightside-text">Testing again</p>
+      <p id="model-name-text" class="ships-rightside-text">Testing again</p>
     </section>
 
     <section id="skills-number">
-        <p id="skills-number-text" class="ships-rightside-text">0</p>
+      <p id="skills-number-text" class="ships-rightside-text">0</p>
     </section>
 
     <section id="select-ship" class="ship-button">
-        <img src="images/select.png">
+      <img src="images/select.png" />
     </section>
 
     <!-- <section id="priced-ship" class="ship-button">
@@ -171,64 +209,61 @@
     </section> -->
 
     <a href="#" class="ship-button" id="priced-ship">
-        <figure>
-            <img src="images/priced.png">
-        </figure>
-        <div class="text1">
-            250000
-        </div>
+      <figure>
+        <img src="images/priced.png" />
+      </figure>
+      <div class="text1">250000</div>
     </a>
 
     <section id="chosen-ship" class="ship-button">
-        <img src="images/chosen.png">
+      <img src="images/chosen.png" />
     </section>
 
     <section id="locked" class="ship-button">
-        <img src="images/locked.png">
+      <img src="images/locked.png" />
     </section>
 
     <section id="one-star" class="ship-stars">
-        <img src="images/one_star.png">
+      <img src="images/one_star.png" />
     </section>
 
     <section id="two-stars" class="ship-stars">
-        <img src="images/two_stars.png">
+      <img src="images/two_stars.png" />
     </section>
-    
+
     <section id="three-stars" class="ship-stars">
-        <img src="images/three_stars.png">
+      <img src="images/three_stars.png" />
     </section>
-    
+
     <section id="four-stars" class="ship-stars">
-        <img src="images/four_stars.png">
+      <img src="images/four_stars.png" />
     </section>
 
     <section id="shippie1" class="ship-birbs">
-        <img src="images/playership1.png">
+      <img src="images/playership1.png" />
     </section>
 
     <section id="shippie2" class="ship-birbs">
-        <img src="images/playership2.png">
+      <img src="images/playership2.png" />
     </section>
 
     <section id="shippie3" class="ship-birbs">
-        <img src="images/playership3.png">
+      <img src="images/playership3.png" />
     </section>
 
     <section id="shippie4" class="ship-birbs">
-        <img src="images/playership4.png">
+      <img src="images/playership4.png" />
     </section>
 
-    <button id="nextship"> </button>
-    <button id="prevship"> </button>
+    <button id="nextship"></button>
+    <button id="prevship"></button>
 
-    <button id="nextlevel"> </button>
+    <button id="nextlevel"></button>
     <!-- </div> -->
     <div>
-        <canvas id="game-canvas"></canvas>
+      <canvas id="game-canvas"></canvas>
     </div>
 
     <script src="dist/script.js"></script>
-
-</body>
+  </body>
 </html>
